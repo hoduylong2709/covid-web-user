@@ -1,0 +1,9 @@
+.FooterContainer {
+  background-color: rgb(149, 212, 228);
+}
+
+@media (max-width: 499px) {
+  .FooterContainer {
+    flex-direction: column;
+  }
+}
