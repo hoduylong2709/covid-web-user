@@ -7,7 +7,7 @@ import Button from '../../UI/Button/Button';
 const navigationItems = () => (
   <ul className={classes.NavigationItems}>
     <NavigationItem link="/" exact>Home</NavigationItem>
-    <NavigationItem link="/#">Login</NavigationItem>
+    <NavigationItem link="/login">Login</NavigationItem>
     <Button
       btnType="Success"
     >Create New Account</Button>

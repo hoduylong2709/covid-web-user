@@ -1,9 +1,36 @@
 .FooterContainer {
   background-color: rgb(149, 212, 228);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+}
+
+.FooterItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.LeftSideItems {
+  margin: auto 10px;
+}
+
+.RightSideItems {
+  margin: auto 10px;
+}
+
+p {
+  margin: 10px auto;
 }
 
 @media (max-width: 499px) {
   .FooterContainer {
+    height: 100px;
+  }
+
+  .FooterItems {
     flex-direction: column;
+    align-items: center;
   }
 }

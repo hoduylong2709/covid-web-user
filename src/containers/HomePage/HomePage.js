@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-import Auxx from '../../hoc/Auxx/Auxx';
-import Footer from '../../components/UI/Footer/Footer';
+// import Auxx from '../../hoc/Auxx/Auxx';
+import Layout from '../../hoc/Layout/Layout';
+import Banner from '../../components/Banner/Banner';
 
 class HomePage extends Component {
   render() {
     return (
-      <Auxx>
-        <h1>This is Home Page</h1>
-        <Footer />
-      </Auxx>
+      <Layout>
+        <Banner />
+      </Layout>
     );
   }
 }
