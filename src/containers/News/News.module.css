@@ -1,0 +1,10 @@
+.ListNews {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 20px;
+  justify-content: center;
+}
+
+.New {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
