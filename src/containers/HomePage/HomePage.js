@@ -11,8 +11,17 @@ class HomePage extends Component {
     return (
       <Layout>
         <Banner />
-        <h3 className={classes.News}>News and Updates</h3>
-        {/* <New /> */}
+        <h3 className={classes.Header}>News and Updates</h3>
+        <div className={classes.ListNews}>
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+          <New image="https://picsum.photos/300/400" title="Lorem Ipsum is simply dummy text of the printing and typesetting" className={classes.New} />
+        </div>
       </Layout>
     );
   }

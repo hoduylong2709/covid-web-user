@@ -16,12 +16,12 @@ const newPost = (props) => (
         title="image"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography variant="body1" color="inherit" component="p">
           {props.title}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        {/* <Typography variant="body2" color="textSecondary" component="p">
           {props.description}
-        </Typography>
+        </Typography> */}
       </CardContent>
     </CardActionArea>
   </Card>
