@@ -99,26 +99,35 @@ class Login extends Component {
     }
 
     let form = formElementsArray.map(formElement => (
-      <Input
-        key={formElement.id}
-        elementType={formElement.config.elementType}
-        elementConfig={formElement.config.elementConfig}
-        value={formElement.config.value}
-        invalid={!formElement.config.valid}
-        shouldValidate={formElement.config.validation}
-        touched={formElement.config.touched}
-        valueType={formElement.id}
-        changed={(event) => this.inputChangedHandler(event, formElement.id)}
-      />
+      <div className={classes.InputElement}>
+        <h5 className={classes.InputType}>{formElement.config.elementConfig.type.charAt(0).toUpperCase() + formElement.config.elementConfig.type.slice(1) + "*"}</h5>
+        <Input
+          key={formElement.id}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          invalid={!formElement.config.valid}
+          shouldValidate={formElement.config.validation}
+          touched={formElement.config.touched}
+          valueType={formElement.id}
+          changed={(event) => this.inputChangedHandler(event, formElement.id)}
+        />
+      </div>
     ));
 
     return (
       <Layout>
-        <div className={classes.Login}>
-          <form onSubmit={this.submitHandler}>
-            {form}
-            <Button btnType="Success">Login</Button>
-          </form>
+        <div className={classes.LoginContainer}>
+          <div className={classes.Login}>
+            <h1>Login</h1>
+            <form onSubmit={this.submitHandler}>
+              {form}
+            </form>
+            <div className={classes.ForgotPassword}>
+              <a href="/" className={classes.ForgotPasswordLink}>Forgot password?</a>
+            </div>
+            <Button btnType="Success" className={classes.LoginButton}>Login</Button>
+          </div>
         </div>
       </Layout>
     );
