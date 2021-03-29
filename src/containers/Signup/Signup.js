@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
-import classes from './Login.module.css';
+import classes from './Signup.module.css';
 
-class Login extends Component {
+class Signup extends Component {
   state = {
     controls: {
       email: {
@@ -22,11 +22,51 @@ class Login extends Component {
         valid: false,
         touched: false
       },
+      firstName: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your First Name'
+        },
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false
+      },
+      lastName: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Last Name'
+        },
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false
+      },
       password: {
         elementType: 'input',
         elementConfig: {
           type: 'password',
           placeholder: 'Password'
+        },
+        value: '',
+        validation: {
+          required: true,
+          minLength: 8
+        },
+        valid: false,
+        touched: false
+      },
+      confirmPassword: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'password',
+          placeholder: 'Confirm your password'
         },
         value: '',
         validation: {
@@ -117,16 +157,13 @@ class Login extends Component {
 
     return (
       <Layout>
-        <div className={classes.LoginContainer}>
-          <div className={classes.Login}>
-            <h1>Login</h1>
+        <div className={classes.SignupContainer}>
+          <div className={classes.Signup}>
+            <h1>Create A New Account</h1>
             <form onSubmit={this.submitHandler}>
               {form}
             </form>
-            <div className={classes.ForgotPassword}>
-              <a href="/" className={classes.ForgotPasswordLink}>Forgot password?</a>
-            </div>
-            <Button btnType="Success">Login</Button>
+            <Button btnType="Success">Create</Button>
           </div>
         </div>
       </Layout>
@@ -134,4 +171,4 @@ class Login extends Component {
   };
 };
 
-export default Login;
+export default Signup;
