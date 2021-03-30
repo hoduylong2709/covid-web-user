@@ -57,7 +57,8 @@ class Signup extends Component {
         value: '',
         validation: {
           required: true,
-          minLength: 8
+          // minLength: 8
+          isValidPassword: true
         },
         valid: false,
         touched: false
@@ -77,6 +78,7 @@ class Signup extends Component {
         touched: false
       }
     }
+    // isRightPassword: false
   };
 
   checkValidity = (value, rules) => {
@@ -108,6 +110,11 @@ class Signup extends Component {
       isValid = pattern.test(value) && isValid;
     }
 
+    if (rules.isValidPassword) {
+      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm;
+      isValid = pattern.test(value) && isValid;
+    }
+
     return isValid;
   };
 
@@ -122,6 +129,10 @@ class Signup extends Component {
       }
     };
     this.setState({ controls: updatedControls });
+    // if (updatedControls.confirmPassword.value === updatedControls.password.value) {
+
+    //   this.setState({ isRightPassword: true });
+    // }
   }
 
   submitHandler = (event) => {
@@ -132,28 +143,83 @@ class Signup extends Component {
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
+      console.log(key, typeof key);
       formElementsArray.push({
         id: key,
         config: this.state.controls[key]
       });
     }
 
-    let form = formElementsArray.map(formElement => (
-      <div className={classes.InputElement}>
-        <h5 className={classes.InputType}>{formElement.id.charAt(0).toUpperCase() + formElement.id.slice(1) + "*"}</h5>
-        <Input
-          key={formElement.id}
-          elementType={formElement.config.elementType}
-          elementConfig={formElement.config.elementConfig}
-          value={formElement.config.value}
-          invalid={!formElement.config.valid}
-          shouldValidate={formElement.config.validation}
-          touched={formElement.config.touched}
-          valueType={formElement.id}
-          changed={(event) => this.inputChangedHandler(event, formElement.id)}
-        />
-      </div>
-    ));
+    let count = 0;
+
+    formElementsArray.forEach(formElement => {
+      if (formElement.config.valid) {
+        count++;
+      }
+    });
+
+    let form = formElementsArray.map(formElement => {
+      let input = <Input
+        key={formElement.id}
+        elementType={formElement.config.elementType}
+        elementConfig={formElement.config.elementConfig}
+        value={formElement.config.value}
+        invalid={!formElement.config.valid}
+        shouldValidate={formElement.config.validation}
+        touched={formElement.config.touched}
+        valueType={formElement.id}
+        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+      />;
+
+      if (formElement.config.elementConfig.placeholder === 'Password') {
+        input = (
+          <div>
+            <p className={classes.PasswordRequirement}>The password must follow the rules
+            (At least 8 characters, one lowercase character, one uppercase character, one digit, and one special character)
+            </p>
+            <Input
+              key={formElement.id}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              invalid={!formElement.config.valid}
+              shouldValidate={formElement.config.validation}
+              touched={formElement.config.touched}
+              valueType={formElement.id}
+              changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            />
+          </div>
+        );
+      }
+
+      // if (formElement.config.elementConfig.placeholder === 'Confirm your password') {
+      //   input = (
+      //     <div>
+      //       <p className={classes.PasswordRequirement}>The password must follow the rules
+      //       (At least 8 characters, one lowercase character, one uppercase character, one digit, and one special character)
+      //       </p>
+      //       <Input
+      //         key={formElement.id}
+      //         elementType={formElement.config.elementType}
+      //         elementConfig={formElement.config.elementConfig}
+      //         value={formElement.config.value}
+      //         invalid={!formElement.config.valid && !formElement.isRightPassword}
+      //         shouldValidate={formElement.config.validation}
+      //         touched={formElement.config.touched}
+      //         valueType={formElement.id}
+      //         changed={(event) => this.inputChangedHandler(event, formElement.id)}
+      //       />
+      //     </div>
+      //   );
+      // }
+
+      return (
+        <div className={classes.InputElement}>
+          <h5 className={classes.InputType}>{formElement.id.charAt(0).toUpperCase() + formElement.id.slice(1) + "*"}</h5>
+          {input}
+        </div>
+      );
+    });
 
     return (
       <Layout>
@@ -163,7 +229,7 @@ class Signup extends Component {
             <form onSubmit={this.submitHandler}>
               {form}
             </form>
-            <Button btnType="Success">Create</Button>
+            <Button btnType="Success" disabled={count === 5 ? false : true}>Create</Button>
           </div>
         </div>
       </Layout>

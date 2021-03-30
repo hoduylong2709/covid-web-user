@@ -20,6 +20,11 @@
   margin-bottom: 5px;
 }
 
+.PasswordRequirement {
+  font-size: 12px;
+  margin-top: 0;
+}
+
 @media (min-width: 600px) {
   .Signup {
     width: 500px;
