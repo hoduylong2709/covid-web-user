@@ -9,6 +9,7 @@ class Signup extends Component {
   state = {
     controls: {
       email: {
+        elementName: 'Email',
         elementType: 'input',
         elementConfig: {
           type: 'email',
@@ -23,6 +24,7 @@ class Signup extends Component {
         touched: false
       },
       firstName: {
+        elementName: 'First Name',
         elementType: 'input',
         elementConfig: {
           type: 'text',
@@ -36,6 +38,7 @@ class Signup extends Component {
         touched: false
       },
       lastName: {
+        elementName: 'Last Name',
         elementType: 'input',
         elementConfig: {
           type: 'text',
@@ -49,6 +52,7 @@ class Signup extends Component {
         touched: false
       },
       password: {
+        elementName: 'Password',
         elementType: 'input',
         elementConfig: {
           type: 'password',
@@ -57,13 +61,13 @@ class Signup extends Component {
         value: '',
         validation: {
           required: true,
-          // minLength: 8
           isValidPassword: true
         },
         valid: false,
         touched: false
       },
       confirmPassword: {
+        elementName: 'Confirm Password',
         elementType: 'input',
         elementConfig: {
           type: 'password',
@@ -72,16 +76,15 @@ class Signup extends Component {
         value: '',
         validation: {
           required: true,
-          minLength: 8
+          isValidConfirmPassword: true
         },
         valid: false,
         touched: false
       }
     }
-    // isRightPassword: false
   };
 
-  checkValidity = (value, rules) => {
+  checkValidity = (value, rules, valueOfPassword) => {
     let isValid = true;
 
     if (!rules) {
@@ -115,35 +118,39 @@ class Signup extends Component {
       isValid = pattern.test(value) && isValid;
     }
 
+    if (rules.isValidConfirmPassword) {
+      isValid = value === valueOfPassword && isValid;
+    }
+
     return isValid;
   };
 
   inputChangedHandler = (event, controlName) => {
+    let valueOfPassword = '';
+
     const updatedControls = {
       ...this.state.controls,
       [controlName]: {
         ...this.state.controls[controlName],
         value: event.target.value,
-        valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+        valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation, valueOfPassword),
         touched: true
       }
     };
-    this.setState({ controls: updatedControls });
-    // if (updatedControls.confirmPassword.value === updatedControls.password.value) {
 
-    //   this.setState({ isRightPassword: true });
-    // }
+    valueOfPassword = updatedControls.password.value;
+    updatedControls.confirmPassword.valid = this.checkValidity(event.target.value, this.state.controls[controlName].validation, valueOfPassword);
+
+    this.setState({ controls: updatedControls });
   }
 
   submitHandler = (event) => {
     event.preventDefault();
-    // this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
   }
 
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
-      console.log(key, typeof key);
       formElementsArray.push({
         id: key,
         config: this.state.controls[key]
@@ -192,30 +199,9 @@ class Signup extends Component {
         );
       }
 
-      // if (formElement.config.elementConfig.placeholder === 'Confirm your password') {
-      //   input = (
-      //     <div>
-      //       <p className={classes.PasswordRequirement}>The password must follow the rules
-      //       (At least 8 characters, one lowercase character, one uppercase character, one digit, and one special character)
-      //       </p>
-      //       <Input
-      //         key={formElement.id}
-      //         elementType={formElement.config.elementType}
-      //         elementConfig={formElement.config.elementConfig}
-      //         value={formElement.config.value}
-      //         invalid={!formElement.config.valid && !formElement.isRightPassword}
-      //         shouldValidate={formElement.config.validation}
-      //         touched={formElement.config.touched}
-      //         valueType={formElement.id}
-      //         changed={(event) => this.inputChangedHandler(event, formElement.id)}
-      //       />
-      //     </div>
-      //   );
-      // }
-
       return (
         <div className={classes.InputElement}>
-          <h5 className={classes.InputType}>{formElement.id.charAt(0).toUpperCase() + formElement.id.slice(1) + "*"}</h5>
+          <h5 className={classes.InputType}>{formElement.config.elementName + "*"}</h5>
           {input}
         </div>
       );

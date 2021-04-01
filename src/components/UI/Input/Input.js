@@ -9,8 +9,11 @@ const input = (props) => {
 
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
-
-    validationError = <p className={classes.ValidationError}>Please Enter a valid {props.valueType}</p>
+    if (props.valueType === 'confirmPassword') {
+      validationError = <p className={classes.ValidationError}>Password do not match</p>
+    } else {
+      validationError = <p className={classes.ValidationError}>Please Enter a valid {props.valueType}</p>
+    }
   }
 
   switch (props.elementType) {
