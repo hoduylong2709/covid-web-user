@@ -146,6 +146,7 @@ class Signup extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
+    console.log('You clicked create button')
   }
 
   render() {
@@ -212,10 +213,10 @@ class Signup extends Component {
         <div className={classes.SignupContainer}>
           <div className={classes.Signup}>
             <h1>Create A New Account</h1>
-            <form onSubmit={this.submitHandler}>
+            <form>
               {form}
             </form>
-            <Button btnType="Success" disabled={count === 5 ? false : true}>Create</Button>
+            <Button btnType="Success" disabled={count === 5 ? false : true} clicked={this.submitHandler}>Create</Button>
           </div>
         </div>
       </Layout>

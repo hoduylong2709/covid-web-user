@@ -6,6 +6,7 @@ import Auxx from '../src/hoc/Auxx/Auxx';
 import HomePage from '../src/containers/HomePage/HomePage';
 import Login from '../src/containers/Login/Login';
 import Signup from '../src/containers/Signup/Signup';
+import ForgotPassword from '../src/containers/ForgotPassword/ForgotPassword';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path="/" exact component={HomePage} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/forgot-password" exact component={ForgotPassword} />
         </Switch>
       </Auxx>
     );
