@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
@@ -9,6 +12,7 @@ class Login extends Component {
   state = {
     controls: {
       email: {
+        elementName: 'Email',
         elementType: 'input',
         elementConfig: {
           type: 'email',
@@ -23,6 +27,7 @@ class Login extends Component {
         touched: false
       },
       password: {
+        elementName: 'Password',
         elementType: 'input',
         elementConfig: {
           type: 'password',
@@ -36,7 +41,14 @@ class Login extends Component {
         valid: false,
         touched: false
       }
-    }
+    },
+    passwordShown: false
+  };
+
+  togglePasswordVisiblity = () => {
+    this.setState(prevState => {
+      return { passwordShown: !prevState.passwordShown }
+    });
   };
 
   checkValidity = (value, rules) => {
@@ -99,22 +111,48 @@ class Login extends Component {
       });
     }
 
-    let form = formElementsArray.map(formElement => (
-      <div className={classes.InputElement}>
-        <h5 className={classes.InputType}>{formElement.id.charAt(0).toUpperCase() + formElement.id.slice(1) + "*"}</h5>
-        <Input
-          key={formElement.id}
-          elementType={formElement.config.elementType}
-          elementConfig={formElement.config.elementConfig}
-          value={formElement.config.value}
-          invalid={!formElement.config.valid}
-          shouldValidate={formElement.config.validation}
-          touched={formElement.config.touched}
-          valueType={formElement.id}
-          changed={(event) => this.inputChangedHandler(event, formElement.id)}
-        />
-      </div>
-    ));
+    let form = formElementsArray.map(formElement => {
+      let input = <Input
+        key={formElement.id}
+        elementType={formElement.config.elementType}
+        elementConfig={formElement.config.elementConfig}
+        value={formElement.config.value}
+        invalid={!formElement.config.valid}
+        shouldValidate={formElement.config.validation}
+        touched={formElement.config.touched}
+        valueType={formElement.id}
+        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+      />;
+
+      if (formElement.config.elementConfig.placeholder === 'Password') {
+        input = (
+          <div className={classes.PasswordFeild}>
+            <Input
+              key={formElement.id}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              invalid={!formElement.config.valid}
+              shouldValidate={formElement.config.validation}
+              touched={formElement.config.touched}
+              valueType={formElement.id}
+              showPassword={this.state.passwordShown}
+              changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            />
+            <div className={classes.ShowPasswordIcon} onClick={this.togglePasswordVisiblity}>
+              {this.state.passwordShown ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className={classes.InputElement}>
+          <h5 className={classes.InputType}>{formElement.config.elementName + "*"}</h5>
+          {input}
+        </div>
+      );
+    });
 
     return (
       <Layout>

@@ -20,7 +20,8 @@ const input = (props) => {
     case 'input':
       inputElement = <input
         className={inputClasses.join(' ')}
-        {...props.elementConfig}
+        type={props.showPassword ? 'text' : 'password'}
+        placeholder={props.elementConfig.placeholder}
         value={props.value}
         onChange={props.changed}
       />;

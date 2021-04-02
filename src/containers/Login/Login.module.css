@@ -26,6 +26,23 @@
   justify-content: flex-end;
 }
 
+.PasswordFeild {
+  display: flex;
+  position: relative;
+}
+
+.ShowPasswordIcon {
+  height: fit-content;
+  position: absolute;
+  top: 38.5%;
+  right: 3%;
+  left: 93%;
+}
+
+.ShowPasswordIcon:hover {
+  cursor: pointer;
+}
+
 .ForgotPasswordLink {
   text-decoration: none;
 }
