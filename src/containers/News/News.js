@@ -1,33 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import New from '../../components/New/New';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './News.module.css';
+import * as actions from '../../store/actions/index';
 
 class News extends Component {
-  state = {
-    listNews:
-      [
-        { id: 1, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 2, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 3, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 4, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 5, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 6, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 7, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 8, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-        { id: 9, title: "Lorem Ipsum is simply dummy text of the printing and typesetting", content: "Lorem Ipsum is simply dummy text of the printing and typesetting", image: "https://picsum.photos/300/400" },
-      ]
-  };
+  componentDidMount() {
+    this.props.onInitNews();
+  }
 
   render() {
-    let listNews = this.state.listNews.map(newPost => (
-      <New
-        key={newPost.id}
-        title={newPost.title}
-        image={newPost.image}
-        className={classes.New}
-      />
-    ));
+    let listNews = <Spinner />;
+
+    if (this.props.news) {
+      listNews = this.props.news.map(newPost => (
+        <New
+          key={newPost.id}
+          title={newPost.title}
+          image={newPost.image}
+          className={classes.New}
+        />
+      ));
+    }
 
     return (
       <div className={classes.ListNews}>
@@ -37,4 +33,17 @@ class News extends Component {
   }
 }
 
-export default News;
+const mapStateToProps = state => {
+  return {
+    news: state.news.news,
+    error: state.news.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onInitNews: () => dispatch(actions.initNews())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(News);

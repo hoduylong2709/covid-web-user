@@ -16,12 +16,12 @@ export const fetchNewsFailed = () => {
 
 export const initNews = () => {
   return dispatch => {
-    axios.get('/news.json')
+    axios.get('/home/news')
       .then(response => {
         dispatch(setNews(response.data));
       })
       .catch(error => {
-        dispatch(fetchNewsFailed())
+        dispatch(fetchNewsFailed(error))
       });
   };
 };

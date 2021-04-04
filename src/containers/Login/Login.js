@@ -139,9 +139,9 @@ class Login extends Component {
               showPassword={this.state.passwordShown}
               changed={(event) => this.inputChangedHandler(event, formElement.id)}
             />
-            <div className={classes.ShowPasswordIcon} onClick={this.togglePasswordVisiblity}>
+            {/* <div className={classes.ShowPasswordIcon} onClick={this.togglePasswordVisiblity}>
               {this.state.passwordShown ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
-            </div>
+            </div> */}
           </div>
         );
       }
