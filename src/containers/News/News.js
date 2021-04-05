@@ -18,6 +18,7 @@ class News extends Component {
       listNews = this.props.news.map(newPost => (
         <New
           key={newPost.id}
+          newId={newPost.id}
           title={newPost.title}
           image={newPost.image}
           className={classes.New}
