@@ -17,7 +17,7 @@ const NewPost = (props) => {
 
   return (
     <Card className={classes.Root}>
-      <CardActionArea onClick={() => history.push("/news/10")}>
+      <CardActionArea onClick={() => history.push(`/news/${props.newId}`)}>
         <CardMedia
           className={classes.Media}
           image={props.image}

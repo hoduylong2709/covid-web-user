@@ -1,0 +1,18 @@
+.NewContainer {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  max-width: 1140px;
+}
+
+.Wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -2rem;
+  margin-left: -2rem;
+}
+
+.TitleAndContent {
+}
