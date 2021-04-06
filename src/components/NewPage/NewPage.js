@@ -14,13 +14,20 @@ class NewPage extends Component {
 
     return (
       <NewLayout>
-        <div className={classes.NewContainer}>
-          <div className={classes.Wrapper}>
-            <div className={classes.TitleAndContent}>
-              <h1>{newPost.title}</h1>
+        <div className={classes.Wrapper}>
+          <div className={classes.ImageContainer}>
+            <img src={newPost.image} alt="new-image" />
+          </div>
+          <div className={classes.NewContainer}>
+            <div className={classes.HeaderContainer}>
+              <div className={classes.HeaderContainer__date}>
+                <span>April 6, 2021</span>
+              </div>
+              <h2 className={classes.HeaderContainer__title}>{newPost.title}</h2>
+            </div>
+            <div className={classes.ContentContainer}>
               <p>{newPost.content}</p>
             </div>
-            <img src={newPost.image} alt="new-image" />
           </div>
         </div>
       </NewLayout>
