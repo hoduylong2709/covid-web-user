@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
 import classes from './Signup.module.css';
+import * as actions from '../../store/actions/index';
+import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import axios from '../../axios-base';
 
 class Signup extends Component {
   state = {
@@ -146,7 +150,12 @@ class Signup extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    console.log('You clicked create button')
+    this.props.onSignup(
+      this.state.controls.email.value,
+      this.state.controls.password.value,
+      this.state.controls.firstName.value,
+      this.state.controls.lastName.value
+    );
   }
 
   render() {
@@ -224,4 +233,19 @@ class Signup extends Component {
   };
 };
 
-export default Signup;
+const mapStateToProps = state => {
+  return {
+    isSuccess: state.signup.isSuccess,
+    accountId: state.signup.accountId,
+    loading: state.signup.loading,
+    error: state.signup.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSignup: (email, password, firstName, lastName) => dispatch(actions.signup(email, password, firstName, lastName))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(Signup, axios));

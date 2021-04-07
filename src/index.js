@@ -9,11 +9,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import newsReducer from './store/reducers/news';
+import signupReducer from './store/reducers/signup';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  news: newsReducer
+  news: newsReducer,
+  signup: signupReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
