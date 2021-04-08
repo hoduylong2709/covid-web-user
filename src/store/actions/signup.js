@@ -33,12 +33,12 @@ export const signup = (email, password, firstName, lastName) => {
     };
     axios.post("/register", signupData)
       .then(response => {
-        // console.log(response);
+        console.log(response);
         dispatch(signupSuccess(response.data.isSuccess, response.data.accountId));
       })
       .catch(error => {
-        console.log(error.response.data.error);
-        dispatch(signupFail(error.response.data.error));
+        console.log(error);
+        dispatch(signupFail(error));
       });
   };
 };

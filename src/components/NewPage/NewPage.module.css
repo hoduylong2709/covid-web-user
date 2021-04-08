@@ -32,3 +32,7 @@ p {
   color: #666;
   font-weight: 300;
 }
+
+.PostImage {
+  width: 100%;
+}

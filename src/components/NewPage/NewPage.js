@@ -16,7 +16,7 @@ class NewPage extends Component {
       <NewLayout>
         <div className={classes.Wrapper}>
           <div className={classes.ImageContainer}>
-            <img src={newPost.image} alt="new-image" />
+            <img src={newPost.image} alt="new-image" className={classes.PostImage} />
           </div>
           <div className={classes.NewContainer}>
             <div className={classes.HeaderContainer}>

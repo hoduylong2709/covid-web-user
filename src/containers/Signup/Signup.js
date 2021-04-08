@@ -8,6 +8,7 @@ import classes from './Signup.module.css';
 import * as actions from '../../store/actions/index';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-base';
+import VerifyModal from './VerifyPopup/VerifyModal';
 
 class Signup extends Component {
   state = {
@@ -219,6 +220,7 @@ class Signup extends Component {
 
     return (
       <Layout>
+        <VerifyModal />
         <div className={classes.SignupContainer}>
           <div className={classes.Signup}>
             <h1>Create A New Account</h1>
