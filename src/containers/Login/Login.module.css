@@ -23,7 +23,7 @@
 .ForgotPassword {
   margin-top: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .PasswordFeild {
@@ -44,6 +44,10 @@
 }
 
 .ForgotPasswordLink {
+  text-decoration: none;
+}
+
+.RegisterLink {
   text-decoration: none;
 }
 

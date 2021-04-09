@@ -11,7 +11,7 @@ class HomePage extends Component {
     return (
       <Layout>
         <Banner />
-        <h3 className={classes.Header}>News and Updates</h3>
+        <h3 className={classes.Header}>Tin tức và cập nhật</h3>
         <News />
       </Layout>
     );

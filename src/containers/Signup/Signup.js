@@ -18,7 +18,7 @@ class Signup extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your email'
+          placeholder: 'Nhập email muốn đăng ký'
         },
         value: '',
         validation: {
@@ -29,11 +29,11 @@ class Signup extends Component {
         touched: false
       },
       firstName: {
-        elementName: 'First Name',
+        elementName: 'Họ',
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Your First Name'
+          placeholder: 'Họ của bạn'
         },
         value: '',
         validation: {
@@ -43,11 +43,11 @@ class Signup extends Component {
         touched: false
       },
       lastName: {
-        elementName: 'Last Name',
+        elementName: 'Tên',
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Your Last Name'
+          placeholder: 'Tên của bạn'
         },
         value: '',
         validation: {
@@ -57,11 +57,11 @@ class Signup extends Component {
         touched: false
       },
       password: {
-        elementName: 'Password',
+        elementName: 'Mật khẩu',
         elementType: 'input',
         elementConfig: {
           type: 'password',
-          placeholder: 'Password'
+          placeholder: 'Mật khẩu'
         },
         value: '',
         validation: {
@@ -72,11 +72,11 @@ class Signup extends Component {
         touched: false
       },
       confirmPassword: {
-        elementName: 'Confirm Password',
+        elementName: 'Xác nhận mật khẩu',
         elementType: 'input',
         elementConfig: {
           type: 'password',
-          placeholder: 'Confirm your password'
+          placeholder: 'Xác nhận mật khẩu'
         },
         value: '',
         validation: {
@@ -189,11 +189,11 @@ class Signup extends Component {
         changed={(event) => this.inputChangedHandler(event, formElement.id)}
       />;
 
-      if (formElement.config.elementConfig.placeholder === 'Password') {
+      if (formElement.config.elementConfig.placeholder === 'Mật khẩu') {
         input = (
           <div>
-            <p className={classes.PasswordRequirement}>The password must follow the rules
-            (At least 8 characters, one lowercase character, one uppercase character, one digit, and one special character)
+            <p className={classes.PasswordRequirement}>Mật khẩu phải tuân theo quy tắc
+            (Chứa ít nhất 8 ký tự, 1 ký tự thường, 1 ký tự in hoa, 1 chữ số, và 1 ký tự đặc biệt)
             </p>
             <Input
               key={formElement.id}
@@ -223,11 +223,11 @@ class Signup extends Component {
         <VerifyModal />
         <div className={classes.SignupContainer}>
           <div className={classes.Signup}>
-            <h1>Create A New Account</h1>
+            <h1>Tạo tài khoản mới</h1>
             <form>
               {form}
             </form>
-            <Button btnType="Success" disabled={count === 5 ? false : true} clicked={this.submitHandler}>Create</Button>
+            <Button btnType="Success" disabled={count === 5 ? false : true} clicked={this.submitHandler}>Đăng ký</Button>
           </div>
         </div>
       </Layout>

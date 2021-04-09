@@ -16,7 +16,7 @@ class Login extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your email'
+          placeholder: 'Nhập email của bạn'
         },
         value: '',
         validation: {
@@ -27,11 +27,11 @@ class Login extends Component {
         touched: false
       },
       password: {
-        elementName: 'Password',
+        elementName: 'Mật khẩu',
         elementType: 'input',
         elementConfig: {
           type: 'password',
-          placeholder: 'Password'
+          placeholder: 'nhập mật khẩu của bạn'
         },
         value: '',
         validation: {
@@ -158,14 +158,15 @@ class Login extends Component {
       <Layout>
         <div className={classes.LoginContainer}>
           <div className={classes.Login}>
-            <h1>Login</h1>
+            <h1>Đăng nhập</h1>
             <form>
               {form}
             </form>
             <div className={classes.ForgotPassword}>
-              <a href="/forgot-password" className={classes.ForgotPasswordLink}>Forgot password?</a>
+              <a href="/forgot-password" className={classes.ForgotPasswordLink}>Quên mật khẩu?</a>
+              <a href="/signup" className={classes.RegisterLink}>Chưa có tài khoản?</a>
             </div>
-            <Button btnType="Success" clicked={this.submitHandler}>Login</Button>
+            <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
           </div>
         </div>
       </Layout>

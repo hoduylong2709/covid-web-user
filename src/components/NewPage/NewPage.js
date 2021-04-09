@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import classes from './NewPage.module.css';
 import NewLayout from '../../hoc/Layout/NewLayout';
 
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
+
 class NewPage extends Component {
   render() {
     const idOfNew = this.props.match.params.id;
@@ -27,6 +29,12 @@ class NewPage extends Component {
             </div>
             <div className={classes.ContentContainer}>
               <p>{newPost.content}</p>
+            </div>
+          </div>
+          <div className={classes.Footer}>
+            <div className={classes.TurnbackLinkContainer}>
+              <KeyboardReturnIcon />
+              <a href="/" className={classes.TurnbackLink}>Quay lại trang chủ</a>
             </div>
           </div>
         </div>

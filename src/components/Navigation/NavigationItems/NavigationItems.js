@@ -6,13 +6,9 @@ import Button from '../../UI/Button/Button';
 
 const navigationItems = (props) => (
   <ul className={classes.NavigationItems}>
-    <NavigationItem link="/" exact>Home</NavigationItem>
-    <NavigationItem link="/login">Login</NavigationItem>
-    {/* <Button
-      btnType="Success"
-      clicked={props.navigateToSignupPage}
-    >Create New Account</Button> */}
-    <NavigationItem link="/signup">Signup</NavigationItem>
+    <NavigationItem link="/" exact>Trang chủ</NavigationItem>
+    <NavigationItem link="/login">Đăng nhập</NavigationItem>
+    {/* <NavigationItem link="/signup">Signup</NavigationItem> */}
   </ul>
 );
 

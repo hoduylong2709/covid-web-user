@@ -12,6 +12,23 @@
   padding-right: 25px;
 }
 
+.TurnbackLink {
+  text-decoration: none;
+}
+
+.Footer {
+  padding: 15px 15px;
+  margin: 25px auto;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.TurnbackLinkContainer {
+  display: flex;
+}
+
 span {
   font-size: 14px;
   font-weight: 300;
