@@ -5,7 +5,12 @@ const initialState = {
   isSuccess: false,
   accountId: null,
   error: null,
-  loading: false
+  loading: false,
+  isVerified: false,
+  isVerifying: false,
+  verifySuccess: false,
+  verifyMessage: null,
+  verifyError: null
 };
 
 const signupStart = (state, action) => {
@@ -17,7 +22,9 @@ const signupSuccess = (state, action) => {
     isSuccess: action.isSuccess,
     accountId: action.accountId,
     error: null,
-    loading: false
+    loading: false,
+    isVerified: false,
+    isVerifying: true
   });
 };
 
@@ -28,9 +35,36 @@ const signupFail = (state, action) => {
   });
 };
 
+const verifyStart = (state, action) => {
+  return updateObject(state, { verifyError: null, loading: true });
+};
+
+const verifySuccess = (state, action) => {
+  return updateObject(state, {
+    verifySuccess: action.verifySuccess,
+    verifyMessage: action.verifyMessage,
+    isVerifying: false,
+    verifyError: null,
+    loading: false
+  });
+};
+
+const verifyFail = (state, action) => {
+  return updateObject(state, {
+    verifyError: action.verifyError,
+    loading: false
+  });
+};
+
 const closeModalSignup = (state, action) => {
   return updateObject(state, {
     error: null
+  });
+};
+
+const closeVerifyModalSignup = (state, action) => {
+  return updateObject(state, {
+    isVerifying: false
   });
 };
 
@@ -44,6 +78,14 @@ const reducer = (state = initialState, action) => {
       return signupFail(state, action);
     case actionTypes.CLOSE_MODAL_SIGNUP:
       return closeModalSignup(state, action);
+    case actionTypes.CLOSE_VERIFY_MODAL_SIGNUP:
+      return closeVerifyModalSignup(state, action);
+    case actionTypes.VERIFY_START:
+      return verifyStart(state, action);
+    case actionTypes.VERIFY_SUCCESS:
+      return verifySuccess(state, action);
+    case actionTypes.VERIFY_FAIL:
+      return verifyFail(state, action);
     default:
       return state;
   }

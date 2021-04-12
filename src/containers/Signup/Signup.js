@@ -8,6 +8,7 @@ import classes from './Signup.module.css';
 import * as actions from '../../store/actions/index';
 import Modal from './../../components/UI/Modal/Modal';
 import VerifyModal from '../../components/UI/Modal/VerifyModal/VerifyModal';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Signup extends Component {
   state = {
@@ -239,7 +240,11 @@ class Signup extends Component {
           modalClosed={this.props.onCloseModalSignup}>
           {this.props.error}
         </Modal>}
-        <VerifyModal showVerifyModal={this.props.isSuccess}></VerifyModal>
+        <VerifyModal
+          showVerifyModal={this.props.isVerifying}
+          closeModal={this.props.onCloseVerifyModalSignup}
+        >
+        </VerifyModal>
       </div>
     );
   };
@@ -250,14 +255,17 @@ const mapStateToProps = state => {
     isSuccess: state.signup.isSuccess,
     accountId: state.signup.accountId,
     loading: state.signup.loading,
-    error: state.signup.error
+    error: state.signup.error,
+    isVerified: state.signup.isVerified,
+    isVerifying: state.signup.isVerifying
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onSignup: (email, password, firstName, lastName) => dispatch(actions.signup(email, password, firstName, lastName)),
-    onCloseModalSignup: () => dispatch(actions.closeModalSignup())
+    onCloseModalSignup: () => dispatch(actions.closeModalSignup()),
+    onCloseVerifyModalSignup: () => dispatch(actions.closeVerifyModalSignup())
   };
 };
 

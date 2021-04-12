@@ -7,11 +7,12 @@ export const signupStart = () => {
   };
 };
 
-export const signupSuccess = (isSuccess, accountId) => {
+export const signupSuccess = (isSuccess, accountId, isVerified) => {
   return {
     type: actionTypes.SIGNUP_SUCCESS,
     isSuccess: isSuccess,
-    accountId: accountId
+    accountId: accountId,
+    isVerified: isVerified
   };
 };
 
@@ -33,7 +34,7 @@ export const signup = (email, password, firstName, lastName) => {
     };
     axios.post("/Authorization/register", signupData)
       .then(response => {
-        dispatch(signupSuccess(response.data.isSuccess, response.data.accountId));
+        dispatch(signupSuccess(response.data.isSuccess, response.data.accountId, response.data.isVerified));
       })
       .catch(error => {
         dispatch(signupFail(error.response.data.message));
@@ -44,5 +45,49 @@ export const signup = (email, password, firstName, lastName) => {
 export const closeModalSignup = () => {
   return {
     type: actionTypes.CLOSE_MODAL_SIGNUP
+  };
+};
+
+export const closeVerifyModalSignup = () => {
+  return {
+    type: actionTypes.CLOSE_VERIFY_MODAL_SIGNUP
+  };
+};
+
+export const verifyStart = () => {
+  return {
+    type: actionTypes.VERIFY_START
+  };
+};
+
+export const verifySuccess = (isSuccess, message) => {
+  return {
+    type: actionTypes.VERIFY_SUCCESS,
+    verifySuccess: isSuccess,
+    verifyMessage: message
+  };
+};
+
+export const verifyFail = (error) => {
+  return {
+    type: actionTypes.VERIFY_FAIL,
+    verifyError: error
+  };
+};
+
+export const verifyEmail = (accountId, code) => {
+  return dispatch => {
+    dispatch(verifyStart());
+    const verifyData = {
+      accountId: accountId,
+      code: code
+    };
+    axios.post("/Authorization/email", verifyData)
+      .then(response => {
+        dispatch(verifySuccess(response.data.isSuccess, response.data.message));
+      })
+      .catch(error => {
+        dispatch(signupFail(error.response.data.message));
+      });
   };
 };

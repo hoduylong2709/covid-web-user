@@ -3,5 +3,7 @@ export {
 } from './news';
 export {
   signup,
-  closeModalSignup
+  verifyEmail,
+  closeModalSignup,
+  closeVerifyModalSignup
 } from './signup';
