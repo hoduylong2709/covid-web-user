@@ -28,6 +28,12 @@ const signupFail = (state, action) => {
   });
 };
 
+const closeModalSignup = (state, action) => {
+  return updateObject(state, {
+    error: null
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_START:
@@ -36,6 +42,8 @@ const reducer = (state = initialState, action) => {
       return signupSuccess(state, action);
     case actionTypes.SIGNUP_FAIL:
       return signupFail(state, action);
+    case actionTypes.CLOSE_MODAL_SIGNUP:
+      return closeModalSignup(state, action);
     default:
       return state;
   }

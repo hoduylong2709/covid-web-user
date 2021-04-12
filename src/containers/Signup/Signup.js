@@ -6,9 +6,8 @@ import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
 import classes from './Signup.module.css';
 import * as actions from '../../store/actions/index';
-import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axios-base';
-import VerifyModal from './VerifyPopup/VerifyModal';
+import Modal from './../../components/UI/Modal/Modal';
+import VerifyModal from '../../components/UI/Modal/VerifyModal/VerifyModal';
 
 class Signup extends Component {
   state = {
@@ -86,7 +85,8 @@ class Signup extends Component {
         valid: false,
         touched: false
       }
-    }
+    },
+    err: null
   };
 
   checkValidity = (value, rules, valueOfPassword) => {
@@ -157,6 +157,9 @@ class Signup extends Component {
       this.state.controls.firstName.value,
       this.state.controls.lastName.value
     );
+    if (this.props.error) {
+      this.setState({ err: this.props.error });
+    }
   }
 
   render() {
@@ -219,18 +222,25 @@ class Signup extends Component {
     });
 
     return (
-      <Layout>
-        <VerifyModal />
-        <div className={classes.SignupContainer}>
-          <div className={classes.Signup}>
-            <h1>Tạo tài khoản mới</h1>
-            <form>
-              {form}
-            </form>
-            <Button btnType="Success" disabled={count === 5 ? false : true} clicked={this.submitHandler}>Đăng ký</Button>
+      <div>
+        <Layout>
+          <div className={classes.SignupContainer}>
+            <div className={classes.Signup}>
+              <h1>Tạo tài khoản mới</h1>
+              <form>
+                {form}
+              </form>
+              <Button btnType="Success" disabled={count === 5 ? false : true} clicked={this.submitHandler}>Đăng ký</Button>
+            </div>
           </div>
-        </div>
-      </Layout>
+        </Layout>
+        {this.props.error && <Modal
+          show={this.props.error}
+          modalClosed={this.props.onCloseModalSignup}>
+          {this.props.error}
+        </Modal>}
+        <VerifyModal showVerifyModal={this.props.isSuccess}></VerifyModal>
+      </div>
     );
   };
 };
@@ -246,8 +256,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignup: (email, password, firstName, lastName) => dispatch(actions.signup(email, password, firstName, lastName))
+    onSignup: (email, password, firstName, lastName) => dispatch(actions.signup(email, password, firstName, lastName)),
+    onCloseModalSignup: () => dispatch(actions.closeModalSignup())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(Signup, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

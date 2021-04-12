@@ -1,0 +1,29 @@
+.VerifyModal {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.VerifyHeader {
+  text-align: center;
+}
+
+.VerifyInput {
+  height: 30px;
+  text-align: center;
+}
+
+.Button {
+  display: flex;
+  justify-content: center;
+}
+
+.SubmitButton {
+  margin-right: 5px;
+  width: 100%;
+}
+
+.CancelButton {
+  margin-left: 5px;
+  width: 100%;
+}

@@ -16,7 +16,7 @@ export const fetchNewsFailed = () => {
 
 export const initNews = () => {
   return dispatch => {
-    axios.get('/home/news')
+    axios.get('/Homepage/news')
       .then(response => {
         dispatch(setNews(response.data));
       })

@@ -2,5 +2,6 @@ export {
   initNews
 } from './news';
 export {
-  signup
+  signup,
+  closeModalSignup
 } from './signup';

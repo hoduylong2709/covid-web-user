@@ -31,14 +31,18 @@ export const signup = (email, password, firstName, lastName) => {
       firstName: firstName,
       lastName: lastName
     };
-    axios.post("/register", signupData)
+    axios.post("/Authorization/register", signupData)
       .then(response => {
-        console.log(response);
         dispatch(signupSuccess(response.data.isSuccess, response.data.accountId));
       })
       .catch(error => {
-        console.log(error);
-        dispatch(signupFail(error));
+        dispatch(signupFail(error.response.data.message));
       });
+  };
+};
+
+export const closeModalSignup = () => {
+  return {
+    type: actionTypes.CLOSE_MODAL_SIGNUP
   };
 };
