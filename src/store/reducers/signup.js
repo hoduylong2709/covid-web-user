@@ -10,7 +10,6 @@ const initialState = {
   isVerifying: false,
   verifySuccess: false,
   verifyMessage: null,
-  verifyError: null
 };
 
 const signupStart = (state, action) => {
@@ -23,7 +22,6 @@ const signupSuccess = (state, action) => {
     accountId: action.accountId,
     error: null,
     loading: false,
-    isVerified: false,
     isVerifying: true
   });
 };
@@ -31,7 +29,14 @@ const signupSuccess = (state, action) => {
 const signupFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false
+    loading: false,
+    isVerifying: false
+  });
+};
+
+const closeModalSignup = (state, action) => {
+  return updateObject(state, {
+    error: null
   });
 };
 
@@ -42,29 +47,22 @@ const verifyStart = (state, action) => {
 const verifySuccess = (state, action) => {
   return updateObject(state, {
     verifySuccess: action.verifySuccess,
-    verifyMessage: action.verifyMessage,
-    isVerifying: false,
     verifyError: null,
-    loading: false
+    loading: false,
   });
 };
 
 const verifyFail = (state, action) => {
   return updateObject(state, {
     verifyError: action.verifyError,
-    loading: false
-  });
-};
-
-const closeModalSignup = (state, action) => {
-  return updateObject(state, {
-    error: null
+    loading: false,
+    verifySuccess: null
   });
 };
 
 const closeVerifyModalSignup = (state, action) => {
   return updateObject(state, {
-    isVerifying: false
+    isVerifying: null
   });
 };
 
@@ -78,14 +76,14 @@ const reducer = (state = initialState, action) => {
       return signupFail(state, action);
     case actionTypes.CLOSE_MODAL_SIGNUP:
       return closeModalSignup(state, action);
-    case actionTypes.CLOSE_VERIFY_MODAL_SIGNUP:
-      return closeVerifyModalSignup(state, action);
     case actionTypes.VERIFY_START:
       return verifyStart(state, action);
     case actionTypes.VERIFY_SUCCESS:
       return verifySuccess(state, action);
     case actionTypes.VERIFY_FAIL:
       return verifyFail(state, action);
+    case actionTypes.CLOSE_VERIFY_MODAL_SIGNUP:
+      return closeVerifyModalSignup(state, action);
     default:
       return state;
   }

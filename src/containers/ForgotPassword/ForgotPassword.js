@@ -12,7 +12,7 @@ class ForgotPassword extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your email'
+          placeholder: 'Email của bạn'
         },
         value: '',
         validation: {
@@ -93,12 +93,12 @@ class ForgotPassword extends Component {
       <Layout>
         <div className={classes.FgPasswordContainer}>
           <div className={classes.FgPassword}>
-            <h1>Forgot password?</h1>
-            <p>Please enter your email</p>
+            <h1>Quên mật khẩu?</h1>
+            <p className={classes.FgPasswordText}>Vui lòng nhập email của bạn</p>
             <form>
               {form}
             </form>
-            <Button btnType="Success" clicked={this.submitHandler}>Done</Button>
+            <Button btnType="Success" clicked={this.submitHandler}>Xác nhận</Button>
           </div>
         </div>
       </Layout>

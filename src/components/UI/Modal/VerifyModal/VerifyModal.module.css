@@ -27,3 +27,15 @@
   margin-left: 5px;
   width: 100%;
 }
+
+.VerifyResult {
+  text-align: center;
+}
+
+.Verified {
+  color: green;
+}
+
+.InvalidVerified {
+  color: red;
+}

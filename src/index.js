@@ -10,6 +10,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import newsReducer from './store/reducers/news';
 import signupReducer from './store/reducers/signup';
+// import verifyEmailReducer from './store/reducers/verifyEmail';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

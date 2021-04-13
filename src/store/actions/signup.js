@@ -48,23 +48,16 @@ export const closeModalSignup = () => {
   };
 };
 
-export const closeVerifyModalSignup = () => {
-  return {
-    type: actionTypes.CLOSE_VERIFY_MODAL_SIGNUP
-  };
-};
-
 export const verifyStart = () => {
   return {
     type: actionTypes.VERIFY_START
   };
 };
 
-export const verifySuccess = (isSuccess, message) => {
+export const verifySuccess = (isSuccess) => {
   return {
     type: actionTypes.VERIFY_SUCCESS,
-    verifySuccess: isSuccess,
-    verifyMessage: message
+    verifySuccess: isSuccess
   };
 };
 
@@ -84,10 +77,26 @@ export const verifyEmail = (accountId, code) => {
     };
     axios.post("/Authorization/email", verifyData)
       .then(response => {
-        dispatch(verifySuccess(response.data.isSuccess, response.data.message));
+        dispatch(verifySuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(signupFail(error.response.data.message));
+        dispatch(verifyFail(error.response.data.message));
       });
   };
 };
+
+export const closeVerifyModalSignup = () => {
+  return {
+    type: actionTypes.CLOSE_VERIFY_MODAL_SIGNUP
+  };
+};
+
+
+
+
+
+
+
+
+
+
