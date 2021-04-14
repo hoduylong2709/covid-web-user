@@ -10,13 +10,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import newsReducer from './store/reducers/news';
 import signupReducer from './store/reducers/signup';
-// import verifyEmailReducer from './store/reducers/verifyEmail';
+import loginReducer from './store/reducers/login';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   news: newsReducer,
-  signup: signupReducer
+  signup: signupReducer,
+  login: loginReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

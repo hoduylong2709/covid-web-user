@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
 import classes from './Login.module.css';
+import Modal from '../../components/UI/Modal/Modal';
+import * as actions from '../../store/actions/index';
 
 class Login extends Component {
   state = {
@@ -35,8 +35,8 @@ class Login extends Component {
         },
         value: '',
         validation: {
-          required: true,
-          minLength: 8
+          // required: true,
+          // minLength: 8
         },
         valid: false,
         touched: false
@@ -98,8 +98,7 @@ class Login extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    console.log('You clicked login button');
-    // this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+    this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
   }
 
   render() {
@@ -139,9 +138,6 @@ class Login extends Component {
               showPassword={this.state.passwordShown}
               changed={(event) => this.inputChangedHandler(event, formElement.id)}
             />
-            {/* <div className={classes.ShowPasswordIcon} onClick={this.togglePasswordVisiblity}>
-              {this.state.passwordShown ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
-            </div> */}
           </div>
         );
       }
@@ -169,9 +165,33 @@ class Login extends Component {
             <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
           </div>
         </div>
+        {this.props.error && <Modal
+          show={this.props.error}
+          modalClosed={this.props.onCloseModalErrorLogin}>
+          {this.props.error}
+        </Modal>}
       </Layout>
     );
   };
 };
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    isSuccess: state.login.isSuccess,
+    userId: state.login.userId,
+    token: state.login.token,
+    fullName: state.login.fullName,
+    role: state.login.role,
+    error: state.login.error,
+    loading: state.login.loading
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (email, password) => dispatch(actions.login(email, password)),
+    onCloseModalErrorLogin: () => dispatch(actions.closeModalErrorLogin())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

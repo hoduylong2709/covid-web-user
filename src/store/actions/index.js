@@ -7,3 +7,7 @@ export {
   closeModalSignup,
   closeVerifyModalSignup
 } from './signup';
+export {
+  login,
+  closeModalErrorLogin
+} from './login';
