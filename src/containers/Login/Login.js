@@ -6,6 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
 import classes from './Login.module.css';
 import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 
 class Login extends Component {
@@ -153,7 +154,7 @@ class Login extends Component {
     return (
       <Layout>
         <div className={classes.LoginContainer}>
-          <div className={classes.Login}>
+          {this.props.loading ? <Spinner className={classes.LoginSpinner}></Spinner> : <div className={classes.Login}>
             <h1>Đăng nhập</h1>
             <form>
               {form}
@@ -163,13 +164,25 @@ class Login extends Component {
               <a href="/signup" className={classes.RegisterLink}>Chưa có tài khoản?</a>
             </div>
             <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
-          </div>
+          </div>}
+          {/* <div className={classes.Login}>
+            <h1>Đăng nhập</h1>
+            <form>
+              {form}
+            </form>
+            <div className={classes.ForgotPassword}>
+              <a href="/forgot-password" className={classes.ForgotPasswordLink}>Quên mật khẩu?</a>
+              <a href="/signup" className={classes.RegisterLink}>Chưa có tài khoản?</a>
+            </div>
+            <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
+          </div> */}
         </div>
         {this.props.error && <Modal
           show={this.props.error}
           modalClosed={this.props.onCloseModalErrorLogin}>
           {this.props.error}
         </Modal>}
+        {/* {true && <Spinner className={classes.LoginSpinner}></Spinner>} */}
       </Layout>
     );
   };

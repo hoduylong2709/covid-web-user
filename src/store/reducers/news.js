@@ -3,7 +3,7 @@ import { updateObject } from '../utility';
 
 const initialState = {
   news: null,
-  error: false
+  error: null
 };
 
 const setNews = (state, action) => {
@@ -11,7 +11,7 @@ const setNews = (state, action) => {
 };
 
 const fecthNewsFailed = (state, action) => {
-  return updateObject(state, { error: true });
+  return updateObject(state, { error: action.error });
 };
 
 const reducer = (state = initialState, action) => {

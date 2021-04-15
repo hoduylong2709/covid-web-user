@@ -15,7 +15,7 @@ class News extends Component {
     let listNews = <Spinner />;
 
     if (this.props.news) {
-      listNews = this.props.news.map(newPost => (
+      listNews = this.props.news.data.map(newPost => (
         <New
           key={newPost.id}
           newId={newPost.id}
@@ -24,6 +24,10 @@ class News extends Component {
           className={classes.New}
         />
       ));
+    }
+
+    if (this.props.error) {
+      listNews = <p className={classes.Error}>{this.props.error}</p>
     }
 
     return (

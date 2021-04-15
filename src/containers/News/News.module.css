@@ -8,3 +8,7 @@
 .New {
   border: 1px solid rgba(0, 0, 0, 0.8);
 }
+
+.Error {
+  color: #666;
+}

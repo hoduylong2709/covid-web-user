@@ -12,7 +12,7 @@ class NewPage extends Component {
 
     console.log(typeof idOfNew);
 
-    const newPost = this.props.news.find(newPost => newPost.id === parseInt(idOfNew));
+    const newPost = this.props.news.data.find(newPost => newPost.id === parseInt(idOfNew));
 
     return (
       <NewLayout>
@@ -28,7 +28,7 @@ class NewPage extends Component {
               <h2 className={classes.HeaderContainer__title}>{newPost.title}</h2>
             </div>
             <div className={classes.ContentContainer}>
-              <p>{newPost.content}</p>
+              <p className={classes.Content}>{newPost.content}</p>
             </div>
           </div>
           <div className={classes.Footer}>

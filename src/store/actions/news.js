@@ -8,9 +8,10 @@ export const setNews = (news) => {
   };
 };
 
-export const fetchNewsFailed = () => {
+export const fetchNewsFailed = (error) => {
   return {
-    type: actionTypes.FETCH_NEWS_FAILED
+    type: actionTypes.FETCH_NEWS_FAILED,
+    error: error
   };
 };
 
@@ -21,7 +22,7 @@ export const initNews = () => {
         dispatch(setNews(response.data));
       })
       .catch(error => {
-        dispatch(fetchNewsFailed(error))
+        dispatch(fetchNewsFailed(error.response.data.message))
       });
   };
 };
