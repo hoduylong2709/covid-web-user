@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
+
+import * as actions from '../../../store/actions/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,16 +22,22 @@ const useStyles = makeStyles((theme) => ({
 const MyPagination = (props) => {
   const classes = useStyles();
 
-  const handleOnChange = (e) => {
-    e.preventDefault();
-    console.log('You changed pagination');
+  const clickPaginationHandle = (event, currentPage) => {
+    event.preventDefault();
+    props.onSetPagination(currentPage, 10);
   };
 
   return (
     <div className={classes.root}>
-      <Pagination count={props.totalPages} defaultPage={1} color="primary" onChange={handleOnChange} />
+      <Pagination count={props.totalPages} defaultPage={1} color="primary" onChange={(event, currentPage) => clickPaginationHandle(event, currentPage)} />
     </div>
   );
 };
 
-export default MyPagination;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetPagination: (pageNumber, pageSize) => dispatch(actions.setPagination(pageNumber, pageSize))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(MyPagination);
