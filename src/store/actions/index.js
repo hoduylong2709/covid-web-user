@@ -1,5 +1,6 @@
 export {
-  initNews
+  initNews,
+  setPagination
 } from './news';
 export {
   signup,

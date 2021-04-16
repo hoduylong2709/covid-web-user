@@ -3,11 +3,21 @@ import { updateObject } from '../utility';
 
 const initialState = {
   news: null,
-  error: null
+  error: null,
+  pageNumber: null,
+  pageSize: null,
+  totalPages: null,
+  totalRecords: null
 };
 
 const setNews = (state, action) => {
-  return updateObject(state, { news: action.news });
+  return updateObject(state, {
+    news: action.news,
+    pageNumber: action.pageNumber,
+    pageSize: action.pageSize,
+    totalPages: action.totalPages,
+    totalRecords: action.totalRecords
+  });
 };
 
 const fecthNewsFailed = (state, action) => {
