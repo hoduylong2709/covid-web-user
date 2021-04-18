@@ -188,7 +188,7 @@ class Signup extends Component {
         invalid={!formElement.config.valid}
         shouldValidate={formElement.config.validation}
         touched={formElement.config.touched}
-        valueType={formElement.id}
+        valueType={formElement.config.elementName}
         changed={(event) => this.inputChangedHandler(event, formElement.id)}
       />;
 
@@ -206,7 +206,7 @@ class Signup extends Component {
               invalid={!formElement.config.valid}
               shouldValidate={formElement.config.validation}
               touched={formElement.config.touched}
-              valueType={formElement.id}
+              valueType={formElement.config.elementName}
               changed={(event) => this.inputChangedHandler(event, formElement.id)}
             />
           </div>
@@ -241,6 +241,7 @@ class Signup extends Component {
         </Modal>}
         <VerifyModal
           showVerifyModal={this.props.isVerifying}
+          email={this.state.controls.email.value}
         >
         </VerifyModal>
       </div>

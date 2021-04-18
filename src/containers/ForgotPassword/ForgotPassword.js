@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Layout from '../../hoc/Layout/Layout';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import classes from './ForgotPassword.module.css';
+import * as actions from '../../store/actions/index';
 
 class ForgotPassword extends Component {
   state = {
@@ -60,7 +62,8 @@ class ForgotPassword extends Component {
   submitHandler = (event) => {
     event.preventDefault();
     console.log('You clicked done button');
-    // this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+    console.log(typeof this.state.controls.email.value, this.state.controls.email.value);
+    this.props.onRecoverPassword(this.state.controls.email.value);
   }
 
   render() {
@@ -106,4 +109,19 @@ class ForgotPassword extends Component {
   };
 };
 
-export default ForgotPassword
+const mapStateToProps = state => {
+  return {
+    isSuccess: state.forgotPassword.isSuccess,
+    message: state.forgotPassword.message,
+    error: state.forgotPassword.error,
+    loading: state.forgotPassword.loading
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onRecoverPassword: (email) => dispatch(actions.recoverPassword(email))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);

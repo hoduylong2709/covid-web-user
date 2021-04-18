@@ -68,11 +68,11 @@ export const verifyFail = (error) => {
   };
 };
 
-export const verifyEmail = (accountId, code) => {
+export const verifyEmail = (email, code) => {
   return dispatch => {
     dispatch(verifyStart());
     const verifyData = {
-      accountId: accountId,
+      email: email,
       code: code
     };
     axios.post("/Authorization/email", verifyData)

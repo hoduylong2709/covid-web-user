@@ -34,4 +34,13 @@
 .ValidationError {
   color: red;
   margin: 5px 0;
+  font-size: 13px;
+}
+
+input {
+  border-radius: 5px;
+}
+
+input::-webkit-input-placeholder {
+  font-size: 13px;
 }

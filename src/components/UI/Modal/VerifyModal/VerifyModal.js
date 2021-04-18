@@ -41,7 +41,7 @@ class VerifyModal extends Component {
             <div className={classes.SubmitButton}>
               <Button
                 btnType="Success"
-                clicked={() => this.props.onVerifyEmail(this.props.accountId, this.state.inputValue)}
+                clicked={() => this.props.onVerifyEmail(this.props.email, this.state.inputValue)}
               >Xác nhận</Button>
             </div>
             <div className={classes.CancelButton}>
@@ -67,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onVerifyEmail: (accountId, code) => dispatch(actions.verifyEmail(accountId, code)),
+    onVerifyEmail: (email, code) => dispatch(actions.verifyEmail(email, code)),
     onCloseVerifyModalSignup: () => dispatch(actions.closeVerifyModalSignup())
   };
 };

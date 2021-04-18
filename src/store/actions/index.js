@@ -12,3 +12,6 @@ export {
   login,
   closeModalErrorLogin
 } from './login';
+export {
+  recoverPassword
+} from './forgotPassword';

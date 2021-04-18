@@ -9,7 +9,7 @@ const input = (props) => {
 
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
-    if (props.valueType === 'confirmPassword') {
+    if (props.valueType === 'Xác nhận mật khẩu') {
       validationError = <p className={classes.ValidationError}>Mật khẩu không trùng khớp</p>
     } else {
       validationError = <p className={classes.ValidationError}>{props.valueType} không hợp lệ</p>
