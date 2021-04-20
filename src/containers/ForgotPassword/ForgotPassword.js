@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import Layout from '../../hoc/Layout/Layout';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
+import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './ForgotPassword.module.css';
+import ForgotPasswordModal from './../../components/UI/Modal/VerifyModal/ForgotPasswordModal';
 import * as actions from '../../store/actions/index';
 
 class ForgotPassword extends Component {
@@ -92,18 +95,35 @@ class ForgotPassword extends Component {
       </div>
     ));
 
+    let body = (<div>
+      <form>
+        {form}
+      </form>
+      <Button btnType="Success" clicked={this.submitHandler}>Xác nhận</Button>
+    </div>);
+
+    if (this.props.loading) {
+      body = <Spinner></Spinner>;
+    }
+
     return (
       <Layout>
         <div className={classes.FgPasswordContainer}>
           <div className={classes.FgPassword}>
             <h1>Quên mật khẩu?</h1>
             <p className={classes.FgPasswordText}>Vui lòng nhập email của bạn</p>
-            <form>
-              {form}
-            </form>
-            <Button btnType="Success" clicked={this.submitHandler}>Xác nhận</Button>
+            {body}
           </div>
         </div>
+        {this.props.error && <Modal
+          show={this.props.error}
+          modalClosed={this.props.onCloseModalErrorRecoverPassword}>
+          {this.props.error}
+        </Modal>}
+        <ForgotPasswordModal
+          showVerifyModal={this.props.isRecovering}
+          email={this.state.controls.email.value}
+        ></ForgotPasswordModal>
       </Layout>
     );
   };
@@ -114,13 +134,18 @@ const mapStateToProps = state => {
     isSuccess: state.forgotPassword.isSuccess,
     message: state.forgotPassword.message,
     error: state.forgotPassword.error,
-    loading: state.forgotPassword.loading
+    loading: state.forgotPassword.loading,
+    recoverSuccess: state.forgotPassword.recoverSuccess,
+    recoverMessage: state.forgotPassword.recoverMessage,
+    recoverError: state.forgotPassword.recoverError,
+    isRecovering: state.forgotPassword.isRecovering
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRecoverPassword: (email) => dispatch(actions.recoverPassword(email))
+    onRecoverPassword: (email) => dispatch(actions.recoverPassword(email)),
+    onCloseModalErrorRecoverPassword: () => dispatch(actions.closeModalErrorRecoverPassword())
   };
 }
 

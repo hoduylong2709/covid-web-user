@@ -13,5 +13,8 @@ export {
   closeModalErrorLogin
 } from './login';
 export {
-  recoverPassword
+  recoverPassword,
+  closeModalErrorRecoverPassword,
+  recoverProcess,
+  closeRecoverProcessModal
 } from './forgotPassword';

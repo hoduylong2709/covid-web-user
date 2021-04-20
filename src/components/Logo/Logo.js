@@ -1,6 +1,6 @@
 import React from 'react';
 
-import covidLogo from '../../assets/images/stop_covid.png';
+import covidLogo from '../../assets/images/logo_web.png';
 import classes from './Logo.module.css';
 
 const logo = (props) => (
