@@ -35,10 +35,7 @@ class Login extends Component {
           placeholder: 'nhập mật khẩu của bạn'
         },
         value: '',
-        validation: {
-          // required: true,
-          // minLength: 8
-        },
+        validation: {},
         valid: false,
         touched: false
       }
@@ -100,6 +97,11 @@ class Login extends Component {
   submitHandler = (event) => {
     event.preventDefault();
     this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
+    setTimeout(() => {
+      if (localStorage.getItem('user') !== null) {
+        this.props.history.push('/');
+      }
+    }, 3000);
   }
 
   render() {
@@ -165,24 +167,12 @@ class Login extends Component {
             </div>
             <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
           </div>}
-          {/* <div className={classes.Login}>
-            <h1>Đăng nhập</h1>
-            <form>
-              {form}
-            </form>
-            <div className={classes.ForgotPassword}>
-              <a href="/forgot-password" className={classes.ForgotPasswordLink}>Quên mật khẩu?</a>
-              <a href="/signup" className={classes.RegisterLink}>Chưa có tài khoản?</a>
-            </div>
-            <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
-          </div> */}
         </div>
         {this.props.error && <Modal
           show={this.props.error}
           modalClosed={this.props.onCloseModalErrorLogin}>
           {this.props.error}
         </Modal>}
-        {/* {true && <Spinner className={classes.LoginSpinner}></Spinner>} */}
       </Layout>
     );
   };

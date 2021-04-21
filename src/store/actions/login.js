@@ -42,9 +42,33 @@ export const login = (email, password) => {
       .then(response => {
         dispatch(loginSuccess(response.data.isSuccess, response.data.data.id, response.data.data.token, response.data.data.fullName, response.data.data.role));
         localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user', response.data.data.fullName);
       })
       .catch(error => {
         dispatch(loginFail(error.response.data.message));
       });
   };
 };
+
+export const navigateAfterLoginStart = () => {
+  return {
+    type: actionTypes.NAVIGATE_AFTER_LOGIN_START
+  };
+}
+
+export const navigateAfterLoginSuccess = (token, userName) => {
+  return {
+    type: actionTypes.NAVIGATE_AFTER_LOGIN_SUCCESS,
+    token: token,
+    userName: userName
+  };
+}
+
+export const navigateAfterLoginFailed = (error) => {
+  return {
+    type: actionTypes.NAVIGATE_AFTER_LOGIN_FAILED,
+    error: error
+  };
+}
+
+export const navigateAfterLogin = () => { }

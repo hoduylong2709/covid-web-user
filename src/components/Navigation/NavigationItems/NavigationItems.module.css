@@ -8,6 +8,15 @@
   height: 100%;
 }
 
+.ProfileContainer {
+  display: flex;
+}
+
+.ProfileIcon {
+  margin-top: 17px;
+  margin-right: -12px;
+}
+
 @media (min-width: 500px) {
   .NavigationItems {
     flex-flow: row;
