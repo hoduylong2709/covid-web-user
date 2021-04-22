@@ -7,6 +7,7 @@ import Layout from '../../hoc/Layout/Layout';
 import classes from './Login.module.css';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import LoadingModal from '../../components/UI/Modal/LoadingModal/LoadingModal';
 import * as actions from '../../store/actions/index';
 
 class Login extends Component {
@@ -40,7 +41,8 @@ class Login extends Component {
         touched: false
       }
     },
-    passwordShown: false
+    passwordShown: false,
+    loadingModal: false
   };
 
   togglePasswordVisiblity = () => {
@@ -97,6 +99,7 @@ class Login extends Component {
   submitHandler = (event) => {
     event.preventDefault();
     this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
+    this.setState({ loadingModal: true });
     setTimeout(() => {
       if (localStorage.getItem('user') !== null) {
         this.props.history.push('/');
@@ -173,6 +176,7 @@ class Login extends Component {
           modalClosed={this.props.onCloseModalErrorLogin}>
           {this.props.error}
         </Modal>}
+        <LoadingModal show={this.state.loadingModal}></LoadingModal>
       </Layout>
     );
   };

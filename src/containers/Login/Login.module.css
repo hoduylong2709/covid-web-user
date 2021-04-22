@@ -51,6 +51,12 @@
   text-decoration: none;
 }
 
+.LoadingModal {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
 @media (min-width: 600px) {
   .Login {
     width: 500px;

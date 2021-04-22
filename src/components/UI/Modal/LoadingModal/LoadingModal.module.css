@@ -1,0 +1,15 @@
+.LoadingModal {
+  position: fixed;
+  z-index: 500;
+  width: 70%;
+  padding: 16px;
+  left: 15%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  border-radius: 5px;
+}
+
+.BeatLoader {
+  text-align: center;
+}
