@@ -1,0 +1,22 @@
+.TestingContainer {
+  height: 100vh;
+  background-color: #f3f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
+.TestingHeader {
+  display: flex;
+  margin: 10px 20px;
+  justify-content: space-around;
+}
+
+.TestingTitle {
+  padding-top: 7px;
+}
+
+.TestingBody_Navbar_line {
+  width: 112px;
+  height: 47px;
+  border-bottom: 1px solid black;
+}

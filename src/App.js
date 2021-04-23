@@ -8,6 +8,7 @@ import Login from '../src/containers/Login/Login';
 import Signup from '../src/containers/Signup/Signup';
 import ForgotPassword from '../src/containers/ForgotPassword/ForgotPassword';
 import NewPage from '../src/components/NewPage/NewPage';
+import Testing from '../src/containers/Testing/Testing';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="/signup" exact component={Signup} />
           <Route path="/forgot-password" exact component={ForgotPassword} />
           <Route path="/news/:id" exact component={NewPage} />
+          <Route path="/testing" exact component={Testing} />
         </Switch>
       </Auxx>
     );
