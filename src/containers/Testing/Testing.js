@@ -18,6 +18,7 @@ class Testing extends Component {
               <Button
                 btn="Success"
                 anotherType="Custom"
+                clicked={() => this.props.history.push('/register-testing-date-location')}
               >
                 Đăng ký xét nghiệm
               </Button>
@@ -26,12 +27,10 @@ class Testing extends Component {
           <div className={classes.TestingBody}>
             <div className={classes.TestingBody_Navbar}>
               <div className={classes.TestingBody_Navbar_Button}>
-                <Button>Thông tin đăng ký</Button>
-                <Button>Lịch sử đăng ký</Button>
+                <button className={classes.Button} autoFocus>Thông tin đăng ký</button>
+                <button className={classes.Button}>Lịch sử đăng ký</button>
               </div>
-              <div className={classes.TestingBody_Navbar_line}></div>
             </div>
-            <div className={classes.TestingBody_Navbar}></div>
           </div>
         </div>
       </Layout>

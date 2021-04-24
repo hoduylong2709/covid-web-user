@@ -8,7 +8,6 @@
   cursor: pointer;
   font: inherit;
   padding: 10px;
-  /* margin: 10px; */
   font-weight: bold;
   width: 100%;
   margin: 20px auto;
@@ -33,4 +32,11 @@
 
 .Custom {
   background-color: #07627e;
+}
+
+.Custom1 {
+  width: fit-content;
+  margin: auto 0;
+  color: #a8a8a8;
+  background: none;
 }

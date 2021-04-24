@@ -1,0 +1,17 @@
+.RegistrationContainer {
+  height: 100vh;
+  background-color: #f3f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
+.RegistrationHeader {
+  display: flex;
+  margin: 10px 20px;
+  justify-content: space-around;
+}
+
+.RegistrationBody {
+  background: white;
+  border-radius: 35px 20px;
+}
