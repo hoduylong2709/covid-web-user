@@ -40,3 +40,11 @@
   color: #a8a8a8;
   background: none;
 }
+
+.RegisterButton-Cancel {
+  color: #07627e;
+}
+
+.RegisterButton-Next {
+  background: #07627e;
+}

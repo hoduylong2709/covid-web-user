@@ -23,6 +23,7 @@ class App extends Component {
           <Route path="/news/:id" exact component={NewPage} />
           <Route path="/testing" exact component={Testing} />
           <Route path="/register-testing-date-location" exact component={DateAndLocation} />
+          <Route path="/register-testing-questions" exact component={HomePage} />
         </Switch>
       </Auxx>
     );
