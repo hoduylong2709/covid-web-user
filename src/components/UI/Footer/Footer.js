@@ -6,10 +6,10 @@ const footer = (props) => (
   <div className={classes.FooterContainer}>
     <div className={classes.FooterItems}>
       <div className={classes.LeftSideItems}>
-        <p>Copyright C Covid Web</p>
+        <p className={classes.LeftText}>Copyright C Covid Web</p>
       </div>
       <div className={classes.RightSideItems}>
-        <p>Terms of Service and Privacy Policy</p>
+        <p className={classes.RightText}>Terms of Service and Privacy Policy</p>
       </div>
     </div>
   </div>

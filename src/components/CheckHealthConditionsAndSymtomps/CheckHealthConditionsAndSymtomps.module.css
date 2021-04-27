@@ -3,7 +3,7 @@
   height: 100vh;
 }
 
-.RegistrationContainer {
+.HealthConditionsAndSymtompsContainer {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,12 +11,12 @@
   margin: 0 200px;
 }
 
-.RegistrationHeader {
+.HAndSHeader {
   display: flex;
   margin: 10px 20px;
 }
 
-.RegistrationBody {
+.HAndSBody {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -24,45 +24,41 @@
   border-radius: 36px;
 }
 
-.RegistrationBody_Header {
+.HAndSBody_HC_Header {
   margin-top: 20px;
   margin-left: 50px;
 }
 
-.RegistrationBody_Content {
+.HAndSBody_HC_Content {
   display: flex;
   flex-direction: row;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 80px;
+  margin-right: 80px;
   margin-bottom: 40px;
   flex-wrap: wrap;
   gap: 250px;
 }
 
-.RegistrationBody_Buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
+.MuiFormControlLabel-label {
+  font-size: 50px;
 }
 
 @media (max-width: 1200px) {
-  .RegistrationBody_Content {
+  .HAndSBody_HC_Content {
     gap: 120px;
   }
-  .RegistrationContainer {
+  .HealthConditionsAndSymtompsContainer {
     margin: 0 120px;
   }
 }
 
 @media (max-width: 1009px) {
-  .RegistrationBody_Content {
+  .HAndSBody_HC_Content {
     flex-direction: column;
     gap: 50px;
   }
 
-  .RegistrationContainer {
+  .HealthConditionsAndSymtompsContainer {
     margin: 0 auto;
   }
 }

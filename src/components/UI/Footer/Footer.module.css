@@ -20,6 +20,14 @@
   margin: auto 10px;
 }
 
+.LeftText {
+  color: white;
+}
+
+.RightText {
+  color: white;
+}
+
 p {
   margin: 10px auto;
 }

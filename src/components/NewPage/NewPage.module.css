@@ -29,7 +29,15 @@
   display: flex;
 }
 
-span {
+/* span {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #999;
+} */
+
+.Date {
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.2em;
@@ -46,7 +54,7 @@ p {
   font-size: 18px;
   line-height: 1.6em;
   margin-bottom: 20px;
-  color: white;
+  /* color: white; */
   font-weight: 300;
 }
 

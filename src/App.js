@@ -10,6 +10,7 @@ import ForgotPassword from '../src/containers/ForgotPassword/ForgotPassword';
 import NewPage from '../src/components/NewPage/NewPage';
 import Testing from '../src/containers/Testing/Testing';
 import DateAndLocation from '../src/containers/DateAndLocationTesting/DateAndLocationTesting';
+import RegisterTestingQuestions from './containers/RegisterTestingQuestions/RegisterTestingQuestions';
 
 class App extends Component {
   render() {
@@ -23,7 +24,7 @@ class App extends Component {
           <Route path="/news/:id" exact component={NewPage} />
           <Route path="/testing" exact component={Testing} />
           <Route path="/register-testing-date-location" exact component={DateAndLocation} />
-          <Route path="/register-testing-questions" exact component={HomePage} />
+          <Route path="/register-testing-questions" exact component={RegisterTestingQuestions} />
         </Switch>
       </Auxx>
     );

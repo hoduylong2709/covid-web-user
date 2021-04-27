@@ -23,7 +23,7 @@ class NewPage extends Component {
           <div className={classes.NewContainer}>
             <div className={classes.HeaderContainer}>
               <div className={classes.HeaderContainer__date}>
-                <span>April 6, 2021</span>
+                <span className={classes.Date}>April 6, 2021</span>
               </div>
               <h2 className={classes.HeaderContainer__title}>{newPost.title}</h2>
             </div>
