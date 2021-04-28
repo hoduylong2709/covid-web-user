@@ -6,6 +6,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Switch from "react-switch";
 
 class CheckHealthConditionsAndSymtomps extends Component {
   state = {
@@ -15,11 +18,16 @@ class CheckHealthConditionsAndSymtomps extends Component {
     isObesity: false,
     isHeartProblem: false,
     isHiv: false,
-    isNone: false
+    isNone: false,
+    isCoughing: true
   };
 
   handleChangeCheckBox = event => {
     this.setState({ ...this.state, [event.target.name]: event.target.checked });
+  }
+
+  handleChangeSwitch = (checked) => {
+    this.setState({ ...this.state, isCoughing: checked })
   }
 
   render() {
@@ -39,6 +47,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isAsthma"
                         onChange={this.handleChangeCheckBox}
                         checked={this.state.isAsthma}
@@ -50,6 +59,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isPregnancy"
                         onChange={this.handleChangeCheckBox}
                         checked={this.state.isPregnancy}
@@ -61,6 +71,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isHighBloodPressure"
                         onChange={this.handleChangeCheckBox}
                         checked={this.state.isHighBloodPressure}
@@ -72,6 +83,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isNone"
                         onChange={this.handleChangeCheckBox}
                         checked={this.state.isNone}
@@ -87,6 +99,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isObesity"
                         checked={this.state.isObesity}
                         color="primary"
@@ -98,6 +111,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isHeartProblem"
                         checked={this.state.isHeartProblem}
                         color="primary"
@@ -109,6 +123,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        style={{ color: "#07627e" }}
                         name="isHiv"
                         checked={this.state.isHiv}
                         color="primary"
@@ -118,6 +133,80 @@ class CheckHealthConditionsAndSymtomps extends Component {
                     label={<Typography variant="body2">HIV</Typography>}
                   />
                 </FormGroup>
+              </div>
+            </div>
+            <div className={classes.HAndSBody_S_Header}>
+              <h3>Triệu chứng</h3>
+            </div>
+            <div className={classes.HAndSBody_S_Content}>
+              <div className={classes.SymtompWrapper}>
+                <Typography variant="body2">Bạn có trải qua triệu chứng ho?</Typography>
+                {/* <ToggleButtonGroup
+                  value={this.state.toggleValue}
+                  size="small"
+                  exclusive
+                  // onChange={handleAlignment}
+                  aria-label="text alignment"
+                >
+                  <ToggleButton value="yes">
+                    <p>CÓ</p>
+                  </ToggleButton>
+                  <ToggleButton value="no">
+                    <p>KHÔNG</p>
+                  </ToggleButton>
+                </ToggleButtonGroup> */}
+                <Switch checked={this.state.isCoughing} onChange={this.handleChangeSwitch} />
+              </div>
+              <div className={classes.SymtompWrapper}>
+                <Typography variant="body2">Bạn có trải qua triệu chứng sốt?</Typography>
+                <ToggleButtonGroup
+                  size="small"
+                  value={this.state.toggleValue}
+                  exclusive
+                  // onChange={handleAlignment}
+                  aria-label="text alignment"
+                >
+                  <ToggleButton value="yes">
+                    <p>CÓ</p>
+                  </ToggleButton>
+                  <ToggleButton value="no">
+                    <p>KHÔNG</p>
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </div>
+              <div className={classes.SymtompWrapper}>
+                <Typography variant="body2">Bạn có trải qua triệu chứng khó thở?</Typography>
+                <ToggleButtonGroup
+                  size="small"
+                  value={this.state.toggleValue}
+                  exclusive
+                  // onChange={handleAlignment}
+                  aria-label="text alignment"
+                >
+                  <ToggleButton value="yes">
+                    <p>CÓ</p>
+                  </ToggleButton>
+                  <ToggleButton value="no">
+                    <p>KHÔNG</p>
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </div>
+              <div className={classes.SymtompWrapper}>
+                <Typography variant="body2">Bạn có trải qua triệu chứng mệt?</Typography>
+                <ToggleButtonGroup
+                  size="small"
+                  value={this.state.toggleValue}
+                  exclusive
+                  // onChange={handleAlignment}
+                  aria-label="text alignment"
+                >
+                  <ToggleButton value="yes">
+                    <p>CÓ</p>
+                  </ToggleButton>
+                  <ToggleButton value="no">
+                    <p>KHÔNG</p>
+                  </ToggleButton>
+                </ToggleButtonGroup>
               </div>
             </div>
           </div>

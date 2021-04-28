@@ -40,7 +40,9 @@ export const login = (email, password) => {
     };
     axios.post("/Authorization/login", loginData)
       .then(response => {
-        dispatch(loginSuccess(response.data.isSuccess, response.data.data.id, response.data.data.token, response.data.data.fullName, response.data.data.role));
+        setTimeout(() => {
+          dispatch(loginSuccess(response.data.isSuccess, response.data.data.id, response.data.data.token, response.data.data.fullName, response.data.data.role));
+        }, 2000);
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('user', response.data.data.fullName);
       })

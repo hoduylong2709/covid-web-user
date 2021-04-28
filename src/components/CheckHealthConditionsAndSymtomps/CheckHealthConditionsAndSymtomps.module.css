@@ -43,6 +43,16 @@
   font-size: 50px;
 }
 
+.HAndSBody_S_Header {
+  margin-left: 50px;
+}
+
+.HAndSBody_S_Content {
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-bottom: 80px;
+}
+
 @media (max-width: 1297px) {
   .HAndSBody_HC_Content {
     display: flex;
@@ -64,53 +74,3 @@
     margin: 0 451px;
   }
 }
-
-/* @media (max-width: 1366px) {
-  .HAndSBody_HC_Content {
-    gap: 120px;
-  }
-  .HealthConditionsAndSymtompsContainer {
-    margin: 0 120px;
-  }
-} */
-
-/* @media (max-width: 1009px) {
-  .HAndSBody_HC_Content {
-    flex-direction: column;
-    gap: 50px;
-  }
-
-  .HealthConditionsAndSymtompsContainer {
-    margin: 0 auto;
-  }
-} */
-
-/* @media (min-width: 1367px) {
-  .HealthConditionsAndSymtompsContainer {
-    margin: 0 487px;
-  }
-} */
-
-/* @media (max-width: 1009px) {
-  .HAndSBody_HC_Content {
-    gap: 0;
-  }
-} */
-
-/* @media (min-width: 1201px) {
-  .HAndSBody_HC_Content {
-    gap: 120px;
-  }
-} */
-
-/* @media (max-width: 697px) {
-  .HAndSBody_HC_Content {
-    display: flex;
-    flex-direction: column;
-    margin-left: 80px;
-    margin-right: 80px;
-    margin-bottom: 40px;
-    flex-wrap: 0;
-    gap: 0;
-  }
-} */

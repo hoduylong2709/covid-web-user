@@ -23,6 +23,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
     "react-spinners": "^0.10.6",
+    "react-switch": "^6.0.0",
     "reactjs-popup": "^2.0.4",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",

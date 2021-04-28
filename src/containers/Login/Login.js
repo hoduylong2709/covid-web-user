@@ -6,7 +6,6 @@ import Button from '../../components/UI/Button/Button';
 import Layout from '../../hoc/Layout/Layout';
 import classes from './Login.module.css';
 import Modal from '../../components/UI/Modal/Modal';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import LoadingModal from '../../components/UI/Modal/LoadingModal/LoadingModal';
 import * as actions from '../../store/actions/index';
 
@@ -41,8 +40,7 @@ class Login extends Component {
         touched: false
       }
     },
-    passwordShown: false,
-    loadingModal: false
+    passwordShown: false
   };
 
   togglePasswordVisiblity = () => {
@@ -99,12 +97,11 @@ class Login extends Component {
   submitHandler = (event) => {
     event.preventDefault();
     this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
-    this.setState({ loadingModal: true });
     setTimeout(() => {
       if (localStorage.getItem('user') !== null) {
         this.props.history.push('/');
       }
-    }, 3000);
+    }, 1000);
   }
 
   render() {
@@ -115,6 +112,14 @@ class Login extends Component {
         config: this.state.controls[key]
       });
     }
+
+    let count = 0;
+
+    formElementsArray.forEach(formElement => {
+      if (formElement.config.valid) {
+        count++;
+      }
+    });
 
     let form = formElementsArray.map(formElement => {
       let input = <Input
@@ -159,7 +164,7 @@ class Login extends Component {
     return (
       <Layout>
         <div className={classes.LoginContainer}>
-          {this.props.loading ? <Spinner className={classes.LoginSpinner}></Spinner> : <div className={classes.Login}>
+          <div className={classes.Login}>
             <h1>Đăng nhập</h1>
             <form>
               {form}
@@ -168,15 +173,15 @@ class Login extends Component {
               <a href="/forgot-password" className={classes.ForgotPasswordLink}>Quên mật khẩu?</a>
               <a href="/signup" className={classes.RegisterLink}>Chưa có tài khoản?</a>
             </div>
-            <Button btnType="Success" clicked={this.submitHandler}>Đăng nhập</Button>
-          </div>}
+            <Button btnType="Success" clicked={this.submitHandler} disabled={count === 2 ? false : true}>Đăng nhập</Button>
+          </div>
         </div>
         {this.props.error && <Modal
           show={this.props.error}
           modalClosed={this.props.onCloseModalErrorLogin}>
           {this.props.error}
         </Modal>}
-        <LoadingModal show={this.state.loadingModal}></LoadingModal>
+        <LoadingModal show={this.props.loading}></LoadingModal>
       </Layout>
     );
   };
