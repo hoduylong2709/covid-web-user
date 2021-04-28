@@ -11,6 +11,7 @@ import NewPage from '../src/components/NewPage/NewPage';
 import Testing from '../src/containers/Testing/Testing';
 import DateAndLocation from '../src/containers/DateAndLocationTesting/DateAndLocationTesting';
 import RegisterTestingQuestions from './containers/RegisterTestingQuestions/RegisterTestingQuestions';
+import CheckoutPayment from './containers/CheckoutPayment/CheckoutPayment';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
           <Route path="/testing" exact component={Testing} />
           <Route path="/register-testing-date-location" exact component={DateAndLocation} />
           <Route path="/register-testing-questions" exact component={RegisterTestingQuestions} />
+          <Route path="/checkout" exact component={CheckoutPayment} />
         </Switch>
       </Auxx>
     );

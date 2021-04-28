@@ -77,13 +77,13 @@ class DateAndLocationRegistration extends Component {
                 <Button
                   anotherType="RegisterButton-Cancel"
                   clicked={() => this.props.history.goBack()}
-                >Cancel</Button>
+                >Hủy</Button>
               </div>
               <div className={classes.NextButton}>
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={() => this.props.history.push("/register-testing-questions")}
-                >Next</Button>
+                >Xác nhận</Button>
               </div>
             </div>
           </div>

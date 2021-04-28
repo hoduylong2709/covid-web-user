@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: flex-start;
   margin: 0 300px;
+  overflow-y: auto;
 }
 
 .HAndSHeader {
@@ -25,8 +26,11 @@
 }
 
 .HAndSBody_HC_Header {
-  margin-top: 20px;
+  /* margin-top: 20px;
+  margin-left: 50px; */
   margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .HAndSBody_HC_Content {
@@ -34,7 +38,7 @@
   flex-direction: row;
   margin-left: 80px;
   margin-right: 80px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
   gap: 250px;
 }
@@ -45,12 +49,37 @@
 
 .HAndSBody_S_Header {
   margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .HAndSBody_S_Content {
   margin-left: 80px;
   margin-right: 80px;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
+}
+
+.SymtompWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.H3Tag {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.RegistrationBody_Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }
 
 @media (max-width: 1297px) {

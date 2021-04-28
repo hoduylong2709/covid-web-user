@@ -1,0 +1,43 @@
+.Container {
+  background-color: #f3f4f4;
+  height: 100vh;
+}
+
+.PaymentContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 300px;
+}
+
+.PaymentHeader {
+  display: flex;
+  margin: 10px 20px;
+}
+
+.PaymentBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: white;
+  border-radius: 36px;
+}
+
+.PaymentContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 39px;
+  flex-wrap: wrap;
+  gap: 23px;
+}
+
+.Payment_Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}

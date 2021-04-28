@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import classes from './CheckHealthConditionsAndSymtomps.module.css';
 
@@ -6,9 +7,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Switch from "react-switch";
+import Button from '../../components/UI/Button/Button';
 
 class CheckHealthConditionsAndSymtomps extends Component {
   state = {
@@ -19,15 +19,37 @@ class CheckHealthConditionsAndSymtomps extends Component {
     isHeartProblem: false,
     isHiv: false,
     isNone: false,
-    isCoughing: true
+    isCoughing: true,
+    isFever: true,
+    isShortnessOfBreath: true,
+    isRunningNose: true,
+    isTired: true
   };
 
   handleChangeCheckBox = event => {
-    this.setState({ ...this.state, [event.target.name]: event.target.checked });
+    this.setState({
+      ...this.state,
+      isNone: false,
+      [event.target.name]: event.target.checked
+    });
   }
 
-  handleChangeSwitch = (checked) => {
-    this.setState({ ...this.state, isCoughing: checked })
+  handleNoneCheckBox = event => {
+    this.setState({
+      ...this.state,
+      isAsthma: false,
+      isPregnancy: false,
+      isHighBloodPressure: false,
+      isObesity: false,
+      isHeartProblem: false,
+      isHiv: false,
+      [event.target.name]: event.target.checked
+    });
+  }
+
+  handleChangeSwitch = (checked, event, id) => {
+    console.log(checked, typeof id);
+    this.setState({ ...this.state, [id]: checked });
   }
 
   render() {
@@ -39,7 +61,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
           </div>
           <div className={classes.HAndSBody}>
             <div className={classes.HAndSBody_HC_Header}>
-              <h3>Tình trạng sức khỏe</h3>
+              <h3 className={classes.H3Tag}>Tình trạng sức khỏe</h3>
             </div>
             <div className={classes.HAndSBody_HC_Content}>
               <div className={classes.HAndSBody_HC_Content_column1}>
@@ -85,7 +107,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                       <Checkbox
                         style={{ color: "#07627e" }}
                         name="isNone"
-                        onChange={this.handleChangeCheckBox}
+                        onChange={this.handleNoneCheckBox}
                         checked={this.state.isNone}
                         color="primary"
                       />
@@ -136,77 +158,42 @@ class CheckHealthConditionsAndSymtomps extends Component {
               </div>
             </div>
             <div className={classes.HAndSBody_S_Header}>
-              <h3>Triệu chứng</h3>
+              <h3 className={classes.H3Tag}>Triệu chứng</h3>
             </div>
             <div className={classes.HAndSBody_S_Content}>
               <div className={classes.SymtompWrapper}>
                 <Typography variant="body2">Bạn có trải qua triệu chứng ho?</Typography>
-                {/* <ToggleButtonGroup
-                  value={this.state.toggleValue}
-                  size="small"
-                  exclusive
-                  // onChange={handleAlignment}
-                  aria-label="text alignment"
-                >
-                  <ToggleButton value="yes">
-                    <p>CÓ</p>
-                  </ToggleButton>
-                  <ToggleButton value="no">
-                    <p>KHÔNG</p>
-                  </ToggleButton>
-                </ToggleButtonGroup> */}
-                <Switch checked={this.state.isCoughing} onChange={this.handleChangeSwitch} />
+                <Switch onColor="#07627e" id="isCoughing" checked={this.state.isCoughing} onChange={this.handleChangeSwitch} />
               </div>
               <div className={classes.SymtompWrapper}>
                 <Typography variant="body2">Bạn có trải qua triệu chứng sốt?</Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  value={this.state.toggleValue}
-                  exclusive
-                  // onChange={handleAlignment}
-                  aria-label="text alignment"
-                >
-                  <ToggleButton value="yes">
-                    <p>CÓ</p>
-                  </ToggleButton>
-                  <ToggleButton value="no">
-                    <p>KHÔNG</p>
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                <Switch onColor="#07627e" id="isFever" checked={this.state.isFever} onChange={this.handleChangeSwitch} />
               </div>
               <div className={classes.SymtompWrapper}>
                 <Typography variant="body2">Bạn có trải qua triệu chứng khó thở?</Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  value={this.state.toggleValue}
-                  exclusive
-                  // onChange={handleAlignment}
-                  aria-label="text alignment"
-                >
-                  <ToggleButton value="yes">
-                    <p>CÓ</p>
-                  </ToggleButton>
-                  <ToggleButton value="no">
-                    <p>KHÔNG</p>
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                <Switch onColor="#07627e" id="isShortnessOfBreath" checked={this.state.isShortnessOfBreath} onChange={this.handleChangeSwitch} />
               </div>
               <div className={classes.SymtompWrapper}>
                 <Typography variant="body2">Bạn có trải qua triệu chứng mệt?</Typography>
-                <ToggleButtonGroup
-                  size="small"
-                  value={this.state.toggleValue}
-                  exclusive
-                  // onChange={handleAlignment}
-                  aria-label="text alignment"
-                >
-                  <ToggleButton value="yes">
-                    <p>CÓ</p>
-                  </ToggleButton>
-                  <ToggleButton value="no">
-                    <p>KHÔNG</p>
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                <Switch onColor="#07627e" id="isTired" checked={this.state.isTired} onChange={this.handleChangeSwitch} />
+              </div>
+              <div className={classes.SymtompWrapper}>
+                <Typography variant="body2">Bạn có trải qua triệu chứng chảy mũi?</Typography>
+                <Switch onColor="#07627e" id="isRunningNose" checked={this.state.isRunningNose} onChange={this.handleChangeSwitch} />
+              </div>
+            </div>
+            <div className={classes.RegistrationBody_Buttons}>
+              <div className={classes.CancelButton}>
+                <Button
+                  anotherType="RegisterButton-Cancel"
+                  clicked={() => this.props.history.goBack()}
+                >Hủy</Button>
+              </div>
+              <div className={classes.NextButton}>
+                <Button
+                  anotherType="RegisterButton-Next"
+                  clicked={() => this.props.history.push("/checkout")}
+                >Xác nhận</Button>
               </div>
             </div>
           </div>
@@ -216,4 +203,4 @@ class CheckHealthConditionsAndSymtomps extends Component {
   }
 }
 
-export default CheckHealthConditionsAndSymtomps;
+export default withRouter(CheckHealthConditionsAndSymtomps);
