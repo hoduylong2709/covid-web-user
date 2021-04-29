@@ -5,6 +5,8 @@ import Layout from '../../hoc/Layout/Layout';
 import Banner from '../../components/Banner/Banner';
 import News from '../News/News';
 import MyPagination from '../../components/UI/Pagination/Pagination';
+import VerifyModal from './../../components/UI/Modal/VerifyModal/VerifyModal';
+import VerifyModalAfterLogin from './../../components/UI/Modal/VerifyModal/VerifyModalAfterLogin';
 
 import classes from './HomePage.module.css';
 
@@ -18,12 +20,19 @@ class HomePage extends Component {
     }
 
     return (
-      <Layout>
-        <Banner />
-        <h3 className={classes.Header}>Tin tức và cập nhật</h3>
-        <News />
-        {pagination}
-      </Layout>
+      <div>
+        <Layout>
+          <Banner />
+          <h3 className={classes.Header}>Tin tức và cập nhật</h3>
+          <News />
+          {pagination}
+        </Layout>
+        <VerifyModalAfterLogin
+          showVerifyModal={localStorage.getItem('isVerified') === 'false'}
+          email={localStorage.getItem('email')}
+        >
+        </VerifyModalAfterLogin>
+      </div>
     );
   }
 }

@@ -8,6 +8,7 @@ import classes from './Signup.module.css';
 import * as actions from '../../store/actions/index';
 import Modal from './../../components/UI/Modal/Modal';
 import VerifyModal from '../../components/UI/Modal/VerifyModal/VerifyModal';
+import LoadingModal from '../../components/UI/Modal/LoadingModal/LoadingModal';
 
 class Signup extends Component {
   state = {
@@ -233,6 +234,7 @@ class Signup extends Component {
               <Button btnType="Success" disabled={count === 5 ? false : true} clicked={this.submitHandler}>Đăng ký</Button>
             </div>
           </div>
+          <LoadingModal show={this.props.loading}></LoadingModal>
         </Layout>
         {this.props.error && <Modal
           show={this.props.error}

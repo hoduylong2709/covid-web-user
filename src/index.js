@@ -12,6 +12,7 @@ import newsReducer from './store/reducers/news';
 import signupReducer from './store/reducers/signup';
 import loginReducer from './store/reducers/login';
 import forgotPasswordReducer from './store/reducers/forgotPassword';
+import verifyEmailAfterLoginReducer from './store/reducers/verifyEmailAfterLogin';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   news: newsReducer,
   signup: signupReducer,
   login: loginReducer,
-  forgotPassword: forgotPasswordReducer
+  forgotPassword: forgotPasswordReducer,
+  verifyEmailAfterLogin: verifyEmailAfterLoginReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

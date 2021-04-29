@@ -195,7 +195,8 @@ const mapStateToProps = state => {
     fullName: state.login.fullName,
     role: state.login.role,
     error: state.login.error,
-    loading: state.login.loading
+    loading: state.login.loading,
+    isVerified: state.login.isVerified
   };
 };
 

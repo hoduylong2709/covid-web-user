@@ -18,3 +18,7 @@ export {
   recoverProcess,
   closeRecoverProcessModal
 } from './forgotPassword';
+export {
+  verifyEmailAfterLogin,
+  closeVerifyModalAfterLogin
+} from './verifyEmailAfterLogin';

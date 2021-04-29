@@ -7,14 +7,16 @@ export const loginStart = () => {
   };
 };
 
-export const loginSuccess = (isSuccess, userId, token, fullName, role) => {
+export const loginSuccess = (isSuccess, userId, token, fullName, role, isVerified, email) => {
   return {
     type: actionTypes.LOGIN_SUCCESS,
     isSuccess: isSuccess,
     userId: userId,
     token: token,
     fullName: fullName,
-    role: role
+    role: role,
+    isVerified: isVerified,
+    email: email
   };
 };
 
@@ -41,10 +43,12 @@ export const login = (email, password) => {
     axios.post("/Authorization/login", loginData)
       .then(response => {
         setTimeout(() => {
-          dispatch(loginSuccess(response.data.isSuccess, response.data.data.id, response.data.data.token, response.data.data.fullName, response.data.data.role));
+          dispatch(loginSuccess(response.data.isSuccess, response.data.data.id, response.data.data.token, response.data.data.fullName, response.data.data.role, response.data.data.isVerified, response.data.data.email));
         }, 2000);
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('user', response.data.data.fullName);
+        localStorage.setItem('isVerified', response.data.data.isVerified);
+        localStorage.setItem('email', response.data.data.email);
       })
       .catch(error => {
         dispatch(loginFail(error.response.data.message));

@@ -8,7 +8,8 @@ const initialState = {
   fullName: null,
   role: null,
   error: null,
-  loading: false
+  loading: false,
+  isVerified: false
 };
 
 const loginStart = (state, action) => {
@@ -23,7 +24,8 @@ const loginSuccess = (state, action) => {
     fullName: action.fullName,
     role: action.role,
     error: null,
-    loading: false
+    loading: false,
+    isVerified: action.isVerified
   });
 };
 
