@@ -22,3 +22,6 @@ export {
   verifyEmailAfterLogin,
   closeVerifyModalAfterLogin
 } from './verifyEmailAfterLogin';
+export {
+  initLocations
+} from './testingLocations';
