@@ -32,6 +32,7 @@ export const verifyEmailAfterLogin = (email, code) => {
       .then(response => {
         dispatch(verifyAfterLoginSuccess(response.data.isSuccess));
         localStorage.setItem('isVerified', true);
+        window.location.reload();
       })
       .catch(error => {
         dispatch(verifyAfterLoginFail(error.response.data.message));
