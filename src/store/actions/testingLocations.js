@@ -23,7 +23,7 @@ export const initLocations = () => {
     axios.get('/testing/location', config)
       .then(response => {
         console.log(response);
-        dispatch(setLocations(response.data))
+        dispatch(setLocations(response.data.data))
       })
       .catch(error => {
         console.log(error);

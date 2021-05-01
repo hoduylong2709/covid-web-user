@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '../../components/UI/Button/Button';
+import * as actions from '../../store/actions/index';
 
 import classes from './DateAndLocationRegistration.module.css';
 
@@ -25,6 +27,16 @@ class DateAndLocationRegistration extends Component {
     console.log(value.value);
     this.setState({ ...this.state, location: value.value });
   }
+
+  componentDidUpdate() {
+    localStorage.setItem('testingDate', this.state.date);
+    localStorage.setItem('testingLocation', this.state.location);
+  }
+
+  // handleSubmitButton = (event) => {
+  //   event.preventDefault();
+  //   this.props.onSaveTestingDateAndLocation()
+  // }
 
   render() {
     const customStyles = {
@@ -55,7 +67,7 @@ class DateAndLocationRegistration extends Component {
                     format="yyyy-MM-dd"
                     margin="normal"
                     id="date-picker-inline"
-                    value={this.state.date}
+                    value={localStorage.getItem('testingDate') ? Date.parse(localStorage.getItem('testingDate')) : new Date()}
                     onChange={this.handleDateChange}
                     KeyboardButtonProps={{
                       'aria-label': 'change date',
@@ -69,6 +81,7 @@ class DateAndLocationRegistration extends Component {
                   styles={customStyles}
                   options={this.props.listLocation}
                   onChange={this.handleLocationChange}
+                  value={localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : 'Chọn địa điểm xét nghiệm...'}
                 />
               </div>
             </div>
@@ -83,6 +96,7 @@ class DateAndLocationRegistration extends Component {
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={() => this.props.history.push("/register-testing-questions")}
+                // clicked={this.handleSubmitButton}
                 >Xác nhận</Button>
               </div>
             </div>
@@ -93,4 +107,17 @@ class DateAndLocationRegistration extends Component {
   }
 }
 
-export default withRouter(DateAndLocationRegistration);
+const mapStateToProps = state => {
+  return {
+    testingDate: state.saveTestingDateAndLocation.testingDate,
+    testingLocation: state.saveTestingDateAndLocation.testingLocation
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSaveTestingDateAndLocation: (testingDate, testingLocation) => dispatch(actions.saveTestingDateAndLocation(testingDate, testingLocation))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DateAndLocationRegistration));
