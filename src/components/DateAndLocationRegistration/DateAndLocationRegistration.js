@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '../../components/UI/Button/Button';
-import * as actions from '../../store/actions/index';
 
 import classes from './DateAndLocationRegistration.module.css';
 
 class DateAndLocationRegistration extends Component {
   state = {
-    date: new Date(),
-    location: null
+    date: localStorage.getItem('testingDate') ? localStorage.getItem('testingDate') : new Date(),
+    location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : null
   };
 
   handleDateChange = date => {
@@ -24,19 +22,15 @@ class DateAndLocationRegistration extends Component {
   }
 
   handleLocationChange = value => {
-    console.log(value.value);
+    console.log(value, typeof value);
     this.setState({ ...this.state, location: value.value });
   }
 
   componentDidUpdate() {
     localStorage.setItem('testingDate', this.state.date);
     localStorage.setItem('testingLocation', this.state.location);
+    console.log(typeof this.state.location);
   }
-
-  // handleSubmitButton = (event) => {
-  //   event.preventDefault();
-  //   this.props.onSaveTestingDateAndLocation()
-  // }
 
   render() {
     const customStyles = {
@@ -67,7 +61,7 @@ class DateAndLocationRegistration extends Component {
                     format="yyyy-MM-dd"
                     margin="normal"
                     id="date-picker-inline"
-                    value={localStorage.getItem('testingDate') ? Date.parse(localStorage.getItem('testingDate')) : new Date()}
+                    value={this.state.date}
                     onChange={this.handleDateChange}
                     KeyboardButtonProps={{
                       'aria-label': 'change date',
@@ -79,9 +73,9 @@ class DateAndLocationRegistration extends Component {
                 <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
                 <Select
                   styles={customStyles}
+                  value={this.state.location ? { label: this.state.location, value: this.state.location } : null}
                   options={this.props.listLocation}
                   onChange={this.handleLocationChange}
-                  value={localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : 'Chọn địa điểm xét nghiệm...'}
                 />
               </div>
             </div>
@@ -96,7 +90,6 @@ class DateAndLocationRegistration extends Component {
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={() => this.props.history.push("/register-testing-questions")}
-                // clicked={this.handleSubmitButton}
                 >Xác nhận</Button>
               </div>
             </div>
@@ -107,17 +100,4 @@ class DateAndLocationRegistration extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    testingDate: state.saveTestingDateAndLocation.testingDate,
-    testingLocation: state.saveTestingDateAndLocation.testingLocation
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onSaveTestingDateAndLocation: (testingDate, testingLocation) => dispatch(actions.saveTestingDateAndLocation(testingDate, testingLocation))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DateAndLocationRegistration));
+export default withRouter(DateAndLocationRegistration);

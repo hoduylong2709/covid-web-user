@@ -25,6 +25,3 @@ export {
 export {
   initLocations
 } from './testingLocations';
-export {
-  saveTestingDateAndLocation
-} from './saveTestingDateAndLocation';
