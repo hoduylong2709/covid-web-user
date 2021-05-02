@@ -47,6 +47,14 @@
   gap: 16px;
 }
 
+.CancelButton {
+  min-width: 70px;
+}
+
+.NextButton {
+  min-width: 70px;
+}
+
 @media (max-width: 1200px) {
   .RegistrationBody_Content {
     gap: 120px;

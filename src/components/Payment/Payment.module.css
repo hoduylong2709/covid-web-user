@@ -41,3 +41,11 @@
   flex-wrap: wrap;
   gap: 16px;
 }
+
+.CancelButton {
+  min-width: 75px;
+}
+
+.CheckoutButton {
+  min-width: 75px;
+}

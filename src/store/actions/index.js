@@ -25,3 +25,6 @@ export {
 export {
   initLocations
 } from './testingLocations';
+export {
+  testingRegistration
+} from './testingRegistration'

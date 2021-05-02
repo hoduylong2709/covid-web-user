@@ -14,6 +14,7 @@ import loginReducer from './store/reducers/login';
 import forgotPasswordReducer from './store/reducers/forgotPassword';
 import verifyEmailAfterLoginReducer from './store/reducers/verifyEmailAfterLogin';
 import testingLocationsReducer from './store/reducers/testingLocations';
+import testingRegistrationReducer from './store/reducers/testingRegistration';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   login: loginReducer,
   forgotPassword: forgotPasswordReducer,
   verifyEmailAfterLogin: verifyEmailAfterLoginReducer,
-  testingLocations: testingLocationsReducer
+  testingLocations: testingLocationsReducer,
+  testingRegistration: testingRegistrationReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

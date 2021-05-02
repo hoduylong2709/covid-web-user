@@ -13,8 +13,12 @@ import classes from './DateAndLocationRegistration.module.css';
 class DateAndLocationRegistration extends Component {
   state = {
     date: localStorage.getItem('testingDate') ? localStorage.getItem('testingDate') : new Date(),
-    location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : null
+    location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : ""
   };
+
+  componentDidMount() {
+    console.log(this.state.date, typeof this.state.location);
+  }
 
   handleDateChange = date => {
     console.log(moment(date).format('YYYY-MM-DD'));
@@ -73,7 +77,7 @@ class DateAndLocationRegistration extends Component {
                 <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
                 <Select
                   styles={customStyles}
-                  value={this.state.location ? { label: this.state.location, value: this.state.location } : null}
+                  value={this.state.location !== "" ? { label: this.state.location, value: this.state.location } : null}
                   options={this.props.listLocation}
                   onChange={this.handleLocationChange}
                 />
@@ -90,7 +94,8 @@ class DateAndLocationRegistration extends Component {
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={() => this.props.history.push("/register-testing-questions")}
-                >Xác nhận</Button>
+                  disabled={this.state.location === ""}
+                >Tiếp tục</Button>
               </div>
             </div>
           </div>
