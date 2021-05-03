@@ -4,3 +4,10 @@ export const updateObject = (oldObject, updatedProperties) => {
     ...updatedProperties
   };
 };
+
+export const convertStringToBoolean = (stringInput) => {
+  if (stringInput === 'true')
+    return true;
+  else
+    return false;
+}

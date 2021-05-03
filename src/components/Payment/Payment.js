@@ -7,6 +7,7 @@ import classes from './Payment.module.css';
 import Typography from '@material-ui/core/Typography';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
+import { convertStringToBoolean } from '../../store/utility';
 
 class Payment extends Component {
   componentDidMount() {
@@ -17,10 +18,48 @@ class Payment extends Component {
     event.preventDefault();
     const location = this.props.listLocation.find(ele => ele.name === localStorage.getItem('testingLocation'));
     const testingLocationId = location.id;
-    const registerDate = moment(new Date()).format('YYYY-MM-DD');
-    const testingDate = moment(localStorage.getItem('testingDate')).format('YYYY-MM-DD');
+    const registerDate = moment(new Date()).format();
+    const testingDate = moment(localStorage.getItem('testingDate')).format();
     console.log('HDL', testingLocationId, registerDate, testingDate);
     this.props.onTestingRegistration(testingLocationId, registerDate, testingDate);
+    const asthma = convertStringToBoolean(localStorage.getItem('isAsthma'));
+    const pregnancy = convertStringToBoolean(localStorage.getItem('isPregnancy'));
+    const highBloodPressure = convertStringToBoolean(localStorage.getItem('isHighBloodPressure'));
+    const obesity = convertStringToBoolean(localStorage.getItem('isObesity'));
+    const heartProblem = convertStringToBoolean(localStorage.getItem('isHeartProblem'));
+    const hiv = convertStringToBoolean(localStorage.getItem('isHiv'));
+    const none = convertStringToBoolean(localStorage.getItem('isNone'));
+    const coughing = convertStringToBoolean(localStorage.getItem('isCoughing'));
+    const fever = convertStringToBoolean(localStorage.getItem('isFever'));
+    const shortnessOfBreath = convertStringToBoolean(localStorage.getItem('isShortnessOfBreath'));
+    const runningNose = convertStringToBoolean(localStorage.getItem('isRunningNose'));
+    const tired = convertStringToBoolean(localStorage.getItem('isTired'));
+    console.log(asthma,
+      pregnancy,
+      highBloodPressure,
+      obesity,
+      heartProblem,
+      hiv,
+      none,
+      coughing,
+      fever,
+      shortnessOfBreath,
+      runningNose,
+      tired);
+    this.props.onSubmitMedicalInfo(
+      asthma,
+      pregnancy,
+      highBloodPressure,
+      obesity,
+      heartProblem,
+      hiv,
+      none,
+      coughing,
+      fever,
+      shortnessOfBreath,
+      runningNose,
+      tired
+    );
   }
 
   render() {
@@ -61,13 +100,39 @@ const mapStateToProps = state => {
   return {
     isSuccess: state.testingRegistration.isSuccess,
     error: state.testingRegistration.error,
-    loading: state.testingRegistration.loading
+    loading: state.testingRegistration.loading,
+    isSuccessMI: state.submitMedicalInfo.isSuccess,
+    errorMI: state.submitMedicalInfo.error,
+    loadingMI: state.submitMedicalInfo.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTestingRegistration: (testingLocationId, registerDate, testingDate) => dispatch(actions.testingRegistration(testingLocationId, registerDate, testingDate))
+    onTestingRegistration: (testingLocationId, registerDate, testingDate) => dispatch(actions.testingRegistration(testingLocationId, registerDate, testingDate)),
+    onSubmitMedicalInfo: (asthma,
+      pregnancy,
+      highBloodPressure,
+      obesity,
+      heartProblem,
+      hiv,
+      none,
+      coughing,
+      fever,
+      shortnessOfBreath,
+      runningNose,
+      tired) => dispatch(actions.submitMedicalInfo(asthma,
+        pregnancy,
+        highBloodPressure,
+        obesity,
+        heartProblem,
+        hiv,
+        none,
+        coughing,
+        fever,
+        shortnessOfBreath,
+        runningNose,
+        tired))
   };
 };
 

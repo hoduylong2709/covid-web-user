@@ -27,4 +27,7 @@ export {
 } from './testingLocations';
 export {
   testingRegistration
-} from './testingRegistration'
+} from './testingRegistration';
+export {
+  submitMedicalInfo
+} from './submitMedicalInfo';

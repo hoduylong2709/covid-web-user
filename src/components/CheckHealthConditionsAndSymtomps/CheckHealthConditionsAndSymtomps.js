@@ -9,21 +9,22 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Switch from "react-switch";
 import Button from '../../components/UI/Button/Button';
+import { convertStringToBoolean } from '../../store/utility';
 
 class CheckHealthConditionsAndSymtomps extends Component {
   state = {
-    isAsthma: false,
-    isPregnancy: false,
-    isHighBloodPressure: false,
-    isObesity: false,
-    isHeartProblem: false,
-    isHiv: false,
-    isNone: false,
-    isCoughing: true,
-    isFever: true,
-    isShortnessOfBreath: true,
-    isRunningNose: true,
-    isTired: true
+    isAsthma: localStorage.getItem('isAsthma') ? convertStringToBoolean(localStorage.getItem('isAsthma')) : false,
+    isPregnancy: localStorage.getItem('isPregnancy') ? convertStringToBoolean(localStorage.getItem('isPregnancy')) : false,
+    isHighBloodPressure: localStorage.getItem('isHighBloodPressure') ? convertStringToBoolean(localStorage.getItem('isHighBloodPressure')) : false,
+    isObesity: localStorage.getItem('isObesity') ? convertStringToBoolean(localStorage.getItem('isObesity')) : false,
+    isHeartProblem: localStorage.getItem('isHeartProblem') ? convertStringToBoolean(localStorage.getItem('isHeartProblem')) : false,
+    isHiv: localStorage.getItem('isHiv') ? convertStringToBoolean(localStorage.getItem('isHiv')) : false,
+    isNone: localStorage.getItem('isNone') ? convertStringToBoolean(localStorage.getItem('isNone')) : false,
+    isCoughing: localStorage.getItem('isCoughing') ? convertStringToBoolean(localStorage.getItem('isCoughing')) : false,
+    isFever: localStorage.getItem('isFever') ? convertStringToBoolean(localStorage.getItem('isFever')) : false,
+    isShortnessOfBreath: localStorage.getItem('isShortnessOfBreath') ? convertStringToBoolean(localStorage.getItem('isShortnessOfBreath')) : false,
+    isRunningNose: localStorage.getItem('isRunningNose') ? convertStringToBoolean(localStorage.getItem('isRunningNose')) : false,
+    isTired: localStorage.getItem('isTired') ? convertStringToBoolean(localStorage.getItem('isTired')) : false
   };
 
   handleChangeCheckBox = event => {
@@ -50,6 +51,12 @@ class CheckHealthConditionsAndSymtomps extends Component {
   handleChangeSwitch = (checked, event, id) => {
     console.log(checked, typeof id);
     this.setState({ ...this.state, [id]: checked });
+  }
+
+  componentDidUpdate() {
+    for (const medicalInfo in this.state) {
+      localStorage.setItem(`${medicalInfo}`, this.state[medicalInfo]);
+    }
   }
 
   render() {
