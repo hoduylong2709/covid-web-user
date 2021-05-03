@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { convertStringToBoolean } from '../../store/utility';
+import { Alert } from 'react-st-modal';
+import LoadingModal from '../UI/Modal/LoadingModal/LoadingModal';
+import VerifyModal from './../UI/Modal/VerifyModal/VerifyModal';
 
 class Payment extends Component {
   componentDidMount() {
@@ -29,23 +32,25 @@ class Payment extends Component {
     const heartProblem = convertStringToBoolean(localStorage.getItem('isHeartProblem'));
     const hiv = convertStringToBoolean(localStorage.getItem('isHiv'));
     const none = convertStringToBoolean(localStorage.getItem('isNone'));
-    const coughing = convertStringToBoolean(localStorage.getItem('isCoughing'));
+    const cough = convertStringToBoolean(localStorage.getItem('isCoughing'));
     const fever = convertStringToBoolean(localStorage.getItem('isFever'));
     const shortnessOfBreath = convertStringToBoolean(localStorage.getItem('isShortnessOfBreath'));
     const runningNose = convertStringToBoolean(localStorage.getItem('isRunningNose'));
-    const tired = convertStringToBoolean(localStorage.getItem('isTired'));
-    console.log(asthma,
+    const tiredness = convertStringToBoolean(localStorage.getItem('isTired'));
+    console.log(
+      asthma,
       pregnancy,
       highBloodPressure,
       obesity,
       heartProblem,
       hiv,
-      none,
-      coughing,
+      cough,
       fever,
       shortnessOfBreath,
       runningNose,
-      tired);
+      tiredness,
+      none
+    );
     this.props.onSubmitMedicalInfo(
       asthma,
       pregnancy,
@@ -53,12 +58,12 @@ class Payment extends Component {
       obesity,
       heartProblem,
       hiv,
-      none,
-      coughing,
+      cough,
       fever,
       shortnessOfBreath,
       runningNose,
-      tired
+      tiredness,
+      none
     );
   }
 
@@ -91,6 +96,12 @@ class Payment extends Component {
             </div>
           </div>
         </div>
+        <LoadingModal show={this.props.loading || this.props.loadingMI}></LoadingModal>
+        {/* <VerifyModal
+          showVerifyModal={this.props.isSuccessMI}
+        // email={this.state.controls.email.value}
+        >
+        </VerifyModal> */}
       </div>
     );
   }
@@ -110,29 +121,33 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onTestingRegistration: (testingLocationId, registerDate, testingDate) => dispatch(actions.testingRegistration(testingLocationId, registerDate, testingDate)),
-    onSubmitMedicalInfo: (asthma,
+    onSubmitMedicalInfo: (
+      asthma,
       pregnancy,
       highBloodPressure,
       obesity,
       heartProblem,
       hiv,
-      none,
-      coughing,
+      cough,
       fever,
       shortnessOfBreath,
       runningNose,
-      tired) => dispatch(actions.submitMedicalInfo(asthma,
-        pregnancy,
-        highBloodPressure,
-        obesity,
-        heartProblem,
-        hiv,
-        none,
-        coughing,
-        fever,
-        shortnessOfBreath,
-        runningNose,
-        tired))
+      tiredness,
+      none
+    ) => dispatch(actions.submitMedicalInfo(
+      asthma,
+      pregnancy,
+      highBloodPressure,
+      obesity,
+      heartProblem,
+      hiv,
+      cough,
+      fever,
+      shortnessOfBreath,
+      runningNose,
+      tiredness,
+      none
+    ))
   };
 };
 

@@ -28,12 +28,12 @@ export const submitMedicalInfo = (
   obesity,
   heartProblem,
   hiv,
-  none,
-  coughing,
+  cough,
   fever,
   shortnessOfBreath,
   runningNose,
-  tired
+  tiredness,
+  none
 ) => {
   return dispatch => {
     dispatch(submitMedicalInfoStart());
@@ -47,16 +47,18 @@ export const submitMedicalInfo = (
       obesity,
       heartProblem,
       hiv,
-      none,
-      coughing,
+      cough,
       fever,
       shortnessOfBreath,
       runningNose,
-      tired
+      tiredness,
+      none
     };
     axios.post('/User/testing/medicalinfo', medicalInfoData, config)
       .then(response => {
-        dispatch(submitMedicalInfoSuccess(response.data.isSuccess));
+        setTimeout(() => {
+          dispatch(submitMedicalInfoSuccess(response.data.isSuccess));
+        }, 2000);
       })
       .catch(error => {
         dispatch(submitMedicalInfoFail(error.response.data.message));
