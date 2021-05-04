@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Button from '../../components/UI/Button/Button';
+import * as actions from '../../store/actions/index';
 
 import classes from './DateAndLocationRegistration.module.css';
 
 class DateAndLocationRegistration extends Component {
   state = {
     date: localStorage.getItem('testingDate') ? localStorage.getItem('testingDate') : new Date(),
-    location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : ""
+    location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : "",
+    testingLocationId: null
   };
 
   componentDidMount() {
@@ -27,13 +30,24 @@ class DateAndLocationRegistration extends Component {
 
   handleLocationChange = value => {
     console.log(value, typeof value);
-    this.setState({ ...this.state, location: value.value });
+    this.setState({ ...this.state, location: value.value, testingLocationId: value.id });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.testingLocationId !== this.state.testingLocationId) {
+      this.props.onInitDisableDates(this.state.testingLocationId);
+    }
     localStorage.setItem('testingDate', this.state.date);
     localStorage.setItem('testingLocation', this.state.location);
     console.log(typeof this.state.location);
+    console.log(this.props.disableDates);
+    // const updatedDisableDatesArray = this.props.disableDates.map(date => moment(date).format('YYYY-MM-DD'));
+    // console.log(updatedDisableDatesArray);
+  }
+
+  filterDisableDates = (date) => {
+    const updatedDisableDatesArray = this.props.disableDates.map(date => moment(date).format('YYYY-MM-DD'));
+    return updatedDisableDatesArray.includes(moment(date).format('YYYY-MM-DD'));
   }
 
   render() {
@@ -71,6 +85,7 @@ class DateAndLocationRegistration extends Component {
                       'aria-label': 'change date',
                     }}
                     disablePast={true}
+                    shouldDisableDate={this.state.testingLocationId && this.filterDisableDates}
                   />
                 </MuiPickersUtilsProvider>
               </div>
@@ -106,4 +121,17 @@ class DateAndLocationRegistration extends Component {
   }
 }
 
-export default withRouter(DateAndLocationRegistration);
+const mapStateToProps = state => {
+  return {
+    disableDates: state.disableDates.disableDates,
+    error: state.disableDates.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onInitDisableDates: (testingLocationId) => dispatch(actions.initDisableDates(testingLocationId))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DateAndLocationRegistration));

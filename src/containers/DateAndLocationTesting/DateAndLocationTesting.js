@@ -13,11 +13,11 @@ class DateAndLocationTesting extends Component {
   }
 
   render() {
-    let listLocation = [{ value: 'Loading...', label: 'Loading...' }];
+    let listLocation = [{ value: 'Loading...', label: 'Loading...', id: null }];
 
     if (this.props.locations) {
       listLocation = this.props.locations.map(location => {
-        return { value: location.name, label: location.name };
+        return { value: location.name, label: location.name, id: location.id };
       });
     }
 

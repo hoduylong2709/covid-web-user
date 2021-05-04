@@ -32,3 +32,6 @@ export {
   submitMedicalInfo,
   closeModalTestingRegistration
 } from './submitMedicalInfo';
+export {
+  initDisableDates
+} from './disableDates';
