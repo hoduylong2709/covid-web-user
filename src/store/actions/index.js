@@ -29,5 +29,6 @@ export {
   testingRegistration
 } from './testingRegistration';
 export {
-  submitMedicalInfo
+  submitMedicalInfo,
+  closeModalTestingRegistration
 } from './submitMedicalInfo';

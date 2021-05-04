@@ -8,9 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { convertStringToBoolean } from '../../store/utility';
-import { Alert } from 'react-st-modal';
 import LoadingModal from '../UI/Modal/LoadingModal/LoadingModal';
-import VerifyModal from './../UI/Modal/VerifyModal/VerifyModal';
+import TestingRegistrationModal from '../UI/Modal/TestingRegistrationModal/TestingRegistrationModal';
 
 class Payment extends Component {
   componentDidMount() {
@@ -97,11 +96,14 @@ class Payment extends Component {
           </div>
         </div>
         <LoadingModal show={this.props.loading || this.props.loadingMI}></LoadingModal>
-        {/* <VerifyModal
-          showVerifyModal={this.props.isSuccessMI}
-        // email={this.state.controls.email.value}
-        >
-        </VerifyModal> */}
+        <TestingRegistrationModal
+          showTestingModal={this.props.showModal}
+          showSuccessIcon={this.props.isSuccess && this.props.isSuccessMI}
+          testingRegistrationResult={
+            this.props.isSuccess && this.props.isSuccessMI ? 'Đăng ký xét nghiệm COVID-19 thành công' : this.props.error
+          }
+          hasError={this.props.error}
+        ></TestingRegistrationModal>
       </div>
     );
   }
@@ -114,7 +116,8 @@ const mapStateToProps = state => {
     loading: state.testingRegistration.loading,
     isSuccessMI: state.submitMedicalInfo.isSuccess,
     errorMI: state.submitMedicalInfo.error,
-    loadingMI: state.submitMedicalInfo.loading
+    loadingMI: state.submitMedicalInfo.loading,
+    showModal: state.submitMedicalInfo.showModal
   };
 };
 

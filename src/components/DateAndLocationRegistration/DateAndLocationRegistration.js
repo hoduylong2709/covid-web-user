@@ -70,6 +70,7 @@ class DateAndLocationRegistration extends Component {
                     KeyboardButtonProps={{
                       'aria-label': 'change date',
                     }}
+                    disablePast={true}
                   />
                 </MuiPickersUtilsProvider>
               </div>

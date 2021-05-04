@@ -4,7 +4,8 @@ import { updateObject } from '../utility';
 const initialState = {
   isSuccess: false,
   error: null,
-  loading: false
+  loading: false,
+  showModal: false
 };
 
 const submitMedicalInfoStart = (state, action) => {
@@ -15,7 +16,8 @@ const submitMedicalInfoSuccess = (state, action) => {
   return updateObject(state, {
     isSuccess: action.isSuccess,
     error: null,
-    loading: false
+    loading: false,
+    showModal: true
   });
 }
 
@@ -23,7 +25,14 @@ const submitMedicalInfoFail = (state, action) => {
   return updateObject(state, {
     isSuccess: false,
     error: action.error,
-    loading: false
+    loading: false,
+    showModal: true
+  });
+}
+
+const closeModalTestingRegistration = (state, action) => {
+  return updateObject(state, {
+    showModal: false
   });
 }
 
@@ -35,6 +44,8 @@ const reducer = (state = initialState, action) => {
       return submitMedicalInfoSuccess(state, action);
     case actionTypes.SUBMIT_MEDICALINFO_FAIL:
       return submitMedicalInfoFail(state, action);
+    case actionTypes.CLOSE_MODAL_TESTING_REGISTRATION:
+      return closeModalTestingRegistration(state, action);
     default:
       return state;
   }

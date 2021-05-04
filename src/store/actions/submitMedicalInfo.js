@@ -65,3 +65,9 @@ export const submitMedicalInfo = (
       });
   };
 }
+
+export const closeModalTestingRegistration = () => {
+  return {
+    type: actionTypes.CLOSE_MODAL_TESTING_REGISTRATION
+  };
+}
