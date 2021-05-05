@@ -35,3 +35,6 @@ export {
 export {
   initDisableDates
 } from './disableDates';
+export {
+  getTestingInfo
+} from './testingInfo'

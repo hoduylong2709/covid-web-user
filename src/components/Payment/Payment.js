@@ -50,7 +50,7 @@ class Payment extends Component {
       tiredness,
       none
     );
-    this.props.isSuccess === true && this.props.onSubmitMedicalInfo(
+    this.props.onSubmitMedicalInfo(
       asthma,
       pregnancy,
       highBloodPressure,

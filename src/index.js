@@ -17,6 +17,7 @@ import testingLocationsReducer from './store/reducers/testingLocations';
 import testingRegistrationReducer from './store/reducers/testingRegistration';
 import submitMedicalInfoReducer from './store/reducers/submitMedicalInfo';
 import disableDatesReducer from './store/reducers/disableDates';
+import testingInfoReducer from './store/reducers/testingInfo';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   testingLocations: testingLocationsReducer,
   testingRegistration: testingRegistrationReducer,
   submitMedicalInfo: submitMedicalInfoReducer,
-  disableDates: disableDatesReducer
+  disableDates: disableDatesReducer,
+  testingInfo: testingInfoReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

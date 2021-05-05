@@ -6,7 +6,30 @@ import Layout from '../../hoc/Layout/Layout';
 import Button from '../../components/UI/Button/Button';
 
 class Testing extends Component {
+  state = {
+    infoButtonClicked: true,
+    historyButtonClicked: false
+  };
+
+  handleInfoButtonClick = () => {
+    this.setState({ infoButtonClicked: true, historyButtonClicked: false });
+  }
+
+  handleHistoryButtonClick = () => {
+    this.setState({ infoButtonClicked: false, historyButtonClicked: true });
+  }
+
   render() {
+    let testInfo = null;
+
+    if (this.state.infoButtonClicked) {
+      testInfo = <h2>infoButtonClicked</h2>;
+    }
+
+    if (this.state.historyButtonClicked) {
+      testInfo = <h2>historyButtonClicked</h2>;
+    }
+
     return (
       <Layout>
         <div className={classes.TestingContainer}>
@@ -27,9 +50,19 @@ class Testing extends Component {
           <div className={classes.TestingBody}>
             <div className={classes.TestingBody_Navbar}>
               <div className={classes.TestingBody_Navbar_Button}>
-                <button className={classes.Button} autoFocus>Thông tin đăng ký</button>
-                <button className={classes.Button}>Lịch sử đăng ký</button>
+                <button
+                  className={classes.Button}
+                  autoFocus
+                  onClick={this.handleInfoButtonClick}
+                >Thông tin xét nghiệm</button>
+                <button
+                  className={classes.Button}
+                  onClick={this.handleHistoryButtonClick}
+                >Lịch sử xét nghiệm</button>
               </div>
+            </div>
+            <div className={classes.TestingBody_InfoRecords}>
+              {testInfo}
             </div>
           </div>
         </div>
