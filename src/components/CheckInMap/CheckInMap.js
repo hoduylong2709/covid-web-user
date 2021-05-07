@@ -5,10 +5,157 @@ import classes from './CheckInMap.module.css';
 import Typography from '@material-ui/core/Typography';
 import RoomIcon from '@material-ui/icons/Room';
 import Button from '../UI/Button/Button';
-import GoogleMap from '../GoogleMap/GoogleMap';
+// import GoogleMap from '../GoogleMap/GoogleMap';
+import {
+  InfoWindow,
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
+import Geocode from 'react-geocode';
+
+Geocode.setApiKey("AIzaSyDHgPI2vg_IiULDTDqbL3NqyYSGpBSajKY");
 
 class CheckInMap extends Component {
+  state = {
+    address: "",
+    city: "",
+    area: "",
+    state: "",
+    zoom: 15,
+    height: 400,
+    mapPosition: {
+      lat: 0,
+      lng: 0
+    },
+    markerPosition: {
+      lat: 0,
+      lng: 0
+    }
+  };
+
+  componentDidMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.setState({
+          mapPosition: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          },
+          markerPosition: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+        }, () => {
+          Geocode.fromLatLng(position.coords.latitude, position.coords.longitude)
+            .then(response => {
+              const address = response.results[0].formatted_address;
+              const addressArray = response.results[0].address_components;
+              const city = this.getCity(addressArray);
+              const area = this.getArea(addressArray);
+              const state = this.getState(addressArray);
+              this.setState({
+                address: address ? address : '',
+                city: city ? city : '',
+                area: area ? area : '',
+                state: state ? state : ''
+              });
+            })
+            .catch(error => {
+              console.log('error', error);
+            });
+        });
+      });
+    }
+  }
+
+  getCity = (addressArray) => {
+    let city = '';
+    for (let i = 0; i < addressArray.length; i++) {
+      if (addressArray[i].types[0] && 'administrative_area_level_2' === addressArray[i].types[0]) {
+        city = addressArray[i].long_name;
+        return city;
+      }
+    }
+  }
+
+  getArea = (addressArray) => {
+    let area = '';
+    for (let i = 0; i < addressArray.length; i++) {
+      if (addressArray[i].types[0]) {
+        for (let j = 0; j < addressArray[i].types.length; j++) {
+          if ('sublocality_level_1' === addressArray[i].types[j] || 'locality' === addressArray[i].types[j]) {
+            area = addressArray[i].long_name;
+            return area;
+          }
+        }
+      }
+    }
+  }
+
+  getState = (addressArray) => {
+    let state = '';
+    for (let i = 0; i < addressArray.length; i++) {
+      for (let i = 0; i < addressArray.length; i++) {
+        if (addressArray[i].types[0] && 'administrative_area_level_1' === addressArray[i].types[0]) {
+          state = addressArray[i].long_name;
+          return state;
+        }
+      }
+    }
+  }
+
+  onMarkerDragEnd = (event) => {
+    let newLat = event.latLng.lat();
+    let newLng = event.latLng.lng();
+    Geocode.fromLatLng(newLat, newLng)
+      .then(response => {
+        const address = response.results[0].formatted_address;
+        const addressArray = response.results[0].address_components;
+        const city = this.getCity(addressArray);
+        const area = this.getArea(addressArray);
+        const state = this.getState(addressArray);
+        this.setState({
+          address: address ? address : '',
+          city: city ? city : '',
+          area: area ? area : '',
+          state: state ? state : '',
+          mapPosition: {
+            lat: newLat,
+            lng: newLng
+          },
+          markerPosition: {
+            lat: newLat,
+            lng: newLng
+          }
+        });
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }
+
   render() {
+    const MapWithAMarker = withScriptjs(withGoogleMap(props =>
+      <GoogleMap
+        defaultZoom={8}
+        defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
+      >
+        <Marker
+          draggable={true}
+          onDragEnd={this.onMarkerDragEnd}
+          position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
+        >
+          <InfoWindow>
+            <div>
+              hello
+            </div>
+          </InfoWindow>
+        </Marker>
+      </GoogleMap>
+    ));
+
     return (
       <div className={classes.CheckInMap}>
         <div className={classes.CheckInMap_Container}>
@@ -31,7 +178,13 @@ class CheckInMap extends Component {
             </div>
           </div>
           <div className={classes.CheckInMap_Map}>
-            <GoogleMap />
+            {/* <GoogleMap /> */}
+            <MapWithAMarker
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHgPI2vg_IiULDTDqbL3NqyYSGpBSajKY&v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            />
           </div>
         </div>
       </div>
