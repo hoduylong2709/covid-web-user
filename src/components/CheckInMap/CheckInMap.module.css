@@ -1,0 +1,40 @@
+.CheckInMap {
+  background-color: #f3f4f4;
+  height: 100%;
+}
+
+.CheckInMap_Container {
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 200px;
+}
+
+.CheckInMap_Title {
+  display: flex;
+  margin: 0 10px 20px;
+}
+
+.CheckInMap_Desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: white;
+  border-radius: 36px;
+  margin-bottom: 20px;
+}
+
+.CheckInMap_Desc_text {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 39px;
+}
+
+.CheckInMap_Desc_submit {
+  display: flex;
+  flex-direction: row;
+  margin-left: 39px;
+}
+
+.SubmitButton {
+  max-width: 150px;
+}
