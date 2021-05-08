@@ -19,6 +19,7 @@ import submitMedicalInfoReducer from './store/reducers/submitMedicalInfo';
 import disableDatesReducer from './store/reducers/disableDates';
 import testingInfoReducer from './store/reducers/testingInfo';
 import checkinLocationReducer from './store/reducers/locationCheckin';
+import getLocationCheckinReducer from './store/reducers/getLocationCheckin';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
   submitMedicalInfo: submitMedicalInfoReducer,
   disableDates: disableDatesReducer,
   testingInfo: testingInfoReducer,
-  locationCheckin: checkinLocationReducer
+  locationCheckin: checkinLocationReducer,
+  getLocationCheckin: getLocationCheckinReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -29,3 +29,15 @@
   flex-wrap: wrap;
   gap: 23px;
 }
+
+.CheckinRecord_Content_Time {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.CheckinRecord_Content_Location {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}

@@ -42,3 +42,6 @@ export {
   checkinLocation,
   closeModalCheckinLocation
 } from './locationCheckin';
+export {
+  getLocationCheckin
+} from './getLocationCheckin';

@@ -33,7 +33,7 @@ class Testing extends Component {
     let testingRecordsView = <Spinner />;
 
     if (this.props.testingRecords) {
-      let updatedTestingRecords = this.props.testingRecords.slice(0, 3);
+      let updatedTestingRecords = this.props.testingRecords.slice().reverse().slice(0, 3);
       if (this.state.infoButtonClicked) {
         testingRecordsView = updatedTestingRecords.map(testingRecord => {
           return (
