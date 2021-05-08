@@ -17,8 +17,9 @@ import {
 } from "react-google-maps";
 import Geocode from 'react-geocode';
 import CheckinLocationModal from '../UI/Modal/TestingRegistrationModal/CheckinLocationModal';
+import moment from 'moment';
 
-Geocode.setApiKey("AIzaSyDHgPI2vg_IiULDTDqbL3NqyYSGpBSajKY");
+Geocode.setApiKey("AIzaSyBEj_N2fFz4FxUACprRCtZIBp21_r4LHu8");
 
 class CheckInMap extends Component {
   state = {
@@ -53,6 +54,7 @@ class CheckInMap extends Component {
         }, () => {
           Geocode.fromLatLng(position.coords.latitude, position.coords.longitude)
             .then(response => {
+              console.log(response);
               const address = response.results[0].formatted_address;
               const addressArray = response.results[0].address_components;
               const city = this.getCity(addressArray);
@@ -139,15 +141,46 @@ class CheckInMap extends Component {
       });
   }
 
+  onPlaceSelected = (place) => {
+    console.log('plc', place);
+    const address = place.formatted_address,
+      addressArray = place.address_components,
+      city = this.getCity(addressArray),
+      area = this.getArea(addressArray),
+      state = this.getState(addressArray),
+      latValue = place.geometry.location.lat(),
+      lngValue = place.geometry.location.lng();
+
+    console.log('latvalue', latValue)
+    console.log('lngValue', lngValue)
+
+    // Set these values in the state.
+    this.setState({
+      address: (address) ? address : '',
+      area: (area) ? area : '',
+      city: (city) ? city : '',
+      state: (state) ? state : '',
+      markerPosition: {
+        lat: latValue,
+        lng: lngValue
+      },
+      mapPosition: {
+        lat: latValue,
+        lng: lngValue
+      },
+    })
+  };
+
   handleCheckin = (event) => {
     event.preventDefault();
-    this.props.onCheckinLocation(this.state.address);
+    this.props.onCheckinLocation(this.state.address, moment(new Date()).format());
+    console.log(this.state.address);
   }
 
   render() {
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
       <GoogleMap
-        defaultZoom={8}
+        defaultZoom={this.state.zoom}
         defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
       >
         <Marker
@@ -156,9 +189,6 @@ class CheckInMap extends Component {
           position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
         >
           <InfoWindow>
-            {/* <div>
-              hello
-            </div> */}
             <div>
               <span style={{ padding: 0, margin: 0 }}>{this.state.address}</span>
             </div>
@@ -200,7 +230,7 @@ class CheckInMap extends Component {
           </div>
           <div className={classes.CheckInMap_Map}>
             <MapWithAMarker
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHgPI2vg_IiULDTDqbL3NqyYSGpBSajKY&v=3.exp&libraries=geometry,drawing,places"
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEj_N2fFz4FxUACprRCtZIBp21_r4LHu8&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
@@ -231,7 +261,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckinLocation: (address) => dispatch(actions.checkinLocation(address))
+    onCheckinLocation: (address, time) => dispatch(actions.checkinLocation(address, time))
   };
 };
 

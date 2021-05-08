@@ -21,16 +21,17 @@ export const checkinLocationFail = (error) => {
   };
 }
 
-export const checkinLocation = (address) => {
+export const checkinLocation = (address, time) => {
   return dispatch => {
     dispatch(checkinLocationstart());
     const config = {
       headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
     };
     const checkinLocationInfo = {
-      address
+      address,
+      time
     };
-    axios.post('', checkinLocationInfo, config)
+    axios.post('/User/itinerary/location-checkin', checkinLocationInfo, config)
       .then(response => {
         dispatch(checkinLocationSuccess(response.data.isSuccess));
       })

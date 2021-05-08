@@ -1,4 +1,16 @@
-.TestingBody_InfoRecords {
+.Container {
+  height: 100%;
+  background-color: #f3f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
+.CheckinHeader {
+  display: flex;
+  margin: 10px 300px;
+}
+
+.CheckinRecords {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -8,7 +20,7 @@
   margin-bottom: 20px;
 }
 
-.InfoTestingContent {
+.CheckinRecord_Content {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
