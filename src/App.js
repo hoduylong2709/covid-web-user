@@ -13,6 +13,7 @@ import DateAndLocation from '../src/containers/DateAndLocationTesting/DateAndLoc
 import RegisterTestingQuestions from './containers/RegisterTestingQuestions/RegisterTestingQuestions';
 import CheckoutPayment from './containers/CheckoutPayment/CheckoutPayment';
 import LocationCheckIn from './containers/LocationCheckIn/LocationCheckIn';
+import LocationCheckinHistory from './containers/LocationCheckinHistory/LocationCheckinHistory';
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
           <Route path="/register-testing-questions" exact component={RegisterTestingQuestions} />
           <Route path="/checkout" exact component={CheckoutPayment} />
           <Route path="/check-in" exact component={LocationCheckIn} />
+          <Route path="/check-in-history" exact component={LocationCheckinHistory} />
         </Switch>
       </Auxx>
     );

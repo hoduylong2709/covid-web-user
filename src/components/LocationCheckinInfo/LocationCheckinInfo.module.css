@@ -1,0 +1,19 @@
+.TestingBody_InfoRecords {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: white;
+  border-radius: 36px;
+  margin: 0 300px;
+  margin-bottom: 20px;
+}
+
+.InfoTestingContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 39px;
+  flex-wrap: wrap;
+  gap: 23px;
+}

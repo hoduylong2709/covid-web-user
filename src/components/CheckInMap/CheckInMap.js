@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import classes from './CheckInMap.module.css';
 
+import * as actions from '../../store/actions/index';
 import Typography from '@material-ui/core/Typography';
 import RoomIcon from '@material-ui/icons/Room';
 import Button from '../UI/Button/Button';
-// import GoogleMap from '../GoogleMap/GoogleMap';
 import {
   InfoWindow,
   withScriptjs,
@@ -14,6 +16,7 @@ import {
   Marker,
 } from "react-google-maps";
 import Geocode from 'react-geocode';
+import CheckinLocationModal from '../UI/Modal/TestingRegistrationModal/CheckinLocationModal';
 
 Geocode.setApiKey("AIzaSyDHgPI2vg_IiULDTDqbL3NqyYSGpBSajKY");
 
@@ -136,6 +139,11 @@ class CheckInMap extends Component {
       });
   }
 
+  handleCheckin = (event) => {
+    event.preventDefault();
+    this.props.onCheckinLocation(this.state.address);
+  }
+
   render() {
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
       <GoogleMap
@@ -148,8 +156,11 @@ class CheckInMap extends Component {
           position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
         >
           <InfoWindow>
-            <div>
+            {/* <div>
               hello
+            </div> */}
+            <div>
+              <span style={{ padding: 0, margin: 0 }}>{this.state.address}</span>
             </div>
           </InfoWindow>
         </Marker>
@@ -161,6 +172,15 @@ class CheckInMap extends Component {
         <div className={classes.CheckInMap_Container}>
           <div className={classes.CheckInMap_Title}>
             <h2 className={classes.CheckInMap_Title_h2}>Check-in địa điểm</h2>
+            <div className={classes.HistoryCheckinButton}>
+              <Button
+                btnType="Success"
+                anotherType="HistoryCheckinButton"
+                clicked={() => this.props.history.push("/check-in-history")}
+              >
+                Xem lịch sử check-in
+              </Button>
+            </div>
           </div>
           <div className={classes.CheckInMap_Desc}>
             <div className={classes.CheckInMap_Desc_text}>
@@ -172,13 +192,13 @@ class CheckInMap extends Component {
                 <Button
                   btnType="Success"
                   anotherType="CheckInButton"
+                  clicked={this.handleCheckin}
                 >Check-in
                 </Button>
               </div>
             </div>
           </div>
           <div className={classes.CheckInMap_Map}>
-            {/* <GoogleMap /> */}
             <MapWithAMarker
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHgPI2vg_IiULDTDqbL3NqyYSGpBSajKY&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
@@ -187,9 +207,32 @@ class CheckInMap extends Component {
             />
           </div>
         </div>
+        <CheckinLocationModal
+          showCheckinModal={this.props.showModal}
+          showSuccessIcon={this.props.isSuccess}
+          checkinLocationResult={
+            this.props.isSuccess ? 'Check-in địa điểm hiện tại của bạn thành công' : this.props.error
+          }
+          hasError={this.props.error}
+        ></CheckinLocationModal>
       </div>
     );
   }
 }
 
-export default CheckInMap;
+const mapStateToProps = state => {
+  return {
+    isSuccess: state.locationCheckin.isSuccess,
+    error: state.locationCheckin.error,
+    loading: state.locationCheckin.loading,
+    showModal: state.locationCheckin.showModal
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCheckinLocation: (address) => dispatch(actions.checkinLocation(address))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CheckInMap));

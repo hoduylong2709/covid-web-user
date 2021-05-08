@@ -37,4 +37,8 @@ export {
 } from './disableDates';
 export {
   getTestingInfo
-} from './testingInfo'
+} from './testingInfo';
+export {
+  checkinLocation,
+  closeModalCheckinLocation
+} from './locationCheckin';

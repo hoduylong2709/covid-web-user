@@ -11,7 +11,13 @@
 
 .CheckInMap_Title {
   display: flex;
+  flex-direction: row;
   margin: 0 10px 20px;
+  justify-content: space-between;
+}
+
+.HistoryCheckinButton {
+  max-width: 200px;
 }
 
 .CheckInMap_Desc {

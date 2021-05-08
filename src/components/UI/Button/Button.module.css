@@ -52,4 +52,11 @@
 .CheckInButton {
   margin-top: -3px;
   margin-left: 7px;
+  background: #07627e;
+  color: white;
+}
+
+.HistoryCheckinButton {
+  background: #07627e;
+  color: white;
 }
