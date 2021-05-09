@@ -14,6 +14,7 @@ import RegisterTestingQuestions from './containers/RegisterTestingQuestions/Regi
 import CheckoutPayment from './containers/CheckoutPayment/CheckoutPayment';
 import LocationCheckIn from './containers/LocationCheckIn/LocationCheckIn';
 import LocationCheckinHistory from './containers/LocationCheckinHistory/LocationCheckinHistory';
+import ItineraryInfo from './containers/ItineraryInfo/ItineraryInfo';
 
 class App extends Component {
   render() {
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="/checkout" exact component={CheckoutPayment} />
           <Route path="/check-in" exact component={LocationCheckIn} />
           <Route path="/check-in-history" exact component={LocationCheckinHistory} />
+          <Route path="/itinerary" exact component={ItineraryInfo} />
         </Switch>
       </Auxx>
     );

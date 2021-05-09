@@ -91,7 +91,7 @@ class Testing extends Component {
         <div className={classes.TestingContainer}>
           <div className={classes.TestingHeader}>
             <div className={classes.TestingTitle}>
-              <h3>Quản lý xét nghiệm</h3>
+              <h2>Quản lý xét nghiệm</h2>
             </div>
             <div>
               <Button

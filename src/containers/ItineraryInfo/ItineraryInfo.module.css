@@ -1,0 +1,20 @@
+.ItineraryContainer {
+  background-color: #f3f4f4;
+  height: 100%;
+}
+
+.ItineraryContent {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 200px;
+}
+
+.ItineraryHeader {
+  margin: 25px 20px;
+}
+
+.ItineraryTitle {
+  margin-top: 0;
+}

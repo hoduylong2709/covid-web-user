@@ -16,6 +16,7 @@ class NavigationItems extends Component {
         <NavigationItem link="/" exact>Trang chủ</NavigationItem>
         <NavigationItem link="/testing" exact>Xét nghiệm</NavigationItem>
         <NavigationItem link="/check-in" exact>Check-in</NavigationItem>
+        <NavigationItem link="/itinerary" exact>Lịch trình</NavigationItem>
         <div className={classes.ProfileContainer}>
           <AccountCircleRoundedIcon
             className={classes.ProfileIcon}
