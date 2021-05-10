@@ -45,3 +45,9 @@ export {
 export {
   getLocationCheckin
 } from './getLocationCheckin';
+export {
+  getCityList
+} from './cityList';
+export {
+  submitItineraryInfo
+} from './ItineraryInfo';

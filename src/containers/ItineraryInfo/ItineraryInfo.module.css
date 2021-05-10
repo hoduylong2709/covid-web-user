@@ -18,3 +18,54 @@
 .ItineraryTitle {
   margin-top: 0;
 }
+
+.ItineraryBody {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 36px;
+}
+
+.DepatureInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.DestinationInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.StyleDiv {
+  width: 244.188px;
+}
+
+.TransportIdentify {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+
+.Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.CancelButton {
+  min-width: 100px;
+}
+
+.SubmitButton {
+  min-width: 100px;
+}
