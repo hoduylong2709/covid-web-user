@@ -49,5 +49,6 @@ export {
   getCityList
 } from './cityList';
 export {
-  submitItineraryInfo
+  submitItineraryInfo,
+  closeModalItineraryInfo
 } from './ItineraryInfo';

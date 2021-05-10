@@ -244,6 +244,7 @@ class CheckInMap extends Component {
             this.props.isSuccess ? 'Check-in địa điểm hiện tại của bạn thành công' : this.props.error
           }
           hasError={this.props.error}
+          closeModal={false}
         ></CheckinLocationModal>
       </div>
     );

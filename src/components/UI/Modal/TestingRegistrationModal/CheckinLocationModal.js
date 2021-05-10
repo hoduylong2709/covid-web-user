@@ -10,7 +10,11 @@ import WarningIcon from '@material-ui/icons/Warning';
 class CheckinLocationModal extends Component {
   submitHandler = (event) => {
     event.preventDefault();
-    this.props.onCloseModalCheckinLocation();
+    if (this.props.closeModal) {
+      this.props.closeModal();
+    } else {
+      this.props.onCloseModalCheckinLocation();
+    }
   }
 
   render() {
@@ -29,7 +33,7 @@ class CheckinLocationModal extends Component {
     return (
       <Modal
         show={this.props.showCheckinModal}
-        modalClosed={this.props.onCloseModalCheckinLocation}
+        modalClosed={this.props.closeModal ? this.props.closeModal : this.props.onCloseModalCheckinLocation}
       >
         <div className={classes.testingModal}>
           {descCheckin}

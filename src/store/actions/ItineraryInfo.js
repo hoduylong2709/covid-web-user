@@ -22,6 +22,12 @@ export const submitItineraryInfoFail = (error) => {
   };
 }
 
+export const closeModalItineraryInfo = () => {
+  return {
+    type: actionTypes.CLOSE_MODAL_ITINERARY_INFORMATION
+  };
+}
+
 export const submitItineraryInfo = (
   departureCityId,
   destinationCityId,

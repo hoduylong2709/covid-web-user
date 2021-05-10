@@ -16,6 +16,12 @@
   color: red;
 }
 
+.ItineraryInfoHeader {
+  text-align: center;
+  margin-bottom: 15px;
+  color: black;
+}
+
 .Button {
   display: flex;
   justify-content: center;

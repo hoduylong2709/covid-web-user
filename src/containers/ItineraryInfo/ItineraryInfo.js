@@ -13,12 +13,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import * as actions from '../../store/actions/index';
+import CheckinLocationModal from '../../components/UI/Modal/TestingRegistrationModal/CheckinLocationModal';
+import MustTestingModal from './../../components/UI/Modal/TestingRegistrationModal/MustTestingModal';
 
 class ItineraryInfo extends Component {
   state = {
-    depature: null,
+    depatureId: null,
     depatureTime: null,
-    destination: null,
+    destinationId: null,
     destinationTime: null,
     transportIdentify: null
   };
@@ -32,11 +34,11 @@ class ItineraryInfo extends Component {
   }
 
   handleDepartureFieldChange = event => {
-    this.setState({ depature: event.target.value });
+    this.setState({ depatureId: event.target.value });
   }
 
   handleDestinationFieldChange = event => {
-    this.setState({ destination: event.target.value });
+    this.setState({ destinationId: event.target.value });
   }
 
   handleDepatureTimeChange = event => {
@@ -52,23 +54,67 @@ class ItineraryInfo extends Component {
   }
 
   handleSubmitButton = () => {
-    console.log(this.state);
+    this.props.onSubmitItineraryInfo(
+      this.state.depatureId,
+      this.state.destinationId,
+      this.state.transportIdentify,
+      this.state.depatureTime,
+      this.state.destinationTime
+    );
+  }
+
+  isDisabledItem = () => {
+
   }
 
   render() {
     let cityList = null;
+
+    let cityList2 = null;
 
     if (this.props.cities) {
       cityList = this.props.cities.map(city => {
         return (
           <MenuItem
             key={city.id}
-            value={city.name}
+            value={city.id}
+            disabled={this.state.destinationId !== null && city.id === this.state.destinationId}
           >
             {city.name}
           </MenuItem>
         );
       });
+      cityList2 = this.props.cities.map(city => {
+        return (
+          <MenuItem
+            key={city.id}
+            value={city.id}
+            disabled={this.state.depatureId !== null && city.id === this.state.depatureId}
+          >
+            {city.name}
+          </MenuItem>
+        );
+      });
+    }
+
+    let modal = (
+      <CheckinLocationModal
+        showCheckinModal={this.props.showModalSubmit}
+        showSuccessIcon={this.props.isSuccessSubmit}
+        checkinLocationResult={
+          this.props.isSuccessSubmit ? 'Khai báo lịch trình y tế thành công' : this.props.error
+        }
+        hasError={this.props.errorSubmit}
+        closeModal={() => this.props.onCloseModalItineraryInfo()}
+      ></CheckinLocationModal>
+    );
+
+    if (this.props.mustTesting) {
+      modal = (
+        <MustTestingModal
+          mustTesting={true}
+        ></MustTestingModal>
+      );
     }
 
     return (
@@ -118,7 +164,7 @@ class ItineraryInfo extends Component {
                       onChange={this.handleDestinationFieldChange}
                       style={{ minWidth: '250px' }}
                     >
-                      {cityList}
+                      {cityList2}
                     </Select>
                   </FormControl>
                 </div>
@@ -132,6 +178,7 @@ class ItineraryInfo extends Component {
                       shrink: true,
                     }}
                     onChange={this.handleDestinationTimeChange}
+                    inputProps={{ min: this.state.depatureTime }}
                   />
                 </form>
               </div>
@@ -154,11 +201,6 @@ class ItineraryInfo extends Component {
                 <div className={classes.StyleDiv}></div>
               </div>
               <div className={classes.Buttons}>
-                <div className={classes.CancelButton}>
-                  <Button
-                    anotherType="RegisterButton-Cancel"
-                  >Xóa dữ liệu</Button>
-                </div>
                 <div className={classes.SubmitButton}>
                   <Button
                     anotherType="RegisterButton-Next"
@@ -168,6 +210,19 @@ class ItineraryInfo extends Component {
               </div>
             </div>
           </div>
+          {/* <CheckinLocationModal
+            showCheckinModal={this.props.showModalSubmit}
+            showSuccessIcon={this.props.isSuccessSubmit}
+            checkinLocationResult={
+              this.props.isSuccessSubmit ? 'Khai báo lịch trình y tế thành công' : this.props.error
+            }
+            hasError={this.props.errorSubmit}
+            closeModal={() => this.props.onCloseModalItineraryInfo()}
+          ></CheckinLocationModal> */}
+          {/* <MustTestingModal
+            mustTesting={true}
+          ></MustTestingModal> */}
+          {modal}
         </div>
       </Layout>
     );
@@ -179,13 +234,22 @@ const mapStateToProps = state => {
     cities: state.cityList.cities,
     isSuccess: state.cityList.isSuccess,
     error: state.cityList.error,
-    loading: state.cityList.loading
+    loading: state.cityList.loading,
+    isSuccessSubmit: state.itineraryInfo.isSuccess,
+    errorSubmit: state.itineraryInfo.error,
+    loadingSubmit: state.itineraryInfo.loading,
+    showModalSubmit: state.itineraryInfo.showModal,
+    mustTesting: state.itineraryInfo.mustTesting
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCityList: () => dispatch(actions.getCityList())
+    onGetCityList: () => dispatch(actions.getCityList()),
+    onSubmitItineraryInfo: (
+      departureCityId, destinationCityId, flyNo, departureTime, landingTime
+    ) => dispatch(actions.submitItineraryInfo(departureCityId, destinationCityId, flyNo, departureTime, landingTime)),
+    onCloseModalItineraryInfo: () => dispatch(actions.closeModalItineraryInfo())
   };
 };
 
