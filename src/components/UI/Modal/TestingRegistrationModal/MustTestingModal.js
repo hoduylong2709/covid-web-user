@@ -10,7 +10,7 @@ class MustTestingModal extends Component {
     return (
       <Modal
         show={this.props.mustTesting}
-      // modalClosed={this.props.closeModal ? this.props.closeModal : this.props.onCloseModalCheckinLocation}
+        modalClosed={this.props.closeModal}
       >
         <div className={classes.testingModal}>
           <h4 className={classes.ItineraryInfoHeader}>
