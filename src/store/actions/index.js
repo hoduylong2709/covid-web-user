@@ -52,7 +52,3 @@ export {
   submitItineraryInfo,
   closeModalItineraryInfo
 } from './ItineraryInfo';
-export {
-  openMustTestingModal,
-  closeMustTestingModal
-} from './mustTestingModal'

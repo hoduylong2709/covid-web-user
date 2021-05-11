@@ -112,7 +112,8 @@ class ItineraryInfo extends Component {
     if (this.props.mustTesting) {
       modal = (
         <MustTestingModal
-          mustTesting={true}
+          mustTesting={this.props.showModalSubmit && this.props.mustTesting}
+          closeModal={() => this.props.onCloseModalItineraryInfo()}
         ></MustTestingModal>
       );
     }
@@ -129,7 +130,7 @@ class ItineraryInfo extends Component {
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
                   <EmojiTransportationIcon style={{ color: '#07627e', marginTop: '20px' }} />
                   <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Địa điểm khởi hành</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Địa điểm khởi hành*</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -138,12 +139,13 @@ class ItineraryInfo extends Component {
                     >
                       {cityList}
                     </Select>
+
                   </FormControl>
                 </div>
                 <form noValidate>
                   <TextField
                     id="datetime-local"
-                    label="Thời gian khởi hành"
+                    label="Thời gian khởi hành*"
                     type="datetime-local"
                     className={classes.textField}
                     InputLabelProps={{
@@ -157,7 +159,7 @@ class ItineraryInfo extends Component {
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
                   <LocationCityIcon style={{ color: '#07627e', marginTop: '20px' }} />
                   <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Địa điểm đến</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Địa điểm đến*</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -171,7 +173,7 @@ class ItineraryInfo extends Component {
                 <form noValidate>
                   <TextField
                     id="datetime-local"
-                    label="Thời gian đến"
+                    label="Thời gian đến*"
                     type="datetime-local"
                     className={classes.textField}
                     InputLabelProps={{
@@ -205,23 +207,17 @@ class ItineraryInfo extends Component {
                   <Button
                     anotherType="RegisterButton-Next"
                     clicked={this.handleSubmitButton}
+                    disabled={
+                      this.state.depatureId === null ||
+                      this.state.destinationId === null ||
+                      this.state.depatureTime === null ||
+                      this.state.destinationTime === null
+                    }
                   >Xác nhận</Button>
                 </div>
               </div>
             </div>
           </div>
-          {/* <CheckinLocationModal
-            showCheckinModal={this.props.showModalSubmit}
-            showSuccessIcon={this.props.isSuccessSubmit}
-            checkinLocationResult={
-              this.props.isSuccessSubmit ? 'Khai báo lịch trình y tế thành công' : this.props.error
-            }
-            hasError={this.props.errorSubmit}
-            closeModal={() => this.props.onCloseModalItineraryInfo()}
-          ></CheckinLocationModal> */}
-          {/* <MustTestingModal
-            mustTesting={true}
-          ></MustTestingModal> */}
           {modal}
         </div>
       </Layout>
