@@ -3,9 +3,17 @@ import classes from './ManageProfiles.module.css';
 import DescriptionIcon from '@material-ui/icons/Description';
 
 class ManageProfiles extends Component {
+  handleClickEvent = (event) => {
+    event.preventDefault();
+  }
+
   render() {
     return (
-      <div className={classes.ManageProfilesContainer}>
+      <a
+        className={classes.ManageProfilesContainer}
+        href="/#"
+        onClick={this.handleClickEvent}
+      >
         <div className={classes.Icon}>
           <DescriptionIcon
             fontSize='large'
@@ -15,7 +23,7 @@ class ManageProfiles extends Component {
         <div className={classes.Title}>
           <h3>Quản lý hồ sơ</h3>
         </div>
-      </div>
+      </a>
     );
   }
 }

@@ -3,9 +3,17 @@ import classes from './ChangePassword.module.css';
 import LockIcon from '@material-ui/icons/Lock';
 
 class ChangePassword extends Component {
+  handleClickEvent = (event) => {
+    event.preventDefault();
+  }
+
   render() {
     return (
-      <div className={classes.ChangePasswordContainer}>
+      <a
+        className={classes.ChangePasswordContainer}
+        href="/#"
+        onClick={this.handleClickEvent}
+      >
         <div className={classes.Icon}>
           <LockIcon
             fontSize='large'
@@ -15,7 +23,7 @@ class ChangePassword extends Component {
         <div className={classes.Title}>
           <h3>Thay đổi mật khẩu</h3>
         </div>
-      </div>
+      </a>
     );
   }
 }

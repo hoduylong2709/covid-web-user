@@ -4,6 +4,15 @@
   background: white;
   border-radius: 36px;
   margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.ManageProfilesContainer:visited {
+  color: black;
+}
+
+.ManageProfilesContainer:hover {
+  background-color: #c4c9c1;
 }
 
 .Icon {

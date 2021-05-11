@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import classes from './Logout.module.css';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 class Logout extends Component {
+  handleClickEvent = (event) => {
+    event.preventDefault();
+    localStorage.clear();
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 1000);
+  }
+
   render() {
     return (
-      <div className={classes.LogoutContainer}>
+      <a
+        id="log-out"
+        className={classes.LogoutContainer}
+        href="/#"
+        onClick={this.handleClickEvent}
+      >
         <div className={classes.Icon}>
           <ExitToAppIcon
             fontSize='large'
@@ -15,9 +29,9 @@ class Logout extends Component {
         <div className={classes.Title}>
           <h3>Đăng xuất</h3>
         </div>
-      </div>
+      </a>
     );
   }
 }
 
-export default Logout;
+export default withRouter(Logout);
