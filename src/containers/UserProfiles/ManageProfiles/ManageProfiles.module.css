@@ -1,0 +1,11 @@
+.ManageProfilesContainer {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  border-radius: 36px;
+  margin-bottom: 20px;
+}
+
+.Icon {
+  margin: auto 83px;
+}

@@ -1,0 +1,10 @@
+.LogoutContainer {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  border-radius: 36px;
+}
+
+.Icon {
+  margin: auto 83px;
+}

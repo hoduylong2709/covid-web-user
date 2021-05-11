@@ -1,0 +1,21 @@
+.InfoContainer {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  border-radius: 36px;
+  margin-top: 60px;
+  min-height: 115px;
+  margin-bottom: 60px;
+}
+
+.Icon {
+  margin: auto 83px;
+}
+
+.Info {
+  margin: auto 0;
+}
+
+.UserName {
+  margin: 13px 0;
+}

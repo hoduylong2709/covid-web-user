@@ -23,7 +23,7 @@ class NavigationItems extends Component {
             style={{ color: '#07627e' }}
           >
           </AccountCircleRoundedIcon>
-          <NavigationItem link="/profile">{localStorage.getItem('user')}</NavigationItem>
+          <NavigationItem link="/user-profiles">{localStorage.getItem('user')}</NavigationItem>
         </div>
       </ul>);
     }

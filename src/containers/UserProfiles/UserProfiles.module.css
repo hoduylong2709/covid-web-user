@@ -1,0 +1,12 @@
+.ProfilesContainer {
+  background-color: #f3f4f4;
+  height: 100%;
+}
+
+.Components {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 400px;
+}
