@@ -3,16 +3,11 @@ import classes from './ManageProfiles.module.css';
 import DescriptionIcon from '@material-ui/icons/Description';
 
 class ManageProfiles extends Component {
-  handleClickEvent = (event) => {
-    event.preventDefault();
-  }
-
   render() {
     return (
       <a
         className={classes.ManageProfilesContainer}
-        href="/#"
-        onClick={this.handleClickEvent}
+        href="/user-profiles-manage"
       >
         <div className={classes.Icon}>
           <DescriptionIcon

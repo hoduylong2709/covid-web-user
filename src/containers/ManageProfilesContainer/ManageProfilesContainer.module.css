@@ -1,0 +1,54 @@
+.MPWrapper {
+  background-color: #f3f4f4;
+  height: 100%;
+}
+
+.MPContainer {
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 250px;
+}
+
+.MPContainer_Header {
+  display: flex;
+  margin: 0 10px 20px;
+}
+
+.MPContainer_Body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: white;
+  border-radius: 36px;
+  margin-bottom: 20px;
+}
+
+.UserName {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 80px;
+}
+
+.SectionItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-bottom: 30px;
+}
+
+.Email {
+  display: flex;
+  flex-direction: column;
+}
+
+.EmailBody {
+  display: flex;
+  flex-direction: row;
+}
+
+.Buttons {
+  margin-left: 80px;
+  max-width: 120px;
+}
