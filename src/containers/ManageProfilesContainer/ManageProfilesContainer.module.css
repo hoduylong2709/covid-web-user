@@ -25,7 +25,7 @@
 
 .UserName {
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   margin-left: 80px;
 }
 
@@ -51,4 +51,8 @@
 .Buttons {
   margin-left: 80px;
   max-width: 120px;
+}
+
+.SectionItem1 {
+  margin-top: 15px;
 }

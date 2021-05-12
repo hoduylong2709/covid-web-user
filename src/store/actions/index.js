@@ -52,3 +52,6 @@ export {
   submitItineraryInfo,
   closeModalItineraryInfo
 } from './ItineraryInfo';
+export {
+  getUserProfiles
+} from './getUserProfiles';

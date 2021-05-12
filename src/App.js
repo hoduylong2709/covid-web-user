@@ -17,6 +17,7 @@ import LocationCheckinHistory from './containers/LocationCheckinHistory/Location
 import ItineraryInfo from './containers/ItineraryInfo/ItineraryInfo';
 import UserProfiles from './containers/UserProfiles/UserProfiles';
 import ManageProfilesContainer from './containers/ManageProfilesContainer/ManageProfilesContainer';
+import EditProfiles from './containers/ManageProfilesContainer/EditProfiles/EditProfiles';
 
 class App extends Component {
   render() {
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/itinerary" exact component={ItineraryInfo} />
           <Route path="/user-profiles" exact component={UserProfiles} />
           <Route path="/user-profiles-manage" exact component={ManageProfilesContainer} />
+          <Route path="/edit-profiles" exact component={EditProfiles} />
         </Switch>
       </Auxx>
     );
