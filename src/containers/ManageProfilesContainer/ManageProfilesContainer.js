@@ -23,28 +23,42 @@ class ManageProfilesContainer extends Component {
     let address = 'N/A';
 
     if (this.props.userProfiles) {
+      if (this.props.userProfiles['firstName']) {
+        localStorage.setItem('firstName', this.props.userProfiles['firstName']);
+      }
+
+      if (this.props.userProfiles['lastName']) {
+        localStorage.setItem('lastName', this.props.userProfiles['lastName']);
+      }
+
       if (this.props.userProfiles['phoneNumber']) {
         phoneNumber = this.props.userProfiles['phoneNumber'];
+        localStorage.setItem('phoneNumber', phoneNumber);
       }
 
       if (this.props.userProfiles['dateOfBirth'].substring(0, 4) !== '0001') {
         dateOfBirth = moment(this.props.userProfiles['dateOfBirth']).format('DD/MM/YYYY');
+        localStorage.setItem('dateOfBirth', this.props.userProfiles['dateOfBirth']);
       }
 
       if (this.props.userProfiles['idNo']) {
         idNo = this.props.userProfiles['idNo'];
+        localStorage.setItem('idNo', idNo);
       }
 
       if (this.props.userProfiles['nationality']) {
         nationality = this.props.userProfiles['nationality'];
+        localStorage.setItem('nationality', nationality);
       }
 
       if (this.props.userProfiles['address']) {
         address = this.props.userProfiles['address'];
+        localStorage.setItem('address', address);
       }
 
       if (this.props.userProfiles['gender']) {
         gender = this.props.userProfiles['gender'];
+        localStorage.setItem('gender', gender);
       }
     }
 

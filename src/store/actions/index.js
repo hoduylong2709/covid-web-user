@@ -55,3 +55,7 @@ export {
 export {
   getUserProfiles
 } from './getUserProfiles';
+export {
+  editProfiles,
+  closeEditProfilesModal
+} from './editProfiles';

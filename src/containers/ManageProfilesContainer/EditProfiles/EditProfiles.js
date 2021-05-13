@@ -4,6 +4,9 @@ import Layout from '../../../hoc/Layout/Layout';
 import classes from './EditProfiles.module.css';
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import moment from 'moment';
+import * as actions from '../../../store/actions/index';
+import CheckinLocationModal from '../../../components/UI/Modal/TestingRegistrationModal/CheckinLocationModal';
 
 class EditProfiles extends Component {
   state = {
@@ -13,9 +16,9 @@ class EditProfiles extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Họ của bạn'
+          placeholder: ''
         },
-        value: '',
+        value: `${localStorage.getItem('firstName')}`,
         validation: {},
         valid: true,
         touched: false
@@ -25,9 +28,9 @@ class EditProfiles extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Tên của bạn'
+          placeholder: ''
         },
-        value: '',
+        value: `${localStorage.getItem('lastName')}`,
         validation: {},
         valid: true,
         touched: false
@@ -37,28 +40,38 @@ class EditProfiles extends Component {
         elementType: 'select',
         elementConfig: {
           options: [
-            { value: 'mam', displayValue: 'Nam' },
+            { value: 'nam', displayValue: 'Nam' },
             { value: 'nữ', displayValue: 'Nữ' },
             { value: 'khác', displayValue: 'Khác' }
           ]
         },
-        value: 'nam',
+        value: `${localStorage.getItem('gender').toLowerCase()}`,
         validation: {},
         valid: true
+      },
+      dateOfBirth: {
+        elementName: 'Ngày sinh',
+        elementType: 'input',
+        elementConfig: {
+          type: 'date'
+        },
+        value: `${localStorage.getItem('dateOfBirth') ? moment(localStorage.getItem('dateOfBirth')).format('YYYY-MM-DD') : ''}`,
+        validation: {},
+        valid: true,
+        touched: false
       },
       email: {
         elementName: 'Email',
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Nhập email muốn thay đổi'
+          placeholder: `${localStorage.getItem('email')}`
         },
-        value: '',
         validation: {
           required: true,
           isEmail: true
         },
-        valid: false,
+        valid: true,
         touched: false
       },
       phoneNumber: {
@@ -66,29 +79,29 @@ class EditProfiles extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Số điện thoại của bạn'
+          placeholder: ''
         },
-        value: '',
+        value: `${localStorage.getItem('phoneNumber') ? localStorage.getItem('phoneNumber') : 'N/A'}`,
         validation: {
           required: true,
           isNumeric: true
         },
-        valid: false,
+        valid: true,
         touched: false
       },
-      IdNo: {
+      idNo: {
         elementName: 'Số CMND',
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Số CMND của bạn'
+          placeholder: ''
         },
-        value: '',
+        value: `${localStorage.getItem('idNo') ? localStorage.getItem('idNo') : 'N/A'}`,
         validation: {
           required: true,
           isNumeric: true
         },
-        valid: false,
+        valid: true,
         touched: false
       },
       nationality: {
@@ -96,11 +109,11 @@ class EditProfiles extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Quốc tịch của bạn'
+          placeholder: ''
         },
-        value: '',
+        value: `${localStorage.getItem('nationality') ? localStorage.getItem('nationality') : 'N/A'}`,
         validation: {},
-        valid: false,
+        valid: true,
         touched: false
       },
       address: {
@@ -108,9 +121,9 @@ class EditProfiles extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Địa chỉ của bạn'
+          placeholder: ''
         },
-        value: '',
+        value: `${localStorage.getItem('address') ? localStorage.getItem('address') : 'N/A'}`,
         validation: {},
         valid: true,
         touched: false
@@ -168,6 +181,20 @@ class EditProfiles extends Component {
     this.setState({ controls: updatedControls });
   }
 
+  handleSubmitButton = (event) => {
+    event.preventDefault();
+    this.props.onEditProfiles(
+      this.state.controls.firstName.value,
+      this.state.controls.lastName.value,
+      this.state.controls.phoneNumber.value,
+      this.state.controls.dateOfBirth.value,
+      this.state.controls.gender.value,
+      this.state.controls.idNo.value,
+      this.state.controls.nationality.value,
+      this.state.controls.address.value,
+    );
+  }
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -177,17 +204,20 @@ class EditProfiles extends Component {
       });
     }
 
-    let count = 0;
+    let count1 = 0;
+    let count2 = 0;
 
     formElementsArray.forEach(formElement => {
+      if (formElement.config.value !== '' && formElement.config.value !== 'N/A' && formElement.config.valid) {
+        count1++;
+      }
+
       if (formElement.config.touched) {
-        count++;
+        count2++;
       }
     });
 
-    console.log(count);
-
-    let form1 = formElementsArray.slice(0, 4).map(formElement => {
+    let form1 = formElementsArray.slice(0, 5).map(formElement => {
       let input = <Input
         key={formElement.id}
         elementType={formElement.config.elementType}
@@ -221,13 +251,13 @@ class EditProfiles extends Component {
 
       return (
         <div style={{ marginBottom: '15px' }} className={classes.InputElement}>
-          <h4 style={{ margin: '10px auto' }} className={classes.InputType}>{formElement.config.elementName}</h4>
+          <h4 style={{ margin: '10px auto' }} className={classes.InputType}>{formElement.config.elementName + "*"}</h4>
           {input}
         </div>
       );
     });
 
-    let form2 = formElementsArray.slice(4, 8).map(formElement => {
+    let form2 = formElementsArray.slice(5, 9).map(formElement => {
       let input = <Input
         key={formElement.id}
         elementType={formElement.config.elementType}
@@ -243,7 +273,7 @@ class EditProfiles extends Component {
 
       return (
         <div style={{ marginBottom: '15px' }} className={classes.InputElement}>
-          <h4 style={{ margin: '10px auto' }} className={classes.InputType}>{formElement.config.elementName}</h4>
+          <h4 style={{ margin: '10px auto' }} className={classes.InputType}>{formElement.config.elementName + "*"}</h4>
           {input}
         </div>
       );
@@ -272,11 +302,20 @@ class EditProfiles extends Component {
                   <Button
                     anotherType="RegisterButton-Next"
                     clicked={this.handleSubmitButton}
-                    disabled={count <= 0}
+                    disabled={count1 !== 9 || count2 === 0}
                   >Xác nhận</Button>
                 </div>
               </div>
             </div>
+            <CheckinLocationModal
+              showCheckinModal={this.props.showModal}
+              showSuccessIcon={this.props.isSuccess}
+              checkinLocationResult={
+                this.props.isSuccess ? 'Cập nhật thông tin thành công' : this.props.error
+              }
+              hasError={this.props.error}
+              closeModal={this.props.onCloseEditProfilesModal}
+            ></CheckinLocationModal>
           </div>
         </div>
       </Layout>
@@ -284,4 +323,38 @@ class EditProfiles extends Component {
   }
 }
 
-export default EditProfiles;
+const mapStateToProps = state => {
+  return {
+    isSuccess: state.editProfiles.isSuccess,
+    error: state.editProfiles.error,
+    loading: state.editProfiles.loading,
+    showModal: state.editProfiles.showModal
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onEditProfiles: (
+      firstName,
+      lastName,
+      phoneNumber,
+      dateOfBirth,
+      gender,
+      idNo,
+      nationality,
+      address
+    ) => dispatch(actions.editProfiles(
+      firstName,
+      lastName,
+      phoneNumber,
+      dateOfBirth,
+      gender,
+      idNo,
+      nationality,
+      address
+    )),
+    onCloseEditProfilesModal: () => dispatch(actions.closeEditProfilesModal())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfiles);

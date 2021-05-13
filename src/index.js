@@ -23,6 +23,7 @@ import getLocationCheckinReducer from './store/reducers/getLocationCheckin';
 import cityListReducer from './store/reducers/cityList';
 import itineraryInfoReducer from './store/reducers/itineraryInfo';
 import getUserProfilesReducer from './store/reducers/getUserProfiles';
+import editProfilesReducer from './store/reducers/editProfiles';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -41,7 +42,8 @@ const rootReducer = combineReducers({
   getLocationCheckin: getLocationCheckinReducer,
   cityList: cityListReducer,
   itineraryInfo: itineraryInfoReducer,
-  getUserProfiles: getUserProfilesReducer
+  getUserProfiles: getUserProfilesReducer,
+  editProfiles: editProfilesReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
