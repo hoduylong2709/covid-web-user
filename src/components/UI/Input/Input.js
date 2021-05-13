@@ -24,6 +24,7 @@ const input = (props) => {
         placeholder={props.elementConfig.placeholder}
         value={props.value}
         onChange={props.changed}
+        disabled={props.disabledInput}
       />;
       break;
     case 'textarea':
@@ -52,7 +53,7 @@ const input = (props) => {
   }
 
   return (
-    <div className={classes.Input}>
+    <div className={[classes.Input, classes[props.editStyle]].join(' ')}>
       <label className={classes.Label}>{props.label}</label>
       {inputElement}
       {validationError}
