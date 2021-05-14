@@ -18,6 +18,7 @@ import ItineraryInfo from './containers/ItineraryInfo/ItineraryInfo';
 import UserProfiles from './containers/UserProfiles/UserProfiles';
 import ManageProfilesContainer from './containers/ManageProfilesContainer/ManageProfilesContainer';
 import EditProfiles from './containers/ManageProfilesContainer/EditProfiles/EditProfiles';
+import ChangePasswordContainer from './containers/ChangePasswordContainer/ChangePasswordContainer';
 
 class App extends Component {
   render() {
@@ -39,6 +40,7 @@ class App extends Component {
           <Route path="/user-profiles" exact component={UserProfiles} />
           <Route path="/user-profiles-manage" exact component={ManageProfilesContainer} />
           <Route path="/edit-profiles" exact component={EditProfiles} />
+          <Route path="/change-password" exact component={ChangePasswordContainer} />
         </Switch>
       </Auxx>
     );

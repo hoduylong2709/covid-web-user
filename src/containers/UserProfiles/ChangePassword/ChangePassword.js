@@ -3,16 +3,11 @@ import classes from './ChangePassword.module.css';
 import LockIcon from '@material-ui/icons/Lock';
 
 class ChangePassword extends Component {
-  handleClickEvent = (event) => {
-    event.preventDefault();
-  }
-
   render() {
     return (
       <a
         className={classes.ChangePasswordContainer}
-        href="/#"
-        onClick={this.handleClickEvent}
+        href="/change-password"
       >
         <div className={classes.Icon}>
           <LockIcon

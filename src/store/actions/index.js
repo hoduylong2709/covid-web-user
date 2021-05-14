@@ -59,3 +59,7 @@ export {
   editProfiles,
   closeEditProfilesModal
 } from './editProfiles';
+export {
+  changePassword,
+  closeChangePasswordModal
+} from './changePassword';
