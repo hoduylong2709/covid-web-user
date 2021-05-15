@@ -109,34 +109,10 @@ class CheckHealthConditionsAndSymtomps extends Component {
                     }
                     label={<Typography variant="body2">Cao huyết áp</Typography>}
                   />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        style={{ color: "#07627e" }}
-                        name="isNone"
-                        onChange={this.handleNoneCheckBox}
-                        checked={this.state.isNone}
-                        color="primary"
-                      />
-                    }
-                    label={<Typography variant="body2">Không có triệu chứng</Typography>}
-                  />
                 </FormGroup>
               </div>
               <div className={classes.HAndSBody_HC_Content_column2}>
                 <FormGroup column>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        style={{ color: "#07627e" }}
-                        name="isObesity"
-                        checked={this.state.isObesity}
-                        color="primary"
-                        onChange={this.handleChangeCheckBox}
-                      />
-                    }
-                    label={<Typography variant="body2">Béo phì</Typography>}
-                  />
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -160,6 +136,18 @@ class CheckHealthConditionsAndSymtomps extends Component {
                       />
                     }
                     label={<Typography variant="body2">HIV</Typography>}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        style={{ color: "#07627e" }}
+                        name="isNone"
+                        onChange={this.handleNoneCheckBox}
+                        checked={this.state.isNone}
+                        color="primary"
+                      />
+                    }
+                    label={<Typography variant="body2">Không có triệu chứng</Typography>}
                   />
                 </FormGroup>
               </div>

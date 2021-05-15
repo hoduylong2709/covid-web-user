@@ -173,7 +173,7 @@ class CheckInMap extends Component {
 
   handleCheckin = (event) => {
     event.preventDefault();
-    this.props.onCheckinLocation(this.state.address, moment(new Date()).format());
+    this.props.onCheckinLocation(this.state.address, moment(new Date()).format().substring(0, 19));
     console.log(this.state.address);
   }
 

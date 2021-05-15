@@ -78,9 +78,17 @@ class ForgotPassword extends Component {
       });
     }
 
+    let count = 0;
+
+    formElementsArray.forEach(formElement => {
+      if (formElement.config.valid) {
+        count++;
+      }
+    });
+
     let form = formElementsArray.map(formElement => (
       <div className={classes.InputElement}>
-        <h5 className={classes.InputType}>{formElement.id.charAt(0).toUpperCase() + formElement.id.slice(1)}</h5>
+        <h5 className={classes.InputType}>{formElement.id.charAt(0).toUpperCase() + formElement.id.slice(1) + "*"}</h5>
         <Input
           key={formElement.id}
           elementType={formElement.config.elementType}
@@ -99,7 +107,11 @@ class ForgotPassword extends Component {
       <form>
         {form}
       </form>
-      <Button btnType="Success" clicked={this.submitHandler}>Xác nhận</Button>
+      <Button
+        btnType="Success"
+        clicked={this.submitHandler}
+        disabled={count !== 1}
+      >Xác nhận</Button>
     </div>);
 
     if (this.props.loading) {

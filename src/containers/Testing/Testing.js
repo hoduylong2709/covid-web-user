@@ -49,11 +49,11 @@ class Testing extends Component {
                   Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
                 </Typography>
                 <Typography variant="body1">
-                  Địa điểm xét nghiệm xxxxxxxx
+                  Địa điểm xét nghiệm {testingRecord.testingLocation.name}
                 </Typography>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <CheckCircleIcon fontSize="large" style={{ color: 'green' }} />
-                  <Typography variant="body1" style={{ padding: '5px 5px' }}>
+                  <Typography variant="body1" style={{ padding: '5px 5px', fontWeight: '800' }}>
                     Đã đăng ký
                 </Typography>
                 </div>

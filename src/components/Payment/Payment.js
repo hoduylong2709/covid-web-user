@@ -75,9 +75,15 @@ class Payment extends Component {
           </div>
           <div className={classes.PaymentBody}>
             <div className={classes.PaymentContent}>
-              <Typography variant="body1">Tổng cộng: 120000 VNĐ</Typography>
+              <Typography variant="body1">Tổng cộng: 734000 VNĐ</Typography>
               <Typography variant="body1">Mô tả: Đăng ký xét nghiệm COVID-19 cho ông/bà {localStorage.getItem('user')}</Typography>
-              <Typography variant="body1">Vui lòng thanh toán tại địa điểm xét nghiệm</Typography>
+              <Typography
+                variant="body1"
+                style={{
+                  fontStyle: 'italic',
+                  color: '#d82222'
+                }}
+              >*Vui lòng thanh toán tại địa điểm xét nghiệm</Typography>
             </div>
             <div className={classes.Payment_Buttons}>
               <div className={classes.CancelButton}>

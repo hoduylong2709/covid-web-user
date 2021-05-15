@@ -41,8 +41,6 @@ class DateAndLocationRegistration extends Component {
     localStorage.setItem('testingLocation', this.state.location);
     console.log(typeof this.state.location);
     console.log(this.props.disableDates);
-    // const updatedDisableDatesArray = this.props.disableDates.map(date => moment(date).format('YYYY-MM-DD'));
-    // console.log(updatedDisableDatesArray);
   }
 
   filterDisableDates = (date) => {
@@ -93,7 +91,7 @@ class DateAndLocationRegistration extends Component {
                 <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
                 <Select
                   styles={customStyles}
-                  value={this.state.location !== "" ? { label: this.state.location, value: this.state.location } : null}
+                  value={this.state.location !== "" ? { label: this.state.location, value: this.state.location } : this.props.listLocation[0]}
                   options={this.props.listLocation}
                   onChange={this.handleLocationChange}
                 />
@@ -110,7 +108,6 @@ class DateAndLocationRegistration extends Component {
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={() => this.props.history.push("/register-testing-questions")}
-                  disabled={this.state.location === ""}
                 >Tiếp tục</Button>
               </div>
             </div>

@@ -18,7 +18,7 @@ class LocationCheckinHistory extends Component {
     let checkinListView = <Spinner />;
 
     if (this.props.checkinList) {
-      checkinListView = this.props.checkinList.slice().reverse().map(checkinInfo => {
+      checkinListView = this.props.checkinList.map(checkinInfo => {
         return (
           <div className={classes.CheckinRecords}>
             <div className={classes.CheckinRecord_Content}>
