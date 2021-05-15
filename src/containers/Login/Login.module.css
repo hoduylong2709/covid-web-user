@@ -51,6 +51,22 @@
   text-decoration: none;
 }
 
+.ForgotPasswordLink:visited {
+  color: rgb(126, 115, 115);
+}
+
+.ForgotPasswordLink:link {
+  color: rgb(126, 115, 115);
+}
+
+.RegisterLink:visited {
+  color: rgb(126, 115, 115);
+}
+
+.RegisterLink:link {
+  color: rgb(126, 115, 115);
+}
+
 .LoadingModal {
   background: none;
   border: none;

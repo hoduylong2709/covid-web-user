@@ -21,10 +21,17 @@ class HomePage extends Component {
     return (
       <div>
         <Layout>
-          <Banner />
-          <h3 className={classes.Header}>Tin tức và cập nhật</h3>
-          <News />
-          {pagination}
+          <div
+            style={{
+              height: '100%',
+              backgroundColor: '#f3f4f4'
+            }}
+          >
+            <Banner />
+            <h3 className={classes.Header}>Tin tức và cập nhật</h3>
+            <News />
+            {pagination}
+          </div>
         </Layout>
         <VerifyModalAfterLogin
           showVerifyModal={localStorage.getItem('isVerified') === 'false'}

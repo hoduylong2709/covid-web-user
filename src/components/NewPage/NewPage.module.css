@@ -1,5 +1,7 @@
 .NewContainer {
   padding: 30px 15px;
+  margin: 0 170px;
+  background-color: #f3f4f4;
 }
 
 .HeaderContainer {
