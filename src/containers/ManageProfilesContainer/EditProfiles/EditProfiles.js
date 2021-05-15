@@ -45,7 +45,7 @@ class EditProfiles extends Component {
             { value: 'khác', displayValue: 'Khác' }
           ]
         },
-        value: `${localStorage.getItem('gender').toLowerCase()}`,
+        value: `${localStorage.getItem('gender') ? localStorage.getItem('gender').toLowerCase() : 'nam'}`,
         validation: {},
         valid: true
       },
@@ -216,6 +216,8 @@ class EditProfiles extends Component {
         count2++;
       }
     });
+
+    console.log(count1);
 
     let form1 = formElementsArray.slice(0, 5).map(formElement => {
       let input = <Input
