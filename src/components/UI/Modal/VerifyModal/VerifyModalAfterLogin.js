@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Modal from '../Modal';
 import Button from '../../Button/Button';
@@ -14,6 +15,14 @@ class VerifyModalAfterLogin extends Component {
   inputChangeHandler = (e) => {
     this.setState({ inputValue: e.target.value });
   };
+
+  handleCancelButton = (event) => {
+    event.preventDefault();
+    localStorage.clear();
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 1000);
+  }
 
   render() {
     let verifyResult = null;
@@ -47,8 +56,7 @@ class VerifyModalAfterLogin extends Component {
             <div className={classes.CancelButton}>
               <Button
                 btnType="Danger"
-                disabled={localStorage.getItem('isVerified') === 'false'}
-                clicked={() => this.props.onCloseVerifyModalAfterLogin()}
+                clicked={this.handleCancelButton}
               >Hủy</Button>
             </div>
           </div>
@@ -72,4 +80,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyModalAfterLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VerifyModalAfterLogin));

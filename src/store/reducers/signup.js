@@ -66,6 +66,13 @@ const closeVerifyModalSignup = (state, action) => {
   });
 };
 
+const finishSignup = (state, action) => {
+  return updateObject(state, {
+    verifySuccess: false,
+    verifyError: false
+  });
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_START:
@@ -84,6 +91,8 @@ const reducer = (state = initialState, action) => {
       return verifyFail(state, action);
     case actionTypes.CLOSE_VERIFY_MODAL_SIGNUP:
       return closeVerifyModalSignup(state, action);
+    case actionTypes.FINISH_SIGNUP:
+      return finishSignup(state, action);
     default:
       return state;
   }

@@ -6,7 +6,8 @@ export {
   signup,
   verifyEmail,
   closeModalSignup,
-  closeVerifyModalSignup
+  closeVerifyModalSignup,
+  finishSignup
 } from './signup';
 export {
   login,

@@ -91,6 +91,12 @@ export const closeVerifyModalSignup = () => {
   };
 };
 
+export const finishSignup = () => {
+  return {
+    type: actionTypes.FINISH_SIGNUP
+  };
+}
+
 
 
 

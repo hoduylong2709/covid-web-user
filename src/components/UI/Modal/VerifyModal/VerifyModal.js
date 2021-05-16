@@ -15,6 +15,13 @@ class VerifyModal extends Component {
     this.setState({ inputValue: e.target.value });
   };
 
+  handleCancelButton = (event) => {
+    event.preventDefault();
+    this.props.onFinishSignup();
+    this.setState({ inputValue: '' });
+    this.props.onCloseVerifyModalSignup()
+  }
+
   render() {
     let verifyResult = null;
 
@@ -29,11 +36,11 @@ class VerifyModal extends Component {
     return (
       <Modal
         show={this.props.showVerifyModal}
-        modalClosed={this.props.onCloseVerifyModalSignup}
+        modalClosed={this.handleCancelButton}
       >
         <div className={classes.VerifyModal}>
           <h4 className={classes.VerifyHeader}>Vui lòng kiểm tra Email và nhập mã code</h4>
-          <input className={classes.VerifyInput} type="text" name="code-number" placeholder="Code" onChange={this.inputChangeHandler} />
+          <input className={classes.VerifyInput} type="text" name="code-number" placeholder="Code" onChange={this.inputChangeHandler} value={this.state.inputValue} />
           <div className={classes.VerifyResult}>
             {verifyResult}
           </div>
@@ -47,7 +54,7 @@ class VerifyModal extends Component {
             <div className={classes.CancelButton}>
               <Button
                 btnType="Danger"
-                clicked={() => this.props.onCloseVerifyModalSignup()}
+                clicked={this.handleCancelButton}
               >Hủy</Button>
             </div>
           </div>
@@ -68,7 +75,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onVerifyEmail: (email, code) => dispatch(actions.verifyEmail(email, code)),
-    onCloseVerifyModalSignup: () => dispatch(actions.closeVerifyModalSignup())
+    onCloseVerifyModalSignup: () => dispatch(actions.closeVerifyModalSignup()),
+    onFinishSignup: () => dispatch(actions.finishSignup())
   };
 };
 
