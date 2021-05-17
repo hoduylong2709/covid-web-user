@@ -32,7 +32,7 @@ class Login extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'password',
-          placeholder: 'nhập mật khẩu của bạn'
+          placeholder: 'Nhập mật khẩu của bạn'
         },
         value: '',
         validation: {},

@@ -21,9 +21,10 @@
 
 .ItineraryBody {
   display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 36px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .DepatureInfo {
