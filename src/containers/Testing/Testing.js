@@ -10,6 +10,12 @@ import Spinner from './../../components/UI/Spinner/Spinner';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import PersonIcon from '@material-ui/icons/Person';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import LoopIcon from '@material-ui/icons/Loop';
+import PaymentIcon from '@material-ui/icons/Payment';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 class Testing extends Component {
   state = {
@@ -39,18 +45,30 @@ class Testing extends Component {
           return (
             <div className={classes.TestingBody_InfoRecords}>
               <div className={classes.InfoTestingContent}>
-                <Typography variant="body1">
-                  Ngày đăng ký xét nghiệm {moment(testingRecord.registerDate).format('DD-MM-YYYY')}
-                </Typography>
-                <Typography variant="body1">
-                  Ngày xét nghiệm {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
-                </Typography>
-                <Typography variant="body1">
-                  Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
-                </Typography>
-                <Typography variant="body1">
-                  Địa điểm xét nghiệm {testingRecord.testingLocation.name}
-                </Typography>
+                <div className={classes.InfoWrapper}>
+                  <EventNoteIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Ngày đăng ký xét nghiệm {moment(testingRecord.registerDate).format('DD-MM-YYYY')}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <EventNoteIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Ngày xét nghiệm {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <PersonIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <LocalHospitalIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Địa điểm xét nghiệm {testingRecord.testingLocation.name}
+                  </Typography>
+                </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <CheckCircleIcon fontSize="large" style={{ color: 'green' }} />
                   <Typography variant="body1" style={{ padding: '5px 5px', fontWeight: '800' }}>
@@ -67,18 +85,36 @@ class Testing extends Component {
           return (
             <div className={classes.TestingBody_InfoRecords}>
               <div className={classes.InfoTestingContent}>
-                <Typography variant="body1">
-                  Ngày xét nghiệm {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
-                </Typography>
-                <Typography variant="body1">
-                  Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
-                </Typography>
-                <Typography variant="body1">
-                  Thanh toán chi phí: {testingRecord.isPaid === true ? 'Đã thanh toán' : 'Chưa thanh toán'}
-                </Typography>
-                <Typography variant="body1">
-                  Kết quả xét nghiệm: {testingRecord.result}
-                </Typography>
+                <div className={classes.InfoWrapper}>
+                  <EventNoteIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Ngày xét nghiệm {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <PersonIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <LoopIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Tình trạng: {testingRecord.testingState}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <PaymentIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    {testingRecord.isPaid === true ? 'Đã thanh toán' : 'Chưa thanh toán'}
+                  </Typography>
+                </div>
+                <div className={classes.InfoWrapper}>
+                  <AssignmentIcon style={{ color: '#07627e' }} />
+                  <Typography variant="body1">
+                    Kết quả xét nghiệm: {testingRecord.result}
+                  </Typography>
+                </div>
               </div>
             </div>
           );

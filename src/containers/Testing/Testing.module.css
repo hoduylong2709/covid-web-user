@@ -68,3 +68,9 @@
   flex-wrap: wrap;
   gap: 23px;
 }
+
+.InfoWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

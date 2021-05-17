@@ -16,11 +16,14 @@ class DateAndLocationRegistration extends Component {
   state = {
     date: localStorage.getItem('testingDate') ? localStorage.getItem('testingDate') : new Date(),
     location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : "",
-    testingLocationId: null
+    city: localStorage.getItem('testingCity') ? localStorage.getItem('testingCity') : "",
+    testingLocationId: null,
+    testingCityId: null,
   };
 
   componentDidMount() {
     console.log(this.state.date, typeof this.state.location);
+    console.log(this.props.listLocation);
   }
 
   handleDateChange = date => {
@@ -33,19 +36,30 @@ class DateAndLocationRegistration extends Component {
     this.setState({ ...this.state, location: value.value, testingLocationId: value.id });
   }
 
+  handleCityChange = value => {
+    console.log(value, typeof value);
+    this.setState({ ...this.state, city: value.value, testingCityId: value.id });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.testingLocationId !== this.state.testingLocationId) {
       this.props.onInitDisableDates(this.state.testingLocationId);
     }
     localStorage.setItem('testingDate', this.state.date);
     localStorage.setItem('testingLocation', this.state.location);
+    localStorage.setItem('testingCity', this.state.city);
     console.log(typeof this.state.location);
     console.log(this.props.disableDates);
+    console.log(this.state.testingCityId);
   }
 
   filterDisableDates = (date) => {
     const updatedDisableDatesArray = this.props.disableDates.map(date => moment(date).format('YYYY-MM-DD'));
     return updatedDisableDatesArray.includes(moment(date).format('YYYY-MM-DD'));
+  }
+
+  filterTestingLocation = (cityId) => {
+    return this.props.listLocation.filter(location => location.cityId === cityId);
   }
 
   render() {
@@ -55,6 +69,10 @@ class DateAndLocationRegistration extends Component {
         width: "100%"
       })
     };
+
+    // console.log("hoduylong", this.props.listLocation.filter(location => location.cityId === this.state.testingCityId));
+    const testArray = this.filterTestingLocation(this.state.testingCityId);
+    console.log("hoduylong", testArray);
 
     return (
       <div className={classes.Container}>
@@ -67,33 +85,52 @@ class DateAndLocationRegistration extends Component {
               <h3>Thời gian và địa điểm xét nghiệm</h3>
             </div>
             <div className={classes.RegistrationBody_Content}>
-              <div className={classes.RegistrationBody_Date}>
-                <h4 style={{ color: "#a19f9f" }}>Chọn ngày bạn muốn xét nghiệm</h4>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    style={{ width: "100%", marginTop: "6px" }}
-                    disableToolbar
-                    variant="inline"
-                    format="yyyy-MM-dd"
-                    margin="normal"
-                    id="date-picker-inline"
-                    value={this.state.date}
-                    onChange={this.handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                    disablePast={true}
-                    shouldDisableDate={this.state.testingLocationId && this.filterDisableDates}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '30px'
+                }}
+              >
+                <div className={classes.RegistrationBody_Date}>
+                  <h4 style={{ color: "#a19f9f" }}>Chọn ngày bạn muốn xét nghiệm</h4>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      style={{ width: "100%", marginTop: "6px" }}
+                      disableToolbar
+                      variant="inline"
+                      format="yyyy-MM-dd"
+                      margin="normal"
+                      id="date-picker-inline"
+                      value={this.state.date}
+                      onChange={this.handleDateChange}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                      disablePast={true}
+                      shouldDisableDate={this.state.testingLocationId && this.filterDisableDates}
+                    />
+                  </MuiPickersUtilsProvider>
+                </div>
+                <div className={classes.RegistrationBody_Location}>
+                  <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
+                  <Select
+                    styles={customStyles}
+                    value={this.state.location !== "" ? { label: this.state.location, value: this.state.location } : ''}
+                    // options={this.props.listLocation}
+                    options={this.filterTestingLocation(this.state.testingCityId)}
+                    onChange={this.handleLocationChange}
+                    isDisabled={!this.state.city}
                   />
-                </MuiPickersUtilsProvider>
+                </div>
               </div>
               <div className={classes.RegistrationBody_Location}>
-                <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
+                <h4 style={{ color: "#a19f9f" }}>Chọn thành phố bạn muốn xét nghiệm</h4>
                 <Select
                   styles={customStyles}
-                  value={this.state.location !== "" ? { label: this.state.location, value: this.state.location } : this.props.listLocation[0]}
-                  options={this.props.listLocation}
-                  onChange={this.handleLocationChange}
+                  value={this.state.city !== "" ? { label: this.state.city, value: this.state.city } : this.props.listCity[0]}
+                  options={this.props.listCity}
+                  onChange={this.handleCityChange}
                 />
               </div>
             </div>
