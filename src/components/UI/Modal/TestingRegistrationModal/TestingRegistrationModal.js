@@ -15,6 +15,7 @@ class TestingRegistrationModal extends Component {
     this.props.onCloseModalTestingRegistration();
     localStorage.setItem('testingDate', new Date());
     localStorage.setItem('testingLocation', '');
+    localStorage.setItem('testingCity', '');
     localStorage.setItem('isAsthma', false);
     localStorage.setItem('isPregnancy', false);
     localStorage.setItem('isHighBloodPressure', false);
