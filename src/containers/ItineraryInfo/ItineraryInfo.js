@@ -16,13 +16,18 @@ import * as actions from '../../store/actions/index';
 import CheckinLocationModal from '../../components/UI/Modal/TestingRegistrationModal/CheckinLocationModal';
 import MustTestingModal from './../../components/UI/Modal/TestingRegistrationModal/MustTestingModal';
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+
 class ItineraryInfo extends Component {
   state = {
     depatureId: null,
     depatureTime: null,
     destinationId: null,
     destinationTime: null,
-    transportIdentify: null
+    transportIdentify: null,
+    openVerifyTimeModal: false
   };
 
   componentDidMount() {
@@ -54,6 +59,10 @@ class ItineraryInfo extends Component {
   }
 
   handleSubmitButton = () => {
+    if (this.state.depatureTime >= this.state.destinationTime) {
+      this.setState({ openVerifyTimeModal: true });
+      return;
+    }
     this.props.onSubmitItineraryInfo(
       this.state.depatureId,
       this.state.destinationId,
@@ -63,8 +72,8 @@ class ItineraryInfo extends Component {
     );
   }
 
-  isDisabledItem = () => {
-
+  handleCloseTimeModal = () => {
+    this.setState({ openVerifyTimeModal: false });
   }
 
   render() {
@@ -178,7 +187,7 @@ class ItineraryInfo extends Component {
                       <Grid item>
                         <TextField
                           id="input-with-icon-grid"
-                          label="Số hiệu phương tiện"
+                          label="Số hiệu phương tiện*"
                           onChange={this.handleTransportIdentifyChange}
                           style={{ minWidth: '250px' }}
                         />
@@ -230,7 +239,8 @@ class ItineraryInfo extends Component {
                       this.state.depatureId === null ||
                       this.state.destinationId === null ||
                       this.state.depatureTime === null ||
-                      this.state.destinationTime === null
+                      this.state.destinationTime === null ||
+                      this.state.transportIdentify === null
                     }
                   >Xác nhận</Button>
                 </div>
@@ -238,6 +248,23 @@ class ItineraryInfo extends Component {
             </div>
           </div>
           {modal}
+          <Dialog
+            open={this.state.openVerifyTimeModal}
+            onClose={this.handleCloseTimeModal}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  color: "black"
+                }}
+              >
+                Thời gian di chuyển không tương thích, xin vui lòng chọn lại!
+          </DialogContentText>
+            </DialogContent>
+          </Dialog>
         </div>
       </Layout>
     );
