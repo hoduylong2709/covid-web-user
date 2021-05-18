@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Layout from '../../../hoc/Layout/Layout';
 import classes from './EditProfiles.module.css';
 import Input from '../../../components/UI/Input/Input';
@@ -7,6 +8,7 @@ import Button from '../../../components/UI/Button/Button';
 import moment from 'moment';
 import * as actions from '../../../store/actions/index';
 import CheckinLocationModal from '../../../components/UI/Modal/TestingRegistrationModal/CheckinLocationModal';
+import countryList from 'react-select-country-list'
 
 class EditProfiles extends Component {
   state = {
@@ -60,20 +62,6 @@ class EditProfiles extends Component {
         valid: true,
         touched: false
       },
-      email: {
-        elementName: 'Email',
-        elementType: 'input',
-        elementConfig: {
-          type: 'email',
-          placeholder: `${localStorage.getItem('email')}`
-        },
-        validation: {
-          required: true,
-          isEmail: true
-        },
-        valid: true,
-        touched: false
-      },
       phoneNumber: {
         elementName: 'Số điện thoại',
         elementType: 'input',
@@ -106,15 +94,15 @@ class EditProfiles extends Component {
       },
       nationality: {
         elementName: 'Quốc tịch',
-        elementType: 'input',
+        elementType: 'select',
         elementConfig: {
-          type: 'text',
-          placeholder: ''
+          options: countryList().getData().map(country => {
+            return { value: country.label, displayValue: country.label }
+          })
         },
-        value: `${localStorage.getItem('nationality') ? localStorage.getItem('nationality') : 'N/A'}`,
+        value: `${localStorage.getItem('nationality') ? localStorage.getItem('nationality') : ''}`,
         validation: {},
-        valid: true,
-        touched: false
+        valid: true
       },
       address: {
         elementName: 'Địa chỉ',
@@ -130,6 +118,10 @@ class EditProfiles extends Component {
       },
     }
   };
+
+  componentDidMount() {
+    console.log(countryList().getData());
+  }
 
   componentDidUpdate() {
     console.log(this.state.controls);
@@ -219,7 +211,7 @@ class EditProfiles extends Component {
 
     console.log(count1);
 
-    let form1 = formElementsArray.slice(0, 5).map(formElement => {
+    let form1 = formElementsArray.slice(0, 4).map(formElement => {
       let input = <Input
         key={formElement.id}
         elementType={formElement.config.elementType}
@@ -233,24 +225,6 @@ class EditProfiles extends Component {
         editStyle="EditProfile"
       />;
 
-      if (formElement.config.elementName === 'Email') {
-        input = (
-          <Input
-            key={formElement.id}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            value={formElement.config.value}
-            invalid={!formElement.config.valid}
-            shouldValidate={formElement.config.validation}
-            touched={formElement.config.touched}
-            valueType={formElement.config.elementName}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)}
-            editStyle="EditProfile"
-            disabledInput={true}
-          />
-        );
-      }
-
       return (
         <div style={{ marginBottom: '15px' }} className={classes.InputElement}>
           <h4 style={{ margin: '10px auto' }} className={classes.InputType}>{formElement.config.elementName + "*"}</h4>
@@ -259,7 +233,7 @@ class EditProfiles extends Component {
       );
     });
 
-    let form2 = formElementsArray.slice(5, 9).map(formElement => {
+    let form2 = formElementsArray.slice(4, 8).map(formElement => {
       let input = <Input
         key={formElement.id}
         elementType={formElement.config.elementType}
@@ -304,8 +278,14 @@ class EditProfiles extends Component {
                   <Button
                     anotherType="RegisterButton-Next"
                     clicked={this.handleSubmitButton}
-                    disabled={count1 !== 9 || count2 === 0}
+                    disabled={count1 !== 8 || count2 === 0}
                   >Xác nhận</Button>
+                </div>
+                <div className={classes.CancelButton}>
+                  <Button
+                    anotherType="Success"
+                    clicked={() => this.props.history.goBack()}
+                  >Hủy</Button>
                 </div>
               </div>
             </div>
@@ -317,6 +297,7 @@ class EditProfiles extends Component {
               }
               hasError={this.props.error}
               closeModal={this.props.onCloseEditProfilesModal}
+              goToProfile={true}
             ></CheckinLocationModal>
           </div>
         </div>
@@ -359,4 +340,4 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfiles);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProfiles));

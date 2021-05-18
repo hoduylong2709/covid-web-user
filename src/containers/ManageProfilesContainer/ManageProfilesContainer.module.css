@@ -29,15 +29,6 @@
   margin-left: 80px;
 }
 
-.SectionItem {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 80px;
-  margin-right: 80px;
-  margin-bottom: 30px;
-}
-
 .Email {
   display: flex;
   flex-direction: column;
@@ -51,8 +42,4 @@
 .Buttons {
   margin-left: 80px;
   max-width: 120px;
-}
-
-.SectionItem1 {
-  margin-top: 15px;
 }

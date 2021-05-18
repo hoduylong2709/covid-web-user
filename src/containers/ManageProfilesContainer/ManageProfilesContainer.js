@@ -74,54 +74,71 @@ class ManageProfilesContainer extends Component {
                 <Typography variant="body1">{localStorage.getItem('user')}</Typography>
               </div>
               <Divider style={{ marginLeft: '35px', marginRight: '35px' }} />
-              <div className={[classes.SectionItem, classes.SectionItem1].join(' ')}>
-                <div className={classes.Email}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>Email</Typography>
-                  <div className={classes.EmailBody}>
-                    <Typography variant="body1">{localStorage.getItem('email')}</Typography>
-                    <div
-                      style={{
-                        background: '#07627e',
-                        marginLeft: '14px',
-                        borderRadius: '5px',
-                        padding: '3px',
-                        color: 'white',
-                        marginTop: '-3px'
-                      }}
-                    >
-                      <Typography variant="body1">{localStorage.getItem('isVerified') === 'true' ? 'Đã xác minh' : 'Chưa xác minh'}</Typography>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  margin: '25px 0'
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px'
+                  }}
+                >
+                  <div className={classes.Email}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>Email</Typography>
+                    <div className={classes.EmailBody}>
+                      <Typography variant="body1">{localStorage.getItem('email')}</Typography>
+                      <div
+                        style={{
+                          background: '#07627e',
+                          marginLeft: '14px',
+                          borderRadius: '5px',
+                          padding: '3px',
+                          color: 'white',
+                          marginTop: '-3px'
+                        }}
+                      >
+                        <Typography variant="body1">{localStorage.getItem('isVerified') === 'true' ? 'Đã xác minh' : 'Chưa xác minh'}</Typography>
+                      </div>
                     </div>
                   </div>
+                  <div className={classes.Phone}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>Số điện thoại</Typography>
+                    <Typography variant="body1">{phoneNumber}</Typography>
+                  </div>
+                  <div className={classes.DateOfBirth}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>Ngày sinh</Typography>
+                    <Typography variant="body1">{dateOfBirth}</Typography>
+                  </div>
+                  <div className={classes.Gender}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>Giới tính</Typography>
+                    <Typography variant="body1">{gender}</Typography>
+                  </div>
                 </div>
-                <div className={classes.Phone}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>Số điện thoại</Typography>
-                  <Typography variant="body1">{phoneNumber}</Typography>
-                </div>
-              </div>
-              <div className={classes.SectionItem}>
-                <div className={classes.DateOfBirth}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>Ngày sinh</Typography>
-                  <Typography variant="body1">{dateOfBirth}</Typography>
-                </div>
-                <div className={classes.Gender}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>Giới tính</Typography>
-                  <Typography variant="body1">{gender}</Typography>
-                </div>
-              </div>
-              <div className={classes.SectionItem}>
-                <div className={classes.IDNo}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>CMND</Typography>
-                  <Typography variant="body1">{idNo}</Typography>
-                </div>
-                <div className={classes.Nationality}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>Quốc tịch</Typography>
-                  <Typography variant="body1">{nationality}</Typography>
-                </div>
-              </div>
-              <div className={classes.SectionItem}>
-                <div className={classes.Address}>
-                  <Typography variant="body1" style={{ fontWeight: '600' }}>Địa chỉ</Typography>
-                  <Typography variant="body1">{address}</Typography>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px'
+                  }}
+                >
+                  <div className={classes.IDNo}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>CMND</Typography>
+                    <Typography variant="body1">{idNo}</Typography>
+                  </div>
+                  <div className={classes.Nationality}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>Quốc tịch</Typography>
+                    <Typography variant="body1">{nationality}</Typography>
+                  </div>
+                  <div className={classes.Address}>
+                    <Typography variant="body1" style={{ fontWeight: '600' }}>Địa chỉ</Typography>
+                    <Typography variant="body1">{address}</Typography>
+                  </div>
                 </div>
               </div>
               <Divider style={{ marginLeft: '35px', marginRight: '35px' }} />

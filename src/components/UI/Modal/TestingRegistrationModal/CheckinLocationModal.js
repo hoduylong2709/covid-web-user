@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Modal from './../Modal';
 import Button from '../../Button/Button';
 import classes from './TestingRegistrationModal.module.css';
@@ -14,6 +15,9 @@ class CheckinLocationModal extends Component {
       this.props.closeModal();
     } else {
       this.props.onCloseModalCheckinLocation();
+    }
+    if (this.props.goToProfile) {
+      this.props.history.push("/user-profiles-manage");
     }
   }
 
@@ -58,4 +62,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(CheckinLocationModal);
+export default connect(null, mapDispatchToProps)(withRouter(CheckinLocationModal));
