@@ -55,7 +55,7 @@ class VerifyModal extends Component {
               <Button
                 btnType="Danger"
                 clicked={this.handleCancelButton}
-              >Hủy</Button>
+              >Đóng</Button>
             </div>
           </div>
         </div>

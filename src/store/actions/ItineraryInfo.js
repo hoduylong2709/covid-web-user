@@ -56,3 +56,9 @@ export const submitItineraryInfo = (
       });
   };
 }
+
+export const finishSubmitItineraryInfo = () => {
+  return {
+    type: actionTypes.FINISH_SUBMIT_ITINERARY_INFORMATION
+  };
+}

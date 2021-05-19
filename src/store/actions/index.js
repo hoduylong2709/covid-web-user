@@ -51,7 +51,8 @@ export {
 } from './cityList';
 export {
   submitItineraryInfo,
-  closeModalItineraryInfo
+  closeModalItineraryInfo,
+  finishSubmitItineraryInfo
 } from './ItineraryInfo';
 export {
   getUserProfiles

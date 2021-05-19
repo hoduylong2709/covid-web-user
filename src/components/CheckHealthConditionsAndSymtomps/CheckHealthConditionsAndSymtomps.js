@@ -147,7 +147,7 @@ class CheckHealthConditionsAndSymtomps extends Component {
                         color="primary"
                       />
                     }
-                    label={<Typography variant="body2">Không có triệu chứng</Typography>}
+                    label={<Typography variant="body2">Bình thường</Typography>}
                   />
                 </FormGroup>
               </div>

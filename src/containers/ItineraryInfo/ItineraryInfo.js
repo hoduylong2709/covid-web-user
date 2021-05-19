@@ -261,7 +261,7 @@ class ItineraryInfo extends Component {
                   color: "black"
                 }}
               >
-                Thời gian di chuyển không tương thích, xin vui lòng chọn lại!
+                Thời gian di chuyển không hợp lệ, xin vui lòng chọn lại!
           </DialogContentText>
             </DialogContent>
           </Dialog>

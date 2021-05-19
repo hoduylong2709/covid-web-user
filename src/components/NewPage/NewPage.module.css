@@ -31,14 +31,6 @@
   display: flex;
 }
 
-/* span {
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #999;
-} */
-
 .Date {
   font-size: 14px;
   font-weight: 300;
@@ -56,12 +48,13 @@ p {
   font-size: 18px;
   line-height: 1.6em;
   margin-bottom: 20px;
-  /* color: white; */
   font-weight: 300;
 }
 
 .PostImage {
+  object-fit: cover;
   width: 100%;
+  height: 500px;
 }
 
 .Content {

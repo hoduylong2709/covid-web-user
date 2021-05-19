@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Modal from './../Modal';
 import Button from '../../Button/Button';
 import classes from './TestingRegistrationModal.module.css';
 import IsoIcon from '@material-ui/icons/Iso';
 import { withRouter } from 'react-router-dom';
+import * as actions from '../../../../store/actions/index';
 
 class MustTestingModal extends Component {
+  handleSubmit = () => {
+    this.props.onFinishSubmitItinerary();
+    this.props.history.push("/testing")
+  }
+
   render() {
     return (
       <Modal
@@ -21,7 +28,8 @@ class MustTestingModal extends Component {
             <div className={classes.SubmitButton}>
               <Button
                 anotherType="RegisterButton-Next"
-                clicked={() => this.props.history.push("/testing")}
+                // clicked={() => this.props.history.push("/testing")}
+                clicked={this.handleSubmit}
               >Đến XÉT NGHIỆM</Button>
             </div>
           </div>
@@ -31,4 +39,10 @@ class MustTestingModal extends Component {
   }
 }
 
-export default withRouter(MustTestingModal);
+const mapDispatchToProps = dispatch => {
+  return {
+    onFinishSubmitItinerary: () => dispatch(actions.finishSubmitItineraryInfo())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(MustTestingModal));

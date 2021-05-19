@@ -41,6 +41,16 @@ const closeModalItineraryInfo = (state, action) => {
   });
 }
 
+const finishSubmitItineraryInfo = (state, action) => {
+  return updateObject(state, {
+    isSuccess: false,
+    error: null,
+    loading: false,
+    showModal: false,
+    mustTesting: false
+  });
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SUBMIT_ITINERARY_INFORMATION_START:
@@ -51,6 +61,8 @@ const reducer = (state = initialState, action) => {
       return submitItineraryInfoFail(state, action);
     case actionTypes.CLOSE_MODAL_ITINERARY_INFORMATION:
       return closeModalItineraryInfo(state, action);
+    case actionTypes.FINISH_SUBMIT_ITINERARY_INFORMATION:
+      return finishSubmitItineraryInfo(state, action);
     default:
       return state;
   }
