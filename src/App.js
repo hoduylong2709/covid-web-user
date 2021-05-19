@@ -19,6 +19,7 @@ import UserProfiles from './containers/UserProfiles/UserProfiles';
 import ManageProfilesContainer from './containers/ManageProfilesContainer/ManageProfilesContainer';
 import EditProfiles from './containers/ManageProfilesContainer/EditProfiles/EditProfiles';
 import ChangePasswordContainer from './containers/ChangePasswordContainer/ChangePasswordContainer';
+import PrivateRoute from './privateRoute';
 
 class App extends Component {
   render() {
@@ -30,17 +31,17 @@ class App extends Component {
           <Route path="/signup" exact component={Signup} />
           <Route path="/forgot-password" exact component={ForgotPassword} />
           <Route path="/news/:id" exact component={NewPage} />
-          <Route path="/testing" exact component={Testing} />
-          <Route path="/register-testing-date-location" exact component={DateAndLocation} />
-          <Route path="/register-testing-questions" exact component={RegisterTestingQuestions} />
-          <Route path="/checkout" exact component={CheckoutPayment} />
-          <Route path="/check-in" exact component={LocationCheckIn} />
-          <Route path="/check-in-history" exact component={LocationCheckinHistory} />
-          <Route path="/itinerary" exact component={ItineraryInfo} />
-          <Route path="/user-profiles" exact component={UserProfiles} />
-          <Route path="/user-profiles-manage" exact component={ManageProfilesContainer} />
-          <Route path="/edit-profiles" exact component={EditProfiles} />
-          <Route path="/change-password" exact component={ChangePasswordContainer} />
+          <PrivateRoute path="/testing" exact component={Testing} />
+          <PrivateRoute path="/register-testing-date-location" exact component={DateAndLocation} />
+          <PrivateRoute path="/register-testing-questions" exact component={RegisterTestingQuestions} />
+          <PrivateRoute path="/checkout" exact component={CheckoutPayment} />
+          <PrivateRoute path="/check-in" exact component={LocationCheckIn} />
+          <PrivateRoute path="/check-in-history" exact component={LocationCheckinHistory} />
+          <PrivateRoute path="/itinerary" exact component={ItineraryInfo} />
+          <PrivateRoute path="/user-profiles" exact component={UserProfiles} />
+          <PrivateRoute path="/user-profiles-manage" exact component={ManageProfilesContainer} />
+          <PrivateRoute path="/edit-profiles" exact component={EditProfiles} />
+          <PrivateRoute path="/change-password" exact component={ChangePasswordContainer} />
         </Switch>
       </Auxx>
     );
