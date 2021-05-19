@@ -25,6 +25,7 @@ import itineraryInfoReducer from './store/reducers/itineraryInfo';
 import getUserProfilesReducer from './store/reducers/getUserProfiles';
 import editProfilesReducer from './store/reducers/editProfiles';
 import changePasswordReducer from './store/reducers/changePassword';
+import getItineraryHistoryReducer from './store/reducers/getItineraryHistory';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -45,7 +46,8 @@ const rootReducer = combineReducers({
   itineraryInfo: itineraryInfoReducer,
   getUserProfiles: getUserProfilesReducer,
   editProfiles: editProfilesReducer,
-  changePassword: changePasswordReducer
+  changePassword: changePasswordReducer,
+  getItineraryHistory: getItineraryHistoryReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

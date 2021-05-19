@@ -19,6 +19,7 @@ import UserProfiles from './containers/UserProfiles/UserProfiles';
 import ManageProfilesContainer from './containers/ManageProfilesContainer/ManageProfilesContainer';
 import EditProfiles from './containers/ManageProfilesContainer/EditProfiles/EditProfiles';
 import ChangePasswordContainer from './containers/ChangePasswordContainer/ChangePasswordContainer';
+import ItineraryHistory from './containers/ItineraryHistory/ItineraryHistory';
 import PrivateRoute from './privateRoute';
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
           <PrivateRoute path="/check-in" exact component={LocationCheckIn} />
           <PrivateRoute path="/check-in-history" exact component={LocationCheckinHistory} />
           <PrivateRoute path="/itinerary" exact component={ItineraryInfo} />
+          <PrivateRoute path="/itinerary-history" exact component={ItineraryHistory} />
           <PrivateRoute path="/user-profiles" exact component={UserProfiles} />
           <PrivateRoute path="/user-profiles-manage" exact component={ManageProfilesContainer} />
           <PrivateRoute path="/edit-profiles" exact component={EditProfiles} />

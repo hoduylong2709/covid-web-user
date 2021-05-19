@@ -55,6 +55,9 @@ export {
   finishSubmitItineraryInfo
 } from './ItineraryInfo';
 export {
+  getItineraryHistory
+} from './getItineraryHistory';
+export {
   getUserProfiles
 } from './getUserProfiles';
 export {

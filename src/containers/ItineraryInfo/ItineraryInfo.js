@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Layout from './../../hoc/Layout/Layout';
 import classes from './ItineraryInfo.module.css';
 import TextField from '@material-ui/core/TextField';
@@ -76,6 +77,10 @@ class ItineraryInfo extends Component {
     this.setState({ openVerifyTimeModal: false });
   }
 
+  handleItineraryHistoryButton = () => {
+    this.props.history.push("/itinerary-history");
+  }
+
   render() {
     let cityList = null;
 
@@ -133,6 +138,12 @@ class ItineraryInfo extends Component {
           <div className={classes.ItineraryContent}>
             <div className={classes.ItineraryHeader}>
               <h2 className={classes.ItineraryTitle}>Thông tin lịch trình</h2>
+              <div className={classes.ItineraryHistoryButton}>
+                <Button
+                  anotherType="RegisterButton-Next"
+                  clicked={this.handleItineraryHistoryButton}
+                >Lịch sử di chuyển</Button>
+              </div>
             </div>
             <div
               style={{
@@ -295,4 +306,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItineraryInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ItineraryInfo));
