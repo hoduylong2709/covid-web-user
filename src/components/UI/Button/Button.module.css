@@ -1,7 +1,7 @@
 .Button {
   margin-left: 5px;
   border-radius: 6px 6px;
-  background-color: #e8e9e7;
+  background-color: #d6d8d4;
   border: none;
   color: white;
   outline: none;
@@ -18,7 +18,7 @@
 }
 
 .Button:disabled {
-  color: #ccc;
+  color: #848383;
   cursor: not-allowed;
 }
 

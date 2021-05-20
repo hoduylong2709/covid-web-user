@@ -23,9 +23,23 @@
 .ItineraryRecord_Content {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  margin: 35px 30px;
 }
 
 .Depature {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.Arrow {
+  width: 420px;
+  margin: auto 25px;
+}
+
+.Destination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

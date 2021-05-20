@@ -6,7 +6,8 @@ import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import EmojiTransportationIcon from '@material-ui/icons/EmojiTransportation';
-import Divider from '@material-ui/core/Divider';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import moment from 'moment';
 
 class ItineraryHistory extends Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class ItineraryHistory extends Component {
     let itineraryListView = <Spinner />;
 
     if (this.props.itineraryList) {
-      itineraryListView = this.props.itineraryList.map(checkinInfo => {
+      itineraryListView = this.props.itineraryList.slice().reverse().map(checkinInfo => {
         return (
           <div className={classes.ItineraryRecords}>
             <div className={classes.ItineraryRecord_Content}>
@@ -29,12 +30,50 @@ class ItineraryHistory extends Component {
                 />
                 <p
                   style={{
-                    margin: '0'
+                    margin: '0',
+                    fontWeight: '400'
                   }}
                 >{checkinInfo.departure}</p>
               </div>
-              <div>
-                {/* <Divider style={{ height: '10px' }} /> */}
+              <div className={classes.Arrow}>
+                <p
+                  style={{
+                    margin: '0',
+                    fontFamily: "'Roboto Mono', monospace",
+                    fontSize: '15px',
+                    letterSpacing: '-1px'
+                  }}
+                >{moment(checkinInfo.departureTime).format('MMMM Do YYYY, h:mm a')} - {moment(checkinInfo.landingTime).format('MMMM Do YYYY, h:mm a')}</p>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row'
+                  }}
+                >
+                  <hr style={{ height: '4px', backgroundColor: '#07627e', width: '100%' }} />
+                  <ArrowForwardIosIcon style={{ color: '#07627e' }} />
+                </div>
+                <p
+                  style={{
+                    margin: '0',
+                    fontFamily: "'Roboto Mono', monospace",
+                    fontSize: '15px',
+                    letterSpacing: '-1px'
+                  }}
+                >Số hiệu phương tiện: {checkinInfo.travelNo}</p>
+              </div>
+              <div className={classes.Destination}>
+                <EmojiTransportationIcon
+                  style={{
+                    fontSize: '30px'
+                  }}
+                />
+                <p
+                  style={{
+                    margin: '0',
+                    fontWeight: '400'
+                  }}
+                >{checkinInfo.destination}</p>
               </div>
             </div>
           </div>

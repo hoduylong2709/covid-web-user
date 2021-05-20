@@ -48,25 +48,25 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <EventNoteIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Ngày đăng ký xét nghiệm {moment(testingRecord.registerDate).format('DD-MM-YYYY')}
+                    Ngày đăng ký xét nghiệm: {moment(testingRecord.registerDate).format('DD-MM-YYYY')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
                   <EventNoteIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Ngày xét nghiệm {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
+                    Ngày xét nghiệm: {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
                   <PersonIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
+                    Người đăng ký xét nghiệm ông/bà: {localStorage.getItem('user')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
                   <LocalHospitalIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Địa điểm xét nghiệm {testingRecord.testingLocation.name}
+                    Địa điểm xét nghiệm: {testingRecord.testingLocation.name}
                   </Typography>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -88,13 +88,13 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <EventNoteIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Ngày xét nghiệm {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
+                    Ngày xét nghiệm: {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
                   <PersonIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Người đăng ký xét nghiệm ông/bà {localStorage.getItem('user')}
+                    Người đăng ký xét nghiệm ông/bà: {localStorage.getItem('user')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
@@ -106,7 +106,7 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <PaymentIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    {testingRecord.isPaid === true ? 'Đã thanh toán' : 'Chưa thanh toán'}
+                    Phí xét nghiệm: {testingRecord.isPaid === true ? 'Đã thanh toán' : 'Chưa thanh toán'}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
