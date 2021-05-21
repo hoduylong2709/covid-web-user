@@ -13,14 +13,29 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Button from '../../components/UI/Button/Button';
 import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+
 class LocationCheckinHistory extends Component {
   state = {
+    locationList: [],
     openConfirmation: false,
     currentIdRecord: null
   };
 
   componentDidMount() {
     this.props.onGetLocationCheckin();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.checkinList !== this.props.checkinList) {
+      this.setState({ locationList: nextProps.checkinList });
+    }
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
   }
 
   handleDeleteButton = (id) => {
@@ -32,69 +47,75 @@ class LocationCheckinHistory extends Component {
   }
 
   handleDeleteRecord = () => {
-    this.props.onDeleteLocationCheckin(this.state.currentIdRecord);
+    const originalList = this.state.locationList;
+    const updatedList = this.state.locationList
+      .filter(checkinInfo => checkinInfo.id !== this.state.currentIdRecord);
+    this.setState({ locationList: updatedList, openConfirmation: false });
+    this.props.onDeleteLocationCheckin(this.state.currentIdRecord + 100);
+    if (this.props.errorDelete) {
+      console.log("da vao day");
+      this.setState({ locationList: originalList });
+    }
   }
 
   render() {
     let checkinListView = <Spinner />;
 
-    if (this.props.checkinList) {
-      checkinListView = this.props.checkinList.map(checkinInfo => {
-        return (
-          <div className={classes.CheckinRecords}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between'
-              }}
-            >
-              <div className={classes.CheckinRecord_Content}>
-                <div className={classes.CheckinRecord_Content_Time}>
-                  <EventIcon />
-                  <Typography variant="body1" color="primary">
-                    {moment(checkinInfo.time).format('LLLL')}
-                  </Typography>
+    if (this.state.locationList) {
+      checkinListView = this.state.locationList
+        .map(checkinInfo => {
+          return (
+            <div className={classes.CheckinRecords}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <div className={classes.CheckinRecord_Content}>
+                  <div className={classes.CheckinRecord_Content_Time}>
+                    <EventIcon />
+                    <Typography variant="body1" color="primary">
+                      {moment(checkinInfo.time).format('LLLL')}
+                    </Typography>
+                  </div>
+                  <div className={classes.CheckinRecord_Content_Location}>
+                    <LocationOnIcon />
+                    <Typography variant="body1">
+                      {checkinInfo.address}
+                    </Typography>
+                  </div>
                 </div>
-                <div className={classes.CheckinRecord_Content_Location}>
-                  <LocationOnIcon />
-                  <Typography variant="body1">
-                    {checkinInfo.address}
-                  </Typography>
+                <div className={classes.EditAndDelete}>
+                  <Button
+                    anotherType='EditCheckinButton'
+                  >
+                    <EditIcon
+                      style={{
+                        transform: 'scale(1)',
+                        color: '#07627e'
+                      }}
+                    />
+                  </Button>
+                  <Button
+                    anotherType='DeleteCheckinButton'
+                    clicked={() => this.handleDeleteButton(checkinInfo.id)}
+                  >
+                    <DeleteForeverIcon
+                      style={{
+                        transform: 'scale(1)',
+                        color: '#07627e'
+                      }}
+                    />
+                  </Button>
                 </div>
               </div>
-              <div className={classes.EditAndDelete}>
-                <Button
-                  anotherType='EditCheckinButton'
-                >
-                  <EditIcon
-                    style={{
-                      transform: 'scale(1)',
-                      color: '#07627e'
-                    }}
-                  />
-                </Button>
-                <Button
-                  anotherType='DeleteCheckinButton'
-                  clicked={() => this.handleDeleteButton(checkinInfo.id)}
-                >
-                  <DeleteForeverIcon
-                    style={{
-                      transform: 'scale(1)',
-                      color: '#07627e'
-                    }}
-                  />
-                </Button>
-              </div>
+
+
             </div>
-            <ConfirmDelete
-              openConfirmation={this.state.openConfirmation}
-              closeConfirmation={this.handleCloseConfirmation}
-              deleteRecord={this.handleDeleteRecord}
-            />
-          </div>
-        );
-      });
+          );
+        });
     }
 
     return (
@@ -104,6 +125,28 @@ class LocationCheckinHistory extends Component {
             <h2 className={classes.CheckinHeader_Title}>Lịch sử check-in</h2>
           </div>
           {checkinListView}
+          <ConfirmDelete
+            openConfirmation={this.state.openConfirmation}
+            closeConfirmation={this.handleCloseConfirmation}
+            deleteRecord={this.handleDeleteRecord}
+          />
+          <Dialog
+            // open={this.state.openVerifyTimeModal}
+            // onClose={this.handleCloseTimeModal}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  color: "black"
+                }}
+              >
+                Xóa địa điểm check-in thất bại, xin vui lòng thử lại!
+          </DialogContentText>
+            </DialogContent>
+          </Dialog>
         </div>
       </Layout>
     );
