@@ -68,3 +68,6 @@ export {
   changePassword,
   closeChangePasswordModal
 } from './changePassword';
+export {
+  deleteLocationCheckin
+} from './deleteLocationCheckin';

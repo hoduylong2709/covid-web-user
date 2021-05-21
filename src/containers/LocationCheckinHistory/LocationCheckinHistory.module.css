@@ -41,3 +41,10 @@
   flex-direction: row;
   gap: 12px;
 }
+
+.EditAndDelete {
+  display: flex;
+  flex-direction: column;
+  margin: auto 39px;
+  gap: 5px;
+}

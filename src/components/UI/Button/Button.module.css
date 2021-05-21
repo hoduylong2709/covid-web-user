@@ -60,3 +60,9 @@
   background: #07627e;
   color: white;
 }
+
+.EditCheckinButton,
+.DeleteCheckinButton {
+  margin: 0;
+  padding: 7px;
+}
