@@ -38,6 +38,9 @@ class LocationCheckinHistory extends Component {
     if (nextProps.checkinList !== this.props.checkinList) {
       this.setState({ locationList: nextProps.checkinList });
     }
+    if (nextProps.isSuccessEdit !== this.props.isSuccessEdit) {
+      window.location.reload();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -78,6 +81,9 @@ class LocationCheckinHistory extends Component {
 
   handleCloseEditForm = () => {
     this.setState({ openEditForm: false });
+    setTimeout(() => {
+      this.props.onFinishEditLocationCheckin();
+    }, 500);
   }
 
   handleLocationChange = event => {
@@ -86,6 +92,10 @@ class LocationCheckinHistory extends Component {
 
   handleTimeChange = event => {
     this.setState({ currentTimeRecord: event.target.value });
+  }
+
+  handleEditForm = (id, address, time) => {
+    this.props.onEditLocationCheckin(id, address, time);
   }
 
   render() {
@@ -142,8 +152,6 @@ class LocationCheckinHistory extends Component {
                   </Button>
                 </div>
               </div>
-
-
             </div>
           );
         });
@@ -194,9 +202,17 @@ class LocationCheckinHistory extends Component {
             address={this.state.currentAddressRecord}
             time={this.state.currentTimeRecord}
             closeEditForm={this.handleCloseEditForm}
-            editLocationCheckin={this.handleEditForm}
+            editLocationCheckin={
+              () => this.handleEditForm(
+                this.state.currentIdRecord,
+                this.state.currentAddressRecord,
+                this.state.currentTimeRecord
+              )
+            }
             changeLocation={this.handleLocationChange}
             changeTime={this.handleTimeChange}
+            loading={this.props.loadingEdit}
+            hasError={this.props.errorEdit}
           />
         </div>
       </Layout>
@@ -212,7 +228,11 @@ const mapStateToProps = state => {
     loading: state.getLocationCheckin.loading,
     isSuccessDelete: state.deleteLocationCheckin.isSuccess,
     errorDelete: state.deleteLocationCheckin.error,
-    loadingDelete: state.deleteLocationCheckin.loading
+    loadingDelete: state.deleteLocationCheckin.loading,
+    isSuccessEdit: state.editLocationCheckin.isSuccess,
+    errorEdit: state.editLocationCheckin.error,
+    loadingEdit: state.editLocationCheckin.loading,
+    showModalEdit: state.editLocationCheckin.showModal
   };
 };
 
@@ -220,7 +240,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetLocationCheckin: () => dispatch(actions.getLocationCheckin()),
     onDeleteLocationCheckin: (locationId) => dispatch(actions.deleteLocationCheckin(locationId)),
-    onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal())
+    onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal()),
+    onEditLocationCheckin: (id, address, time) => dispatch(actions.editLocationCheckin(id, address, time)),
+    onFinishEditLocationCheckin: () => dispatch(actions.finishEditLocationCheckin())
   };
 };
 

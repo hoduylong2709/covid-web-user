@@ -72,3 +72,8 @@ export {
   deleteLocationCheckin,
   closeDeleteErrorModal
 } from './deleteLocationCheckin';
+export {
+  editLocationCheckin,
+  closeEditLocationCheckinModal,
+  finishEditLocationCheckin
+} from './editLocationCheckin';
