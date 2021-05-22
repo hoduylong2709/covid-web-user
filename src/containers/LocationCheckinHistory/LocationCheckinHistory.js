@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Button from '../../components/UI/Button/Button';
 import ConfirmDelete from '../../components/ConfirmDelete/ConfirmDelete';
+import EditForm from '../../components/EditForm/EditForm';
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -23,7 +24,10 @@ class LocationCheckinHistory extends Component {
   state = {
     locationList: [],
     openConfirmation: false,
-    currentIdRecord: null
+    currentIdRecord: null,
+    openEditForm: false,
+    currentTimeRecord: null,
+    currentAddressRecord: null
   };
 
   componentDidMount() {
@@ -63,6 +67,27 @@ class LocationCheckinHistory extends Component {
     this.props.onCloseDeleteErrorModal();
   }
 
+  handleEditButton = (id, time, address) => {
+    this.setState({
+      openEditForm: true,
+      currentIdRecord: id,
+      currentTimeRecord: time,
+      currentAddressRecord: address
+    });
+  }
+
+  handleCloseEditForm = () => {
+    this.setState({ openEditForm: false });
+  }
+
+  handleLocationChange = event => {
+    this.setState({ currentAddressRecord: event.target.value });
+  }
+
+  handleTimeChange = event => {
+    this.setState({ currentTimeRecord: event.target.value });
+  }
+
   render() {
     let checkinListView = <Spinner />;
 
@@ -95,6 +120,7 @@ class LocationCheckinHistory extends Component {
                 <div className={classes.EditAndDelete}>
                   <Button
                     anotherType='EditCheckinButton'
+                    clicked={() => this.handleEditButton(checkinInfo.id, checkinInfo.time, checkinInfo.address)}
                   >
                     <EditIcon
                       style={{
@@ -163,6 +189,15 @@ class LocationCheckinHistory extends Component {
           </DialogContentText>
             </DialogContent>
           </Dialog>
+          <EditForm
+            openEditForm={this.state.openEditForm}
+            address={this.state.currentAddressRecord}
+            time={this.state.currentTimeRecord}
+            closeEditForm={this.handleCloseEditForm}
+            editLocationCheckin={this.handleEditForm}
+            changeLocation={this.handleLocationChange}
+            changeTime={this.handleTimeChange}
+          />
         </div>
       </Layout>
     );
