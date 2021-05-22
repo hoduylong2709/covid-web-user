@@ -36,3 +36,9 @@ export const deleteLocationCheckin = (locationId) => {
       });
   };
 }
+
+export const closeDeleteErrorModal = () => {
+  return {
+    type: actionTypes.CLOSE_DELETE_ERROR_MODAL
+  };
+}

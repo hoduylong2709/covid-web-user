@@ -69,5 +69,6 @@ export {
   closeChangePasswordModal
 } from './changePassword';
 export {
-  deleteLocationCheckin
+  deleteLocationCheckin,
+  closeDeleteErrorModal
 } from './deleteLocationCheckin';

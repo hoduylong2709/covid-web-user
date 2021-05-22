@@ -17,6 +17,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
+import ErrorIcon from '@material-ui/icons/Error';
+
 class LocationCheckinHistory extends Component {
   state = {
     locationList: [],
@@ -34,8 +36,10 @@ class LocationCheckinHistory extends Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.state);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.checkinList.length !== prevState.locationList.length && this.props.errorDelete) {
+      this.setState({ locationList: this.props.checkinList });
+    }
   }
 
   handleDeleteButton = (id) => {
@@ -47,15 +51,16 @@ class LocationCheckinHistory extends Component {
   }
 
   handleDeleteRecord = () => {
-    const originalList = this.state.locationList;
     const updatedList = this.state.locationList
       .filter(checkinInfo => checkinInfo.id !== this.state.currentIdRecord);
     this.setState({ locationList: updatedList, openConfirmation: false });
-    this.props.onDeleteLocationCheckin(this.state.currentIdRecord + 100);
-    if (this.props.errorDelete) {
-      console.log("da vao day");
-      this.setState({ locationList: originalList });
-    }
+    setTimeout(() => {
+      this.props.onDeleteLocationCheckin(this.state.currentIdRecord);
+    }, 1000);
+  }
+
+  handleCloseModal = () => {
+    this.props.onCloseDeleteErrorModal();
   }
 
   render() {
@@ -131,12 +136,23 @@ class LocationCheckinHistory extends Component {
             deleteRecord={this.handleDeleteRecord}
           />
           <Dialog
-            // open={this.state.openVerifyTimeModal}
-            // onClose={this.handleCloseTimeModal}
+            open={this.props.errorDelete !== null}
+            onClose={this.handleCloseModal}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogContent>
+            <DialogContent
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '10px'
+              }}
+            >
+              <ErrorIcon
+                style={{
+                  color: 'red'
+                }}
+              />
               <DialogContentText
                 id="alert-dialog-description"
                 style={{
@@ -168,7 +184,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onGetLocationCheckin: () => dispatch(actions.getLocationCheckin()),
-    onDeleteLocationCheckin: (locationId) => dispatch(actions.deleteLocationCheckin(locationId))
+    onDeleteLocationCheckin: (locationId) => dispatch(actions.deleteLocationCheckin(locationId)),
+    onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal())
   };
 };
 

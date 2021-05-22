@@ -29,6 +29,12 @@ const deleteLocationCheckinFail = (state, action) => {
   });
 }
 
+const closeDeleteErrorModal = (state, action) => {
+  return updateObject(state, {
+    error: null
+  });
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.DELETE_LOCATION_CHECKIN_START:
@@ -37,6 +43,8 @@ const reducer = (state = initialState, action) => {
       return deleteLocationCheckinSuccess(state, action);
     case actionTypes.DELETE_LOCATION_CHECKIN_FAIL:
       return deleteLocationCheckinFail(state, action);
+    case actionTypes.CLOSE_DELETE_ERROR_MODAL:
+      return closeDeleteErrorModal(state, action);
     default:
       return state
   }
