@@ -18,6 +18,11 @@ import {
 import Geocode from 'react-geocode';
 import CheckinLocationModal from '../UI/Modal/TestingRegistrationModal/CheckinLocationModal';
 import moment from 'moment';
+import TextField from '@material-ui/core/TextField';
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import ErrorIcon from '@material-ui/icons/Error';
 
 Geocode.setApiKey("AIzaSyBEj_N2fFz4FxUACprRCtZIBp21_r4LHu8");
 
@@ -36,7 +41,9 @@ class CheckInMap extends Component {
     markerPosition: {
       lat: 0,
       lng: 0
-    }
+    },
+    timeCheckin: null,
+    openVerifyTimeModal: false
   };
 
   componentDidMount() {
@@ -73,6 +80,13 @@ class CheckInMap extends Component {
         });
       });
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.timeCheckin !== this.state.timeCheckin) {
+      return false;
+    }
+    return true;
   }
 
   getCity = (addressArray) => {
@@ -171,10 +185,21 @@ class CheckInMap extends Component {
     })
   };
 
+  handleTimeChange = event => {
+    this.setState({ timeCheckin: event.target.value });
+  }
+
   handleCheckin = (event) => {
     event.preventDefault();
-    this.props.onCheckinLocation(this.state.address, moment(new Date()).format().substring(0, 19));
-    console.log(this.state.address);
+    if (this.state.timeCheckin >= moment(new Date()).format().substring(0, 16)) {
+      this.setState({ openVerifyTimeModal: true });
+      return;
+    }
+    this.props.onCheckinLocation(this.state.address, this.state.timeCheckin);
+  }
+
+  handleCloseTimeModal = () => {
+    this.setState({ openVerifyTimeModal: false });
   }
 
   render() {
@@ -218,6 +243,20 @@ class CheckInMap extends Component {
             </div>
             <div className={classes.CheckInMap_Desc_submit}>
               <RoomIcon fontSize="large" style={{ color: '#07627e' }} />
+              <div>
+                <TextField
+                  id="datetime-local"
+                  label="Chọn thời gian check-in"
+                  type="datetime-local"
+                  defaultValue={moment(new Date()).format().substring(0, 16)}
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
+                  onChange={this.handleTimeChange}
+                />
+              </div>
               <div className={classes.SubmitButton}>
                 <Button
                   btnType="Success"
@@ -246,6 +285,36 @@ class CheckInMap extends Component {
           hasError={this.props.error}
           closeModal={false}
         ></CheckinLocationModal>
+        <Dialog
+          open={this.state.openVerifyTimeModal}
+          onClose={this.handleCloseTimeModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContent
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '10px'
+              }}
+            >
+              <ErrorIcon
+                style={{
+                  color: 'red'
+                }}
+              />
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  color: "black"
+                }}
+              >
+                Thời gian check-in không hợp lệ, xin vui lòng chọn lại!
+          </DialogContentText>
+            </DialogContent>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }
