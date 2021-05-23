@@ -27,7 +27,8 @@ class LocationCheckinHistory extends Component {
     currentIdRecord: null,
     openEditForm: false,
     currentTimeRecord: null,
-    currentAddressRecord: null
+    currentAddressRecord: null,
+    openVerifyTimeModal: false
   };
 
   componentDidMount() {
@@ -95,7 +96,15 @@ class LocationCheckinHistory extends Component {
   }
 
   handleEditForm = (id, address, time) => {
+    if (this.state.currentTimeRecord >= moment(new Date()).format().substring(0, 16)) {
+      this.setState({ openVerifyTimeModal: true });
+      return;
+    }
     this.props.onEditLocationCheckin(id, address, time);
+  }
+
+  handleCloseVerifyTimeModal = () => {
+    this.setState({ openVerifyTimeModal: false });
   }
 
   render() {
@@ -213,6 +222,8 @@ class LocationCheckinHistory extends Component {
             changeTime={this.handleTimeChange}
             loading={this.props.loadingEdit}
             hasError={this.props.errorEdit}
+            openVerifyTimeModal={this.state.openVerifyTimeModal}
+            closeVerifyTimeModal={this.handleCloseVerifyTimeModal}
           />
         </div>
       </Layout>

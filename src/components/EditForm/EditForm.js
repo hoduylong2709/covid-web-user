@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorIcon from '@material-ui/icons/Error';
+import moment from 'moment';
 
 const editForm = (props) => {
   const inputFields = (
@@ -20,6 +21,7 @@ const editForm = (props) => {
         InputLabelProps={{
           shrink: true,
         }}
+        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
         onChange={props.changeTime}
       />
       <TextField
@@ -96,6 +98,36 @@ const editForm = (props) => {
               marginLeft: '175px',
               marginBottom: '15px'
             }} /> : (props.hasError ? errorView : inputFields)}
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        open={props.openVerifyTimeModal}
+        onClose={props.closeVerifyTimeModal}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContent
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10px'
+            }}
+          >
+            <ErrorIcon
+              style={{
+                color: 'red'
+              }}
+            />
+            <DialogContentText
+              id="alert-dialog-description"
+              style={{
+                color: "black"
+              }}
+            >
+              Thời gian check-in không hợp lệ, xin vui lòng chọn lại!
+          </DialogContentText>
+          </DialogContent>
         </DialogContent>
       </Dialog>
     </div>

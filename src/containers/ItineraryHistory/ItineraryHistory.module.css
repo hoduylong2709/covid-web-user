@@ -7,7 +7,7 @@
 
 .ItineraryHeader {
   display: flex;
-  margin: 10px 300px;
+  margin: 10px 280px;
 }
 
 .ItineraryRecords {
@@ -16,7 +16,7 @@
   justify-content: flex-start;
   background: white;
   border-radius: 36px;
-  margin: 0 300px;
+  margin: 0 280px;
   margin-bottom: 20px;
 }
 
