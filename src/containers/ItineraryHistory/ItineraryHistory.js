@@ -17,18 +17,21 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import ErrorIcon from '@material-ui/icons/Error';
 import EditForm from '../../components/EditForm/EditForm';
-import editForm from './../../components/EditForm/EditForm';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class ItineraryHistory extends Component {
   state = {
     itineraryList: [],
     openConfirmation: false,
     currentIdRecord: null,
-    openEditForm: false
+    openEditForm: false,
+    depatureId: null,
+    destinationId: null
   }
 
   componentDidMount() {
     this.props.onGetItineraryHistory();
+    this.props.onGetCityList();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,10 +67,12 @@ class ItineraryHistory extends Component {
     this.props.onCloseDeleteErrorModal();
   }
 
-  handleEditButton = (id) => {
+  handleEditButton = (id, departureId, destinationId) => {
     this.setState({
       openEditForm: true,
-      currentIdRecord: id
+      currentIdRecord: id,
+      depatureId: departureId,
+      destinationId: destinationId
     });
   }
 
@@ -78,8 +83,46 @@ class ItineraryHistory extends Component {
     // }, 500);
   }
 
+  handleDepartureFieldChange = event => {
+    console.log(event.target.value);
+    this.setState({ depatureId: event.target.value });
+  }
+
+  handleDestinationFieldChange = event => {
+    this.setState({ destinationId: event.target.value });
+  }
+
   render() {
     let itineraryListView = <Spinner />;
+
+    let cityList1 = null;
+
+    let cityList2 = null;
+
+    if (this.props.cities) {
+      cityList1 = this.props.cities.map(city => {
+        return (
+          <MenuItem
+            key={city.id}
+            value={city.id}
+            disabled={this.state.destinationId !== null && city.id === this.state.destinationId}
+          >
+            {city.name}
+          </MenuItem>
+        );
+      });
+      cityList2 = this.props.cities.map(city => {
+        return (
+          <MenuItem
+            key={city.id}
+            value={city.id}
+            disabled={this.state.depatureId !== null && city.id === this.state.depatureId}
+          >
+            {city.name}
+          </MenuItem>
+        );
+      });
+    }
 
     if (this.state.itineraryList) {
       itineraryListView = this.state.itineraryList.slice().reverse().map(itineraryInfo => {
@@ -152,7 +195,7 @@ class ItineraryHistory extends Component {
               <div className={classes.EditAndDelete}>
                 <Button
                   anotherType='EditCheckinButton'
-                  clicked={() => this.handleEditButton(itineraryInfo.id)}
+                  clicked={() => this.handleEditButton(itineraryInfo.id, 8, 6)}
                 >
                   <EditIcon
                     style={{
@@ -223,6 +266,13 @@ class ItineraryHistory extends Component {
           <EditForm
             openEditForm={this.state.openEditForm}
             closeEditForm={this.handleCloseEditForm}
+            cityList1={cityList1}
+            cityList2={cityList2}
+            handleDepartureFieldChange={this.handleDepartureFieldChange}
+            handleDestinationFieldChange={this.handleDestinationFieldChange}
+            idRecord={this.state.currentIdRecord}
+            departure={this.state.depatureId}
+            destination={this.state.destinationId}
           // editLocationCheckin={
           //   () => this.handleEditForm(
           //     this.state.currentIdRecord,
@@ -252,6 +302,7 @@ const mapStateToProps = state => {
     isSuccessDelete: state.deleteItineraryHistory.isSuccess,
     errorDelete: state.deleteItineraryHistory.error,
     loadingDelete: state.deleteItineraryHistory.loading,
+    cities: state.cityList.cities
   };
 };
 
@@ -259,7 +310,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetItineraryHistory: () => dispatch(actions.getItineraryHistory()),
     onDeleteItineraryHistory: (itineraryId) => dispatch(actions.deleteItineraryHistory(itineraryId)),
-    onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal())
+    onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal()),
+    onGetCityList: () => dispatch(actions.getCityList()),
   };
 };
 

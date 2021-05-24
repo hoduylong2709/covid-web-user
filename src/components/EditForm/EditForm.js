@@ -8,6 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorIcon from '@material-ui/icons/Error';
 import moment from 'moment';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const editForm = (props) => {
   const inputFields = props.isEditForLocationCheckin ? (
@@ -50,10 +54,52 @@ const editForm = (props) => {
       </DialogActions>
     </div>
   ) : (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px'
+      }}
+    >
+      <FormControl>
+        <InputLabel id="demo-simple-select-label">Địa điểm khởi hành*</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={props.departure}
+          onChange={props.handleDepartureFieldChange}
+          style={{ minWidth: '250px' }}
+        >
+          {props.cityList1}
+        </Select>
+      </FormControl>
       <TextField
         id="datetime-local"
-        label="Thời gian khởi hành"
+        label="Thời gian khởi hành*"
+        type="datetime-local"
+        defaultValue={props.time}
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
+        onChange={props.changeTime}
+      />
+      <FormControl>
+        <InputLabel id="demo-simple-select-label">Địa điểm đến*</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={props.destination}
+          onChange={props.handleDestinationFieldChange}
+          style={{ minWidth: '250px' }}
+        >
+          {props.cityList2}
+        </Select>
+      </FormControl>
+      <TextField
+        id="datetime-local"
+        label="Thời gian đến*"
         type="datetime-local"
         defaultValue={props.time}
         fullWidth
@@ -66,37 +112,7 @@ const editForm = (props) => {
       <TextField
         margin="dense"
         id="location"
-        label="Địa điểm khởi hành"
-        type="text"
-        value={props.address}
-        fullWidth
-        onChange={props.changeLocation}
-      />
-      <TextField
-        id="datetime-local"
-        label="Thời gian đến"
-        type="datetime-local"
-        defaultValue={props.time}
-        fullWidth
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
-        onChange={props.changeTime}
-      />
-      <TextField
-        margin="dense"
-        id="location"
-        label="Địa điểm đến"
-        type="text"
-        value={props.address}
-        fullWidth
-        onChange={props.changeLocation}
-      />
-      <TextField
-        margin="dense"
-        id="location"
-        label="Số hiệu phương tiện"
+        label="Số hiệu phương tiện*"
         type="text"
         value={props.address}
         fullWidth
