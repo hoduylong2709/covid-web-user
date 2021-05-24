@@ -16,7 +16,7 @@
   justify-content: flex-start;
   background: white;
   border-radius: 36px;
-  margin: 0 280px;
+  margin: 0 225px;
   margin-bottom: 20px;
 }
 
@@ -44,4 +44,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.EditAndDelete {
+  display: flex;
+  flex-direction: column;
+  margin: auto 39px;
+  gap: 5px;
 }

@@ -28,6 +28,7 @@ import changePasswordReducer from './store/reducers/changePassword';
 import getItineraryHistoryReducer from './store/reducers/getItineraryHistory';
 import deleteLocationCheckinReducer from './store/reducers/deleteLocationCheckin';
 import editLocationCheckinReducer from './store/reducers/editLocationCheckin';
+import deleteItineraryHistoryReducer from './store/reducers/deleteItineraryHistory';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -51,7 +52,8 @@ const rootReducer = combineReducers({
   changePassword: changePasswordReducer,
   getItineraryHistory: getItineraryHistoryReducer,
   deleteLocationCheckin: deleteLocationCheckinReducer,
-  editLocationCheckin: editLocationCheckinReducer
+  editLocationCheckin: editLocationCheckinReducer,
+  deleteItineraryHistory: deleteItineraryHistoryReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

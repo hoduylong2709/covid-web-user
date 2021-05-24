@@ -177,6 +177,7 @@ class LocationCheckinHistory extends Component {
             openConfirmation={this.state.openConfirmation}
             closeConfirmation={this.handleCloseConfirmation}
             deleteRecord={this.handleDeleteRecord}
+            confirmText='Bạn chắc chắn muốn xóa địa điểm và thời gian check-in?'
           />
           <Dialog
             open={this.props.errorDelete !== null}
@@ -207,6 +208,7 @@ class LocationCheckinHistory extends Component {
             </DialogContent>
           </Dialog>
           <EditForm
+            isEditForLocationCheckin={true}
             openEditForm={this.state.openEditForm}
             address={this.state.currentAddressRecord}
             time={this.state.currentTimeRecord}

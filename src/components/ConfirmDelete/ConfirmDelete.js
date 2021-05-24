@@ -16,7 +16,7 @@ const confirmDelete = (props) => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Bạn chắc chắn muốn xóa địa điểm và thời gian check-in?
+            {props.confirmText}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

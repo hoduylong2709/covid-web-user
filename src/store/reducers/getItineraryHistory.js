@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-  itineraryList: null,
+  itineraryList: [],
   isSuccess: false,
   error: null,
   loading: false
@@ -23,7 +23,7 @@ const getItineraryHistorySuccess = (state, action) => {
 
 const getItineraryHistoryFail = (state, action) => {
   return updateObject(state, {
-    itineraryList: null,
+    itineraryList: [],
     isSuccess: false,
     error: action.error,
     loading: false

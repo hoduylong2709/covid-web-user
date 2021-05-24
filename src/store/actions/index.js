@@ -77,3 +77,6 @@ export {
   closeEditLocationCheckinModal,
   finishEditLocationCheckin
 } from './editLocationCheckin';
+export {
+  deleteItineraryHistory
+} from './deleteItineraryHistory';

@@ -10,11 +10,11 @@ import ErrorIcon from '@material-ui/icons/Error';
 import moment from 'moment';
 
 const editForm = (props) => {
-  const inputFields = (
+  const inputFields = props.isEditForLocationCheckin ? (
     <div>
       <TextField
         id="datetime-local"
-        label="Next appointment"
+        label="Thời gian check-in"
         type="datetime-local"
         defaultValue={props.time}
         fullWidth
@@ -28,6 +28,75 @@ const editForm = (props) => {
         margin="dense"
         id="location"
         label="Địa điểm check-in"
+        type="text"
+        value={props.address}
+        fullWidth
+        onChange={props.changeLocation}
+      />
+      <DialogActions>
+        <Button
+          onClick={props.closeEditForm}
+          color="primary"
+        >
+          Hủy
+          </Button>
+        <Button
+          onClick={props.editLocationCheckin}
+          color="primary"
+          disabled={props.address === ''}
+        >
+          Xác nhận
+          </Button>
+      </DialogActions>
+    </div>
+  ) : (
+    <div>
+      <TextField
+        id="datetime-local"
+        label="Thời gian khởi hành"
+        type="datetime-local"
+        defaultValue={props.time}
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
+        onChange={props.changeTime}
+      />
+      <TextField
+        margin="dense"
+        id="location"
+        label="Địa điểm khởi hành"
+        type="text"
+        value={props.address}
+        fullWidth
+        onChange={props.changeLocation}
+      />
+      <TextField
+        id="datetime-local"
+        label="Thời gian đến"
+        type="datetime-local"
+        defaultValue={props.time}
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
+        onChange={props.changeTime}
+      />
+      <TextField
+        margin="dense"
+        id="location"
+        label="Địa điểm đến"
+        type="text"
+        value={props.address}
+        fullWidth
+        onChange={props.changeLocation}
+      />
+      <TextField
+        margin="dense"
+        id="location"
+        label="Số hiệu phương tiện"
         type="text"
         value={props.address}
         fullWidth
@@ -90,7 +159,7 @@ const editForm = (props) => {
               fontWeight: '600'
             }}
           >
-            Chỉnh sửa thông tin check-in
+            {props.isEditForLocationCheckin ? 'Chỉnh sửa thông tin check-in' : 'Chỉnh sửa thông tin lịch trình'}
           </DialogContentText>
           {props.loading ?
             <CircularProgress style={{
