@@ -26,7 +26,11 @@ class ItineraryHistory extends Component {
     currentIdRecord: null,
     openEditForm: false,
     depatureId: null,
-    destinationId: null
+    destinationId: null,
+    departureTime: null,
+    destinationTime: null,
+    travelNo: null,
+    openVerifyTimeModal: false
   }
 
   componentDidMount() {
@@ -37,6 +41,9 @@ class ItineraryHistory extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.itineraryList !== this.props.itineraryList) {
       this.setState({ itineraryList: nextProps.itineraryList });
+    }
+    if (nextProps.isSuccessEdit !== this.props.isSuccessEdit) {
+      window.location.reload();
     }
   }
 
@@ -67,20 +74,23 @@ class ItineraryHistory extends Component {
     this.props.onCloseDeleteErrorModal();
   }
 
-  handleEditButton = (id, departureId, destinationId) => {
+  handleEditButton = (id, departureId, destinationId, departureTime, destinationTime, travelNo) => {
     this.setState({
       openEditForm: true,
       currentIdRecord: id,
       depatureId: departureId,
-      destinationId: destinationId
+      destinationId: destinationId,
+      departureTime: departureTime,
+      destinationTime: destinationTime,
+      travelNo: travelNo
     });
   }
 
   handleCloseEditForm = () => {
     this.setState({ openEditForm: false });
-    // setTimeout(() => {
-    //   this.props.onFinishEditLocationCheckin();
-    // }, 500);
+    setTimeout(() => {
+      this.props.onFinishEditItineraryInfo();
+    }, 500);
   }
 
   handleDepartureFieldChange = event => {
@@ -88,8 +98,46 @@ class ItineraryHistory extends Component {
     this.setState({ depatureId: event.target.value });
   }
 
+  handleDepartureTimeChange = (event) => {
+    this.setState({ departureTime: event.target.value.substring(0, 16) });
+  }
+
   handleDestinationFieldChange = event => {
     this.setState({ destinationId: event.target.value });
+  }
+
+  handleDestinationTimeChange = event => {
+    this.setState({ destinationTime: event.target.value.substring(0, 16) });
+  }
+
+  handleEditForm = (
+    id,
+    departureCityId,
+    destinationCityId,
+    flyNo,
+    departureTime,
+    landingTime
+  ) => {
+    if (this.state.departureTime >= this.state.destinationTime) {
+      this.setState({ openVerifyTimeModal: true });
+      return;
+    }
+    this.props.onEditItineraryInfo(
+      id,
+      departureCityId,
+      destinationCityId,
+      flyNo,
+      departureTime,
+      landingTime
+    );
+  }
+
+  handleCloseTimeModal = () => {
+    this.setState({ openVerifyTimeModal: false });
+  }
+
+  handleTravelNoChange = event => {
+    this.setState({ travelNo: event.target.value })
   }
 
   render() {
@@ -195,7 +243,16 @@ class ItineraryHistory extends Component {
               <div className={classes.EditAndDelete}>
                 <Button
                   anotherType='EditCheckinButton'
-                  clicked={() => this.handleEditButton(itineraryInfo.id, 8, 6)}
+                  clicked={
+                    () => this.handleEditButton(
+                      itineraryInfo.id,
+                      itineraryInfo.departureCityId,
+                      itineraryInfo.destinationCityId,
+                      itineraryInfo.departureTime.substring(0, 16),
+                      itineraryInfo.landingTime.substring(0, 16),
+                      itineraryInfo.travelNo
+                    )
+                  }
                 >
                   <EditIcon
                     style={{
@@ -273,19 +330,26 @@ class ItineraryHistory extends Component {
             idRecord={this.state.currentIdRecord}
             departure={this.state.depatureId}
             destination={this.state.destinationId}
-          // editLocationCheckin={
-          //   () => this.handleEditForm(
-          //     this.state.currentIdRecord,
-          //     this.state.currentAddressRecord,
-          //     this.state.currentTimeRecord
-          //   )
-          // }
-          // changeLocation={this.handleLocationChange}
-          // changeTime={this.handleTimeChange}
-          // loading={this.props.loadingEdit}
-          // hasError={this.props.errorEdit}
-          // openVerifyTimeModal={this.state.openVerifyTimeModal}
-          // closeVerifyTimeModal={this.handleCloseVerifyTimeModal}
+            departureTime={this.state.departureTime}
+            destinationTime={this.state.destinationTime}
+            travelNo={this.state.travelNo}
+            editItineraryInfo={
+              () => this.handleEditForm(
+                this.state.currentIdRecord,
+                this.state.depatureId,
+                this.state.destinationId,
+                this.state.travelNo,
+                this.state.departureTime,
+                this.state.destinationTime
+              )
+            }
+            changeDepartureTime={this.handleDepartureTimeChange}
+            changeDestinationTime={this.handleDestinationTimeChange}
+            changeTravelNo={this.handleTravelNoChange}
+            loading={this.props.loadingEdit}
+            hasErrorItinerary={this.props.errorEdit}
+            openVerifyTimeItinerary={this.state.openVerifyTimeModal}
+            closeTimeModalItinerary={this.handleCloseTimeModal}
           />
         </div>
       </Layout>
@@ -302,7 +366,11 @@ const mapStateToProps = state => {
     isSuccessDelete: state.deleteItineraryHistory.isSuccess,
     errorDelete: state.deleteItineraryHistory.error,
     loadingDelete: state.deleteItineraryHistory.loading,
-    cities: state.cityList.cities
+    cities: state.cityList.cities,
+    isSuccessEdit: state.editItineraryInfo.isSuccess,
+    errorEdit: state.editItineraryInfo.error,
+    loadingEdit: state.editItineraryInfo.loading,
+    showModalEdit: state.editItineraryInfo.showModal
   };
 };
 
@@ -312,6 +380,22 @@ const mapDispatchToProps = dispatch => {
     onDeleteItineraryHistory: (itineraryId) => dispatch(actions.deleteItineraryHistory(itineraryId)),
     onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal()),
     onGetCityList: () => dispatch(actions.getCityList()),
+    onEditItineraryInfo: (
+      id,
+      departureCityId,
+      destinationCityId,
+      flyNo,
+      departureTime,
+      landingTime
+    ) => dispatch(actions.editItineraryInfo(
+      id,
+      departureCityId,
+      destinationCityId,
+      flyNo,
+      departureTime,
+      landingTime
+    )),
+    onFinishEditItineraryInfo: () => dispatch(actions.finishEditItineraryInfo())
   };
 };
 

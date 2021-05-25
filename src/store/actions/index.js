@@ -80,3 +80,8 @@ export {
 export {
   deleteItineraryHistory
 } from './deleteItineraryHistory';
+export {
+  editItineraryInfo,
+  closeEditItineraryInfoModal,
+  finishEditItineraryInfo
+} from './editItineraryInfo';

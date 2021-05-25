@@ -11,7 +11,6 @@ import moment from 'moment';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const editForm = (props) => {
   const inputFields = props.isEditForLocationCheckin ? (
@@ -77,13 +76,13 @@ const editForm = (props) => {
         id="datetime-local"
         label="Thời gian khởi hành*"
         type="datetime-local"
-        defaultValue={props.time}
+        defaultValue={props.departureTime}
         fullWidth
         InputLabelProps={{
           shrink: true,
         }}
-        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
-        onChange={props.changeTime}
+        inputProps={{ max: props.destinationTime }}
+        onChange={props.changeDepartureTime}
       />
       <FormControl>
         <InputLabel id="demo-simple-select-label">Địa điểm đến*</InputLabel>
@@ -101,22 +100,22 @@ const editForm = (props) => {
         id="datetime-local"
         label="Thời gian đến*"
         type="datetime-local"
-        defaultValue={props.time}
+        defaultValue={props.destinationTime}
         fullWidth
         InputLabelProps={{
           shrink: true,
         }}
-        inputProps={{ max: moment(new Date()).format().substring(0, 16) }}
-        onChange={props.changeTime}
+        inputProps={{ min: props.departureTime }}
+        onChange={props.changeDestinationTime}
       />
       <TextField
         margin="dense"
         id="location"
         label="Số hiệu phương tiện*"
         type="text"
-        value={props.address}
+        value={props.travelNo}
         fullWidth
-        onChange={props.changeLocation}
+        onChange={props.changeTravelNo}
       />
       <DialogActions>
         <Button
@@ -126,9 +125,9 @@ const editForm = (props) => {
           Hủy
           </Button>
         <Button
-          onClick={props.editLocationCheckin}
+          onClick={props.editItineraryInfo}
           color="primary"
-          disabled={props.address === ''}
+          disabled={props.travelNo === ''}
         >
           Xác nhận
           </Button>
@@ -155,8 +154,8 @@ const editForm = (props) => {
           color: "black"
         }}
       >
-        Xóa địa điểm check-in thất bại, xin vui lòng thử lại!
-          </DialogContentText>
+        {props.hasErrorItinerary ? 'Chỉnh sửa thông tin lịch trình thất bại, xin vui lòng thử lại!' : 'Chỉnh sửa thông tin check-in thất bại, xin vui lòng thử lại!'}
+      </DialogContentText>
     </DialogContent>
   );
 
@@ -182,7 +181,7 @@ const editForm = (props) => {
               marginTop: '5px',
               marginLeft: '175px',
               marginBottom: '15px'
-            }} /> : (props.hasError ? errorView : inputFields)}
+            }} /> : (props.hasError || props.hasErrorItinerary ? errorView : inputFields)}
         </DialogContent>
       </Dialog>
       <Dialog
@@ -213,6 +212,23 @@ const editForm = (props) => {
               Thời gian check-in không hợp lệ, xin vui lòng chọn lại!
           </DialogContentText>
           </DialogContent>
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        open={props.openVerifyTimeItinerary}
+        onClose={props.closeTimeModalItinerary}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText
+            id="alert-dialog-description"
+            style={{
+              color: "black"
+            }}
+          >
+            Thời gian di chuyển không hợp lệ, xin vui lòng chọn lại!
+          </DialogContentText>
         </DialogContent>
       </Dialog>
     </div>
