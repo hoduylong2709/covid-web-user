@@ -42,7 +42,7 @@ class CheckInMap extends Component {
       lat: 0,
       lng: 0
     },
-    timeCheckin: null,
+    timeCheckin: moment(new Date()).format().substring(0, 16),
     openVerifyTimeModal: false
   };
 
@@ -191,7 +191,9 @@ class CheckInMap extends Component {
 
   handleCheckin = (event) => {
     event.preventDefault();
-    if (this.state.timeCheckin >= moment(new Date()).format().substring(0, 16)) {
+    console.log('time state', this.state.timeCheckin);
+    console.log('new date()', moment(new Date()).format().substring(0, 16));
+    if (this.state.timeCheckin > moment(new Date()).format().substring(0, 16)) {
       this.setState({ openVerifyTimeModal: true });
       return;
     }

@@ -28,11 +28,13 @@ class ItineraryInfo extends Component {
     destinationId: null,
     destinationTime: null,
     transportIdentify: null,
-    openVerifyTimeModal: false
+    openVerifyTimeModal: false,
+    openConflictItineraryModal: false
   };
 
   componentDidMount() {
     this.props.onGetCityList();
+    this.props.onGetItineraryHistory();
   }
 
   componentDidUpdate() {
@@ -64,6 +66,13 @@ class ItineraryInfo extends Component {
       this.setState({ openVerifyTimeModal: true });
       return;
     }
+    if (
+      this.props.itineraryList &&
+      this.state.depatureTime <= this.props.itineraryList[this.props.itineraryList.length - 1].landingTime
+    ) {
+      this.setState({ openConflictItineraryModal: true });
+      return;
+    }
     this.props.onSubmitItineraryInfo(
       this.state.depatureId,
       this.state.destinationId,
@@ -75,6 +84,10 @@ class ItineraryInfo extends Component {
 
   handleCloseTimeModal = () => {
     this.setState({ openVerifyTimeModal: false });
+  }
+
+  handleCloseConflictItineraryModal = () => {
+    this.setState({ openConflictItineraryModal: false });
   }
 
   handleItineraryHistoryButton = () => {
@@ -276,6 +289,23 @@ class ItineraryInfo extends Component {
           </DialogContentText>
             </DialogContent>
           </Dialog>
+          <Dialog
+            open={this.state.openConflictItineraryModal}
+            onClose={this.handleCloseConflictItineraryModal}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  color: "black"
+                }}
+              >
+                Thời gian di chuyển xung đột với lịch trình trước đó, vui lòng vào lịch sử di chuyển để kiểm tra!
+          </DialogContentText>
+            </DialogContent>
+          </Dialog>
         </div>
       </Layout>
     );
@@ -292,7 +322,8 @@ const mapStateToProps = state => {
     errorSubmit: state.itineraryInfo.error,
     loadingSubmit: state.itineraryInfo.loading,
     showModalSubmit: state.itineraryInfo.showModal,
-    mustTesting: state.itineraryInfo.mustTesting
+    mustTesting: state.itineraryInfo.mustTesting,
+    itineraryList: state.getItineraryHistory.itineraryList
   };
 };
 
@@ -302,7 +333,8 @@ const mapDispatchToProps = dispatch => {
     onSubmitItineraryInfo: (
       departureCityId, destinationCityId, flyNo, departureTime, landingTime
     ) => dispatch(actions.submitItineraryInfo(departureCityId, destinationCityId, flyNo, departureTime, landingTime)),
-    onCloseModalItineraryInfo: () => dispatch(actions.closeModalItineraryInfo())
+    onCloseModalItineraryInfo: () => dispatch(actions.closeModalItineraryInfo()),
+    onGetItineraryHistory: () => dispatch(actions.getItineraryHistory())
   };
 };
 
