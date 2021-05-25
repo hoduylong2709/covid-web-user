@@ -9,8 +9,12 @@ import * as actions from '../../../../store/actions/index';
 
 class MustTestingModal extends Component {
   handleSubmit = () => {
-    this.props.onFinishSubmitItinerary();
-    this.props.history.push("/testing")
+    if (this.props.isEditItinerary) {
+      this.props.onFinishEditItineraryInfo();
+    } else {
+      this.props.onFinishSubmitItinerary();
+    }
+    this.props.history.push("/testing");
   }
 
   render() {
@@ -41,7 +45,8 @@ class MustTestingModal extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFinishSubmitItinerary: () => dispatch(actions.finishSubmitItineraryInfo())
+    onFinishSubmitItinerary: () => dispatch(actions.finishSubmitItineraryInfo()),
+    onFinishEditItineraryInfo: () => dispatch(actions.finishEditItineraryInfo())
   };
 };
 

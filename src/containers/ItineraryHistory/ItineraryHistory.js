@@ -18,6 +18,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import ErrorIcon from '@material-ui/icons/Error';
 import EditForm from '../../components/EditForm/EditForm';
 import MenuItem from '@material-ui/core/MenuItem';
+import MustTestingModal from '../../components/UI/Modal/TestingRegistrationModal/MustTestingModal';
 
 class ItineraryHistory extends Component {
   state = {
@@ -42,7 +43,7 @@ class ItineraryHistory extends Component {
     if (nextProps.itineraryList !== this.props.itineraryList) {
       this.setState({ itineraryList: nextProps.itineraryList });
     }
-    if (nextProps.isSuccessEdit !== this.props.isSuccessEdit) {
+    if (nextProps.isSuccessEdit !== this.props.isSuccessEdit && nextProps.mustTesting === this.props.mustTesting) {
       window.location.reload();
     }
   }
@@ -279,6 +280,50 @@ class ItineraryHistory extends Component {
       });
     }
 
+    let mainView = (
+      <EditForm
+        openEditForm={this.state.openEditForm}
+        closeEditForm={this.handleCloseEditForm}
+        cityList1={cityList1}
+        cityList2={cityList2}
+        handleDepartureFieldChange={this.handleDepartureFieldChange}
+        handleDestinationFieldChange={this.handleDestinationFieldChange}
+        idRecord={this.state.currentIdRecord}
+        departure={this.state.depatureId}
+        destination={this.state.destinationId}
+        departureTime={this.state.departureTime}
+        destinationTime={this.state.destinationTime}
+        travelNo={this.state.travelNo}
+        editItineraryInfo={
+          () => this.handleEditForm(
+            this.state.currentIdRecord,
+            this.state.depatureId,
+            this.state.destinationId,
+            this.state.travelNo,
+            this.state.departureTime,
+            this.state.destinationTime
+          )
+        }
+        changeDepartureTime={this.handleDepartureTimeChange}
+        changeDestinationTime={this.handleDestinationTimeChange}
+        changeTravelNo={this.handleTravelNoChange}
+        loading={this.props.loadingEdit}
+        hasErrorItinerary={this.props.errorEdit}
+        openVerifyTimeItinerary={this.state.openVerifyTimeModal}
+        closeTimeModalItinerary={this.handleCloseTimeModal}
+      />
+    );
+
+    if (this.props.mustTesting) {
+      mainView = (
+        <MustTestingModal
+          mustTesting={this.props.showModalEdit && this.props.mustTesting}
+          closeModal={() => this.props.onCloseMustTestingModal()}
+          isEditItinerary={true}
+        ></MustTestingModal>
+      );
+    }
+
     return (
       <Layout>
         <div className={classes.ItineraryWrapper}>
@@ -320,37 +365,8 @@ class ItineraryHistory extends Component {
           </DialogContentText>
             </DialogContent>
           </Dialog>
-          <EditForm
-            openEditForm={this.state.openEditForm}
-            closeEditForm={this.handleCloseEditForm}
-            cityList1={cityList1}
-            cityList2={cityList2}
-            handleDepartureFieldChange={this.handleDepartureFieldChange}
-            handleDestinationFieldChange={this.handleDestinationFieldChange}
-            idRecord={this.state.currentIdRecord}
-            departure={this.state.depatureId}
-            destination={this.state.destinationId}
-            departureTime={this.state.departureTime}
-            destinationTime={this.state.destinationTime}
-            travelNo={this.state.travelNo}
-            editItineraryInfo={
-              () => this.handleEditForm(
-                this.state.currentIdRecord,
-                this.state.depatureId,
-                this.state.destinationId,
-                this.state.travelNo,
-                this.state.departureTime,
-                this.state.destinationTime
-              )
-            }
-            changeDepartureTime={this.handleDepartureTimeChange}
-            changeDestinationTime={this.handleDestinationTimeChange}
-            changeTravelNo={this.handleTravelNoChange}
-            loading={this.props.loadingEdit}
-            hasErrorItinerary={this.props.errorEdit}
-            openVerifyTimeItinerary={this.state.openVerifyTimeModal}
-            closeTimeModalItinerary={this.handleCloseTimeModal}
-          />
+          {mainView}
+
         </div>
       </Layout>
     );
@@ -370,7 +386,8 @@ const mapStateToProps = state => {
     isSuccessEdit: state.editItineraryInfo.isSuccess,
     errorEdit: state.editItineraryInfo.error,
     loadingEdit: state.editItineraryInfo.loading,
-    showModalEdit: state.editItineraryInfo.showModal
+    showModalEdit: state.editItineraryInfo.showModal,
+    mustTesting: state.editItineraryInfo.mustTesting
   };
 };
 
@@ -395,7 +412,8 @@ const mapDispatchToProps = dispatch => {
       departureTime,
       landingTime
     )),
-    onFinishEditItineraryInfo: () => dispatch(actions.finishEditItineraryInfo())
+    onFinishEditItineraryInfo: () => dispatch(actions.finishEditItineraryInfo()),
+    onCloseMustTestingModal: () => dispatch(actions.closeMustTestingModal())
   };
 };
 

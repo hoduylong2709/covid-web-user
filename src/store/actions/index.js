@@ -83,5 +83,6 @@ export {
 export {
   editItineraryInfo,
   closeEditItineraryInfoModal,
-  finishEditItineraryInfo
+  finishEditItineraryInfo,
+  closeMustTestingModal
 } from './editItineraryInfo';

@@ -7,10 +7,11 @@ export const editItineraryInfoStart = () => {
   };
 }
 
-export const editItineraryInfoSuccess = (isSuccess) => {
+export const editItineraryInfoSuccess = (isSuccess, mustTesting) => {
   return {
     type: actionTypes.EDIT_ITINERARY_INFO_SUCCESS,
-    isSuccess
+    isSuccess,
+    mustTesting
   };
 }
 
@@ -44,7 +45,7 @@ export const editItineraryInfo = (
     };
     axios.put(`/User/itinerary/${id}`, editData, config)
       .then(response => {
-        dispatch(editItineraryInfoSuccess(response.data.isSuccess));
+        dispatch(editItineraryInfoSuccess(response.data.isSuccess, response.data.data.mustTesting));
       })
       .catch(error => {
         dispatch(editItineraryInfoFail(error.response.data.message));
@@ -61,5 +62,11 @@ export const closeEditItineraryInfoModal = () => {
 export const finishEditItineraryInfo = () => {
   return {
     type: actionTypes.FINISH_EDIT_ITINERARY_INFO
+  };
+}
+
+export const closeMustTestingModal = () => {
+  return {
+    type: actionTypes.CLOSE_MUST_TESTING_MODAL
   };
 }

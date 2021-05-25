@@ -5,7 +5,8 @@ const initialState = {
   isSuccess: false,
   error: null,
   loading: false,
-  showModal: false
+  showModal: false,
+  mustTesting: false
 };
 
 const editItineraryInfoStart = (state, action) => {
@@ -19,7 +20,8 @@ const editItineraryInfoSuccess = (state, action) => {
     isSuccess: action.isSuccess,
     error: null,
     loading: false,
-    showModal: true
+    showModal: true,
+    mustTesting: action.mustTesting
   });
 }
 
@@ -28,7 +30,8 @@ const editItineraryInfoFail = (state, action) => {
     isSuccess: false,
     error: action.error,
     loading: false,
-    showModal: true
+    showModal: true,
+    mustTesting: false
   });
 }
 
@@ -38,12 +41,20 @@ const closeEditItineraryInfoModal = (state, action) => {
   });
 }
 
+const closeMustTestingModal = (state, action) => {
+  return updateObject(state, {
+    showModal: false,
+    mustTesting: false
+  });
+}
+
 const finishEditItineraryInfo = (state, action) => {
   return updateObject(state, {
     isSuccess: false,
     error: null,
     loading: false,
-    showModal: false
+    showModal: false,
+    mustTesting: false
   });
 }
 
@@ -57,6 +68,8 @@ const reducer = (state = initialState, action) => {
       return editItineraryInfoFail(state, action);
     case actionTypes.CLOSE_EDIT_ITINERARY_INFO_MODAL:
       return closeEditItineraryInfoModal(state, action);
+    case actionTypes.CLOSE_MUST_TESTING_MODAL:
+      return closeMustTestingModal(state, action);
     case actionTypes.FINISH_EDIT_ITINERARY_INFO:
       return finishEditItineraryInfo(state, action);
     default:
