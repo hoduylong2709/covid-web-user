@@ -199,7 +199,7 @@ class ItineraryHistory extends Component {
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                justifyContent: 'space-evenly'
+                justifyContent: 'space-between'
               }}
             >
               <div className={classes.ItineraryRecord_Content}>
@@ -351,6 +351,17 @@ class ItineraryHistory extends Component {
             <h2>Lịch sử di chuyển</h2>
           </div>
           {itineraryListView}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              margin: '0 280px',
+              marginBottom: '20px'
+            }}
+          >
+            <a href="/itinerary">Quay lại</a>
+          </div>
           <ConfirmDelete
             openConfirmation={this.state.openConfirmation}
             closeConfirmation={this.handleCloseConfirmation}

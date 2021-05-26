@@ -173,6 +173,16 @@ class LocationCheckinHistory extends Component {
             <h2 className={classes.CheckinHeader_Title}>Lịch sử check-in</h2>
           </div>
           {checkinListView}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              margin: '0px 323px 20px'
+            }}
+          >
+            <a href="/check-in">Quay lại</a>
+          </div>
           <ConfirmDelete
             openConfirmation={this.state.openConfirmation}
             closeConfirmation={this.handleCloseConfirmation}
