@@ -19,6 +19,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import EditForm from '../../components/EditForm/EditForm';
 import MenuItem from '@material-ui/core/MenuItem';
 import MustTestingModal from '../../components/UI/Modal/TestingRegistrationModal/MustTestingModal';
+import { isConflictItineray } from '../../store/utility';
 
 class ItineraryHistory extends Component {
   state = {
@@ -31,7 +32,8 @@ class ItineraryHistory extends Component {
     departureTime: null,
     destinationTime: null,
     travelNo: null,
-    openVerifyTimeModal: false
+    openVerifyTimeModal: false,
+    openConflictModal: false
   }
 
   componentDidMount() {
@@ -123,6 +125,18 @@ class ItineraryHistory extends Component {
       this.setState({ openVerifyTimeModal: true });
       return;
     }
+    const editItineraryInfo = {
+      id,
+      departureCityId,
+      destinationCityId,
+      flyNo,
+      departureTime,
+      landingTime
+    };
+    if (isConflictItineray(this.state.itineraryList, editItineraryInfo) === true) {
+      this.setState({ openConflictModal: true });
+      return;
+    }
     this.props.onEditItineraryInfo(
       id,
       departureCityId,
@@ -135,6 +149,10 @@ class ItineraryHistory extends Component {
 
   handleCloseTimeModal = () => {
     this.setState({ openVerifyTimeModal: false });
+  }
+
+  handleCloseConflictModal = () => {
+    this.setState({ openConflictModal: false });
   }
 
   handleTravelNoChange = event => {
@@ -311,6 +329,8 @@ class ItineraryHistory extends Component {
         hasErrorItinerary={this.props.errorEdit}
         openVerifyTimeItinerary={this.state.openVerifyTimeModal}
         closeTimeModalItinerary={this.handleCloseTimeModal}
+        openConflictModal={this.state.openConflictModal}
+        closeConflictModal={this.handleCloseConflictModal}
       />
     );
 

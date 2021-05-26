@@ -231,6 +231,23 @@ const editForm = (props) => {
           </DialogContentText>
         </DialogContent>
       </Dialog>
+      <Dialog
+        open={props.openConflictModal}
+        onClose={props.closeConflictModal}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText
+            id="alert-dialog-description"
+            style={{
+              color: "black"
+            }}
+          >
+            Thời gian chỉnh sửa xảy ra xung đột với các thời gian lịch trình khác, vui lòng kiểm tra lại!
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
