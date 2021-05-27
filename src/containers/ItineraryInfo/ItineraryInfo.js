@@ -21,6 +21,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
+import moment from 'moment';
+
 class ItineraryInfo extends Component {
   state = {
     depatureId: null,
@@ -249,7 +251,7 @@ class ItineraryInfo extends Component {
                         shrink: true,
                       }}
                       onChange={this.handleDestinationTimeChange}
-                      inputProps={{ min: this.state.depatureTime }}
+                      inputProps={{ min: this.state.depatureTime, max: moment(new Date()).format().substring(0, 16) }}
                     />
                   </form>
                 </div>

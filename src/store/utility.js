@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const updateObject = (oldObject, updatedProperties) => {
   return {
     ...oldObject,
@@ -15,7 +17,9 @@ export const convertStringToBoolean = (stringInput) => {
 export const isConflictItineray = (itineraryList, editItineraryInfo) => {
   const editItineraryWrapper = [editItineraryInfo];
   const tempItineraryList = itineraryList.map(obj => editItineraryWrapper.find(o => o.id === obj.id) || obj);
+  tempItineraryList.sort((a, b) => (a.departureTime > b.departureTime) ? 1 : -1);
   const lengthOfTempList = tempItineraryList.length;
+  console.log(tempItineraryList);
   for (let i = 0; i < lengthOfTempList; i++) {
     if (i === 0) {
       if (tempItineraryList[i].landingTime >= tempItineraryList[i + 1].departureTime) {
@@ -26,6 +30,13 @@ export const isConflictItineray = (itineraryList, editItineraryInfo) => {
         return true;
       }
     } else {
+      if (tempItineraryList[i].departureTime <= tempItineraryList[0].departureTime &&
+        tempItineraryList[i].landingTime <= tempItineraryList[0].departureTime) {
+        return false;
+      }
+      if (tempItineraryList[i].landingTime >= moment(new Date()).format().substring(0, 16)) {
+        return true;
+      }
       if (tempItineraryList[i].departureTime <= tempItineraryList[i - 1].landingTime ||
         tempItineraryList[i].landingTime >= tempItineraryList[i + 1].departureTime) {
         return true;
