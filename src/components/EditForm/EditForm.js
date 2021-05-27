@@ -105,7 +105,7 @@ const editForm = (props) => {
         InputLabelProps={{
           shrink: true,
         }}
-        inputProps={{ min: props.departureTime, max: moment(new Date()).format().substring(0, 16) }}
+        inputProps={{ min: props.departureTime }}
         onChange={props.changeDestinationTime}
       />
       <TextField

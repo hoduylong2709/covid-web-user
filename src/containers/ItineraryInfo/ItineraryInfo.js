@@ -251,7 +251,7 @@ class ItineraryInfo extends Component {
                         shrink: true,
                       }}
                       onChange={this.handleDestinationTimeChange}
-                      inputProps={{ min: this.state.depatureTime, max: moment(new Date()).format().substring(0, 16) }}
+                      inputProps={{ min: this.state.depatureTime }}
                     />
                   </form>
                 </div>
