@@ -7,11 +7,15 @@ export const getItineraryHistoryStart = () => {
   };
 }
 
-export const getItineraryHistorySuccess = (itineraryList, isSuccess) => {
+export const getItineraryHistorySuccess = (itineraryList, isSuccess, pageNumber, pageSize, totalPages, totalRecords) => {
   return {
     type: actionTypes.GET_ITINERARY_HISTORY_SUCCESS,
     itineraryList,
-    isSuccess
+    isSuccess,
+    pageNumber: pageNumber,
+    pageSize: pageSize,
+    totalPages: totalPages,
+    totalRecords: totalRecords
   };
 }
 
@@ -28,12 +32,27 @@ export const getItineraryHistory = () => {
     const config = {
       headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
     };
-    axios.get('/User/itinerary', config)
+    axios.get('/User/itinerary?PageNumber=1&PageSize=4', config)
       .then(response => {
-        dispatch(getItineraryHistorySuccess(response.data.data, response.data.isSuccess));
+        dispatch(getItineraryHistorySuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })
       .catch(error => {
         dispatch(getItineraryHistoryFail(error.response.data.message));
+      });
+  };
+}
+
+export const setPaginationItineraryHistory = (pageNumber, pageSize) => {
+  return dispatch => {
+    const config = {
+      headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
+    };
+    axios.get(`/User/itinerary?PageNumber=${pageNumber}&PageSize=${pageSize}`, config)
+      .then(response => {
+        dispatch(getItineraryHistorySuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 }

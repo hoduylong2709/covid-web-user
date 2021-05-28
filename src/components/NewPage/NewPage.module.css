@@ -29,6 +29,7 @@
 
 .TurnbackLinkContainer {
   display: flex;
+  margin-right: 166px;
 }
 
 .Date {

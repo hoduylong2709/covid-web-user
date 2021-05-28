@@ -20,6 +20,7 @@ import EditForm from '../../components/EditForm/EditForm';
 import MenuItem from '@material-ui/core/MenuItem';
 import MustTestingModal from '../../components/UI/Modal/TestingRegistrationModal/MustTestingModal';
 import { isConflictItineray } from '../../store/utility';
+import MyPagination from '../../components/UI/Pagination/Pagination';
 
 class ItineraryHistory extends Component {
   state = {
@@ -160,6 +161,16 @@ class ItineraryHistory extends Component {
   }
 
   render() {
+    let pagination = null;
+
+    if (this.props.itineraryList) {
+      pagination = <MyPagination
+        totalPages={this.props.totalPages}
+        isPaginationForItinerary={true}
+        pageSize={4}
+      />
+    }
+
     let itineraryListView = <Spinner />;
 
     let cityList1 = null;
@@ -348,19 +359,19 @@ class ItineraryHistory extends Component {
       <Layout>
         <div className={classes.ItineraryWrapper}>
           <div className={classes.ItineraryHeader}>
-            <h2>Lịch sử di chuyển</h2>
+            <h2>Thông tin di chuyển</h2>
           </div>
           {itineraryListView}
           <div
             style={{
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              margin: '0 280px',
-              marginBottom: '20px'
+              flexDirection: 'row',
+              margin: '0 225px',
+              justifyContent: 'space-around'
             }}
           >
-            <a href="/itinerary">Quay lại</a>
+            <a href="/itinerary" style={{ marginTop: '21px' }}>Quay lại</a>
+            {pagination}
           </div>
           <ConfirmDelete
             openConfirmation={this.state.openConfirmation}
@@ -418,7 +429,9 @@ const mapStateToProps = state => {
     errorEdit: state.editItineraryInfo.error,
     loadingEdit: state.editItineraryInfo.loading,
     showModalEdit: state.editItineraryInfo.showModal,
-    mustTesting: state.editItineraryInfo.mustTesting
+    mustTesting: state.editItineraryInfo.mustTesting,
+    pageSize: state.getItineraryHistory.pageSize,
+    totalPages: state.getItineraryHistory.totalPages
   };
 };
 

@@ -5,7 +5,11 @@ const initialState = {
   itineraryList: [],
   isSuccess: false,
   error: null,
-  loading: false
+  loading: false,
+  pageNumber: null,
+  pageSize: null,
+  totalPages: null,
+  totalRecords: null
 };
 
 const getItineraryHistoryStart = (state, action) => {
@@ -17,7 +21,11 @@ const getItineraryHistorySuccess = (state, action) => {
     itineraryList: action.itineraryList,
     isSuccess: action.isSuccess,
     error: null,
-    loading: false
+    loading: false,
+    pageNumber: action.pageNumber,
+    pageSize: action.pageSize,
+    totalPages: action.totalPages,
+    totalRecords: action.totalRecords
   });
 }
 

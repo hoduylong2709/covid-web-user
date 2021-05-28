@@ -55,7 +55,8 @@ export {
   finishSubmitItineraryInfo
 } from './ItineraryInfo';
 export {
-  getItineraryHistory
+  getItineraryHistory,
+  setPaginationItineraryHistory
 } from './getItineraryHistory';
 export {
   getUserProfiles

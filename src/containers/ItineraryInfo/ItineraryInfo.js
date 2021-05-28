@@ -21,8 +21,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
-import moment from 'moment';
-
 class ItineraryInfo extends Component {
   state = {
     depatureId: null,
@@ -36,7 +34,7 @@ class ItineraryInfo extends Component {
 
   componentDidMount() {
     this.props.onGetCityList();
-    this.props.onGetItineraryHistory();
+    // this.props.onGetItineraryHistory();
   }
 
   componentDidUpdate() {
@@ -68,13 +66,6 @@ class ItineraryInfo extends Component {
       this.setState({ openVerifyTimeModal: true });
       return;
     }
-    if (
-      this.props.itineraryList &&
-      this.state.depatureTime <= this.props.itineraryList[this.props.itineraryList.length - 1].landingTime
-    ) {
-      this.setState({ openConflictItineraryModal: true });
-      return;
-    }
     this.props.onSubmitItineraryInfo(
       this.state.depatureId,
       this.state.destinationId,
@@ -89,7 +80,7 @@ class ItineraryInfo extends Component {
   }
 
   handleCloseConflictItineraryModal = () => {
-    this.setState({ openConflictItineraryModal: false });
+    this.props.onCloseVerifyTimeItineraryModal()
   }
 
   handleItineraryHistoryButton = () => {
@@ -131,7 +122,7 @@ class ItineraryInfo extends Component {
         showCheckinModal={this.props.showModalSubmit}
         showSuccessIcon={this.props.isSuccessSubmit}
         checkinLocationResult={
-          this.props.isSuccessSubmit ? 'Khai báo lịch trình y tế thành công' : this.props.error
+          this.props.isSuccessSubmit ? 'Khai báo lịch trình y tế thành công' : 'Thời gian di chuyển xung đột với lịch trình, vui lòng vào thông tin di chuyển để kiểm tra!'
         }
         hasError={this.props.errorSubmit}
         closeModal={() => this.props.onCloseModalItineraryInfo()}
@@ -152,12 +143,12 @@ class ItineraryInfo extends Component {
         <div className={classes.ItineraryContainer}>
           <div className={classes.ItineraryContent}>
             <div className={classes.ItineraryHeader}>
-              <h2 className={classes.ItineraryTitle}>Thông tin lịch trình</h2>
+              <h2 className={classes.ItineraryTitle}>Đăng ký lịch trình</h2>
               <div className={classes.ItineraryHistoryButton}>
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={this.handleItineraryHistoryButton}
-                >Lịch sử di chuyển</Button>
+                >Thông tin di chuyển</Button>
               </div>
             </div>
             <div
@@ -287,24 +278,7 @@ class ItineraryInfo extends Component {
                   color: "black"
                 }}
               >
-                Thời gian di chuyển không hợp lệ, xin vui lòng chọn lại!
-          </DialogContentText>
-            </DialogContent>
-          </Dialog>
-          <Dialog
-            open={this.state.openConflictItineraryModal}
-            onClose={this.handleCloseConflictItineraryModal}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogContent>
-              <DialogContentText
-                id="alert-dialog-description"
-                style={{
-                  color: "black"
-                }}
-              >
-                Thời gian di chuyển xung đột với lịch trình trước đó, vui lòng vào lịch sử di chuyển để kiểm tra!
+                Thời gian khởi hành và thời gian đến không hợp lệ, xin vui lòng chọn lại!
           </DialogContentText>
             </DialogContent>
           </Dialog>
@@ -335,8 +309,7 @@ const mapDispatchToProps = dispatch => {
     onSubmitItineraryInfo: (
       departureCityId, destinationCityId, flyNo, departureTime, landingTime
     ) => dispatch(actions.submitItineraryInfo(departureCityId, destinationCityId, flyNo, departureTime, landingTime)),
-    onCloseModalItineraryInfo: () => dispatch(actions.closeModalItineraryInfo()),
-    onGetItineraryHistory: () => dispatch(actions.getItineraryHistory())
+    onCloseModalItineraryInfo: () => dispatch(actions.closeModalItineraryInfo())
   };
 };
 
