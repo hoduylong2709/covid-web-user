@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export const updateObject = (oldObject, updatedProperties) => {
   return {
     ...oldObject,
@@ -17,16 +15,16 @@ export const convertStringToBoolean = (stringInput) => {
 export const isConflictItineray = (itineraryList, editItineraryInfo) => {
   const editItineraryWrapper = [editItineraryInfo];
   const tempItineraryList = itineraryList.map(obj => editItineraryWrapper.find(o => o.id === obj.id) || obj);
-  tempItineraryList.sort((a, b) => (a.departureTime > b.departureTime) ? 1 : -1);
+  tempItineraryList.sort((a, b) => (a.departureTime > b.departureTime) ? -1 : 1);
   const lengthOfTempList = tempItineraryList.length;
   console.log(tempItineraryList);
   for (let i = 0; i < lengthOfTempList; i++) {
     if (i === 0) {
-      if (tempItineraryList[i + 1] && tempItineraryList[i].landingTime >= tempItineraryList[i + 1].departureTime) {
+      if (tempItineraryList[i + 1] && tempItineraryList[i].departureTime <= tempItineraryList[i + 1].landingTime) {
         return true;
       }
     } else if (i === lengthOfTempList - 1) {
-      if (tempItineraryList[i - 1] && tempItineraryList[i].departureTime <= tempItineraryList[i - 1].landingTime) {
+      if (tempItineraryList[i - 1] && tempItineraryList[i].landingTime >= tempItineraryList[i - 1].departureTime) {
         return true;
       }
     } else {

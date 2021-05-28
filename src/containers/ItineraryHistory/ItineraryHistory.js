@@ -203,7 +203,7 @@ class ItineraryHistory extends Component {
     }
 
     if (this.state.itineraryList) {
-      itineraryListView = this.state.itineraryList.slice().reverse().map(itineraryInfo => {
+      itineraryListView = this.state.itineraryList.map(itineraryInfo => {
         return (
           <div className={classes.ItineraryRecords}>
             <div
