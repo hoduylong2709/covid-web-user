@@ -4,11 +4,15 @@ import classes from './Banner.module.css';
 import covid1 from '../../assets/images/covid_background.jpg';
 
 const banner = (props) => (
-  <div>
+  <div
+    style={{
+      position: 'relative'
+    }}
+  >
     <h1
       style={{
         position: 'absolute',
-        top: '30%',
+        top: '50%',
         left: '50%',
         zIndex: '1',
         transform: 'translate(-50%, -50%)',
@@ -17,7 +21,6 @@ const banner = (props) => (
         height: 'fit-content',
         fontWeight: 'bolder',
         fontSize: 'xxx-large',
-        textAlign: 'center',
         width: 'fit-content',
         wordSpacing: '-13px'
       }}
