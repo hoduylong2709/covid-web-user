@@ -40,7 +40,7 @@ export const login = (email, password) => {
       email: email,
       password: password
     };
-    axios.post("/Authorization/login", loginData)
+    axios.post("/Authorization/user/login", loginData)
       .then(response => {
         setTimeout(() => {
           dispatch(loginSuccess(response.data.isSuccess, response.data.data.id, response.data.data.token, response.data.data.fullName, response.data.data.role, response.data.data.isVerified, response.data.data.email));
