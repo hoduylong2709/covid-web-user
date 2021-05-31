@@ -30,6 +30,8 @@ import deleteLocationCheckinReducer from './store/reducers/deleteLocationCheckin
 import editLocationCheckinReducer from './store/reducers/editLocationCheckin';
 import deleteItineraryHistoryReducer from './store/reducers/deleteItineraryHistory';
 import editItineraryInfoReducer from './store/reducers/editItineraryInfo';
+import uploadProfileImageReducer from './store/reducers/uploadProfileImg';
+import setProfileImageReducer from './store/reducers/setProfileImg';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -55,7 +57,9 @@ const rootReducer = combineReducers({
   deleteLocationCheckin: deleteLocationCheckinReducer,
   editLocationCheckin: editLocationCheckinReducer,
   deleteItineraryHistory: deleteItineraryHistoryReducer,
-  editItineraryInfo: editItineraryInfoReducer
+  editItineraryInfo: editItineraryInfoReducer,
+  uploadProfileImage: uploadProfileImageReducer,
+  setProfileImage: setProfileImageReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

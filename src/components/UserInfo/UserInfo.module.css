@@ -9,7 +9,14 @@
 }
 
 .Icon {
-  margin: auto 83px;
+  margin: auto 61px;
+}
+
+.UploadImage {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .Info {
@@ -18,4 +25,15 @@
 
 .UserName {
   margin: 13px 0;
+}
+
+.UploadImageButton {
+  margin: auto;
+  height: fit-content;
+  border: none;
+  background: none;
+}
+
+.UploadImageButton:hover {
+  cursor: pointer;
 }

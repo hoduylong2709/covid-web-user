@@ -87,3 +87,9 @@ export {
   finishEditItineraryInfo,
   closeMustTestingModal
 } from './editItineraryInfo';
+export {
+  uploadProfileImage
+} from './uploadProfileImg';
+export {
+  getProfileImage
+} from './setProfileImg';
