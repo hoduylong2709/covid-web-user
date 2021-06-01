@@ -28,7 +28,7 @@ class NewPage extends Component {
               <h2 className={classes.HeaderContainer__title}>{newPost.title}</h2>
             </div>
             <div className={classes.ContentContainer}>
-              <p className={classes.Content}>{newPost.content}</p>
+              <div dangerouslySetInnerHTML={{ __html: newPost.content }} />
             </div>
           </div>
           <div className={classes.Footer}>

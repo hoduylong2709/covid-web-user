@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './UserInfo.module.css';
 import Typography from '@material-ui/core/Typography';
@@ -15,19 +15,41 @@ class UserInfo extends Component {
     this.myRef = React.createRef();
   }
 
+  state = {
+    loading: false,
+    openCheckSizeImageModal: false
+  }
+
   componentDidMount() {
     this.props.onGetProfileImage();
   }
 
   handleChangeImage = (event) => {
+    if (event.target.files[0].size > 5000000) {
+      this.setState({ openCheckSizeImageModal: true });
+      return;
+    }
     this.props.onUploadProfileImage(event.target.files[0]);
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.props.onGetProfileImage();
+      this.setState({ loading: false });
+    }, 500);
+  }
+
+  handleCloseCheckSizeImageModal = () => {
+    this.setState({ openCheckSizeImageModal: false });
   }
 
   render() {
-    let profileImage = <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="" id="img" className={classes.UploadImage} />
+    let profileImage = <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="" id="img" className={classes.UploadImage} />;
 
     if (this.props.profileImage) {
-      profileImage = <img src={this.props.profileImage + `?a=${Math.random()}`} alt="" id="img" className={classes.UploadImage} />
+      profileImage = <img src={this.props.profileImage + `?a=${Math.random()}`} alt="" id="img" className={classes.UploadImage} />;
+    }
+
+    if (this.state.loading) {
+      profileImage = <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="" id="img" className={classes.UploadImage} />;
     }
 
     return (
@@ -55,23 +77,23 @@ class UserInfo extends Component {
           ref={this.myRef}
           onChange={this.handleChangeImage}
         />
-        {/* <Dialog
-        open={openCheckSizeImageModal}
-        onClose={handleCloseCheckSizeImageModal}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText
-            id="alert-dialog-description"
-            style={{
-              color: "black"
-            }}
-          >
-            Kích thước ảnh quá lớn, vui lòng chọn lại!
+        <Dialog
+          open={this.state.openCheckSizeImageModal}
+          onClose={this.handleCloseCheckSizeImageModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText
+              id="alert-dialog-description"
+              style={{
+                color: "black"
+              }}
+            >
+              Kích thước ảnh quá lớn, vui lòng chọn lại!
           </DialogContentText>
-        </DialogContent>
-      </Dialog> */}
+          </DialogContent>
+        </Dialog>
       </div >
     );
   }

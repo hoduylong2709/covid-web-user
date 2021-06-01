@@ -52,9 +52,13 @@ p {
   font-weight: 300;
 }
 
+.ImageContainer {
+  text-align: center;
+}
+
 .PostImage {
   object-fit: cover;
-  width: 100%;
+  width: 80%;
   height: 500px;
 }
 
