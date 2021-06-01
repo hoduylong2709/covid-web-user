@@ -24,6 +24,15 @@ class UserInfo extends Component {
     this.props.onGetProfileImage();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.profileImage !== prevProps.profileImage) {
+      this.setState({ loading: false });
+    }
+    if (this.props.loading !== prevProps.loading) {
+      this.props.onGetProfileImage();
+    }
+  }
+
   handleChangeImage = (event) => {
     if (event.target.files[0].size > 5000000) {
       this.setState({ openCheckSizeImageModal: true });
@@ -31,10 +40,12 @@ class UserInfo extends Component {
     }
     this.props.onUploadProfileImage(event.target.files[0]);
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.props.onGetProfileImage();
-      this.setState({ loading: false });
-    }, 500);
+    // setTimeout(() => {
+    //   this.props.onGetProfileImage();
+    // }, 2000);
+    // if (this.props.loading !== true) {
+    //   this.props.onGetProfileImage();
+    // }
   }
 
   handleCloseCheckSizeImageModal = () => {
