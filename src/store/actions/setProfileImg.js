@@ -24,7 +24,6 @@ export const getProfileImage = () => {
     axios.get('/User/profile/avatar', config)
       .then(response => {
         dispatch(setProfileImage(response.data.data, response.data.isSuccess));
-        localStorage.setItem('profileImage', response.data.data);
       })
       .catch(error => {
         dispatch(setProfileImageFail(error.response.data.message));

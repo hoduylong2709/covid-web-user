@@ -99,6 +99,7 @@ class Login extends Component {
     this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
     setTimeout(() => {
       if (localStorage.getItem('user') !== null) {
+        this.props.onGetProfileImage();
         this.props.history.push('/');
       }
     }, 1000);
@@ -203,7 +204,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onLogin: (email, password) => dispatch(actions.login(email, password)),
-    onCloseModalErrorLogin: () => dispatch(actions.closeModalErrorLogin())
+    onCloseModalErrorLogin: () => dispatch(actions.closeModalErrorLogin()),
+    onGetProfileImage: () => dispatch(actions.getProfileImage())
   };
 };
 
