@@ -17,7 +17,8 @@ class UserInfo extends Component {
 
   state = {
     loading: false,
-    openCheckSizeImageModal: false
+    openCheckSizeImageModal: false,
+    invalidFile: false
   }
 
   componentDidMount() {
@@ -34,22 +35,24 @@ class UserInfo extends Component {
   }
 
   handleChangeImage = (event) => {
+    if (event.target.files[0].type.substring(0, 5) !== 'image') {
+      this.setState({ invalidFile: true });
+      return;
+    }
     if (event.target.files[0].size > 5000000) {
       this.setState({ openCheckSizeImageModal: true });
       return;
     }
     this.props.onUploadProfileImage(event.target.files[0]);
     this.setState({ loading: true });
-    // setTimeout(() => {
-    //   this.props.onGetProfileImage();
-    // }, 2000);
-    // if (this.props.loading !== true) {
-    //   this.props.onGetProfileImage();
-    // }
   }
 
   handleCloseCheckSizeImageModal = () => {
     this.setState({ openCheckSizeImageModal: false });
+  }
+
+  closeUploadImageModal = () => {
+    this.setState({ invalidFile: false });
   }
 
   render() {
@@ -102,6 +105,23 @@ class UserInfo extends Component {
               }}
             >
               Kích thước ảnh quá lớn, vui lòng chọn lại!
+          </DialogContentText>
+          </DialogContent>
+        </Dialog>
+        <Dialog
+          open={this.state.invalidFile}
+          onClose={this.closeUploadImageModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText
+              id="alert-dialog-description"
+              style={{
+                color: "black"
+              }}
+            >
+              Ảnh tải lên không hợp lệ, vui lòng thử lại!
           </DialogContentText>
           </DialogContent>
         </Dialog>
