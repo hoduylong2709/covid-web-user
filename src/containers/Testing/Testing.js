@@ -112,7 +112,7 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <AssignmentIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Kết quả xét nghiệm: {testingRecord.result}
+                    Kết quả xét nghiệm: {testingRecord.result === 'Positive' ? 'Dương tính' : 'Âm tính'}
                   </Typography>
                 </div>
               </div>

@@ -16,7 +16,7 @@ class DateAndLocationRegistration extends Component {
   state = {
     date: localStorage.getItem('testingDate') ? localStorage.getItem('testingDate') : new Date(),
     location: localStorage.getItem('testingLocation') ? localStorage.getItem('testingLocation') : "",
-    city: localStorage.getItem('testingCity') ? localStorage.getItem('testingCity') : "",
+    city: localStorage.getItem('testingCity') ? localStorage.getItem('testingCity') : "An Giang",
     testingLocationId: null,
     testingCityId: null,
   };
@@ -49,8 +49,12 @@ class DateAndLocationRegistration extends Component {
     return updatedDisableDatesArray.includes(moment(date).format('YYYY-MM-DD'));
   }
 
-  filterTestingLocation = (cityId) => {
-    return this.props.listLocation.filter(location => location.cityId === cityId);
+  filterTestingLocation = (cityName) => {
+    const listLocation = this.props.listLocation.filter(location => location.cityName === cityName);
+    if (listLocation[0]) {
+      localStorage.setItem('testingLocation', listLocation[0].label);
+    }
+    return listLocation;
   }
 
   render() {
@@ -68,9 +72,6 @@ class DateAndLocationRegistration extends Component {
             <h2 className={classes.RegistrationHeader_Title}>Đăng ký xét nghiệm</h2>
           </div>
           <div className={classes.RegistrationBody}>
-            <div className={classes.RegistrationBody_Header}>
-              <h3>Thời gian và địa điểm xét nghiệm</h3>
-            </div>
             <div className={classes.RegistrationBody_Content}>
               <div
                 style={{
@@ -103,8 +104,19 @@ class DateAndLocationRegistration extends Component {
                   <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
                   <Select
                     styles={customStyles}
-                    value={{ label: this.state.location, value: this.state.location }}
-                    options={this.filterTestingLocation(this.state.testingCityId)}
+                    // value={{ label: this.state.location, value: this.state.location }}
+                    value={
+                      {
+                        label: this.state.location ? this.state.location : (
+                          this.filterTestingLocation(this.state.city)[0] ? this.filterTestingLocation(this.state.city)[0].label : null
+                        ),
+                        value: this.state.location ? this.state.location : (
+                          this.filterTestingLocation(this.state.city)[0] ? this.filterTestingLocation(this.state.city)[0].label : null
+                        )
+                      }
+                    }
+
+                    options={this.filterTestingLocation(this.state.city)}
                     onChange={this.handleLocationChange}
                     isDisabled={!this.state.city}
                   />
@@ -114,7 +126,7 @@ class DateAndLocationRegistration extends Component {
                 <h4 style={{ color: "#a19f9f" }}>Chọn thành phố bạn muốn xét nghiệm</h4>
                 <Select
                   styles={customStyles}
-                  value={this.state.city !== "" ? { label: this.state.city, value: this.state.city } : null}
+                  value={{ label: this.state.city, value: this.state.city }}
                   options={this.props.listCity}
                   onChange={this.handleCityChange}
                 />
@@ -131,7 +143,6 @@ class DateAndLocationRegistration extends Component {
                 <Button
                   anotherType="RegisterButton-Next"
                   clicked={() => this.props.history.push("/register-testing-questions")}
-                  // disabled={this.state.testingLocationId === null || this.state.testingCityId === null}
                   disabled={localStorage.getItem('testingLocation') === '' || localStorage.getItem('testingCity') === ''}
                 >Tiếp tục</Button>
               </div>

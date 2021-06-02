@@ -17,7 +17,7 @@ class DateAndLocationTesting extends Component {
 
     if (this.props.locations) {
       listLocation = this.props.locations.map(location => {
-        return { value: location.name, label: location.name, id: location.id, cityId: location.cityId };
+        return { value: location.name, label: location.name, id: location.id, cityId: location.cityId, cityName: location.city['name'] };
       });
     }
 
