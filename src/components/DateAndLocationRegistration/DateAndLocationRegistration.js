@@ -12,6 +12,10 @@ import * as actions from '../../store/actions/index';
 
 import classes from './DateAndLocationRegistration.module.css';
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+
 class DateAndLocationRegistration extends Component {
   state = {
     date: localStorage.getItem('testingDate') ? localStorage.getItem('testingDate') : new Date(),
@@ -19,6 +23,10 @@ class DateAndLocationRegistration extends Component {
     city: localStorage.getItem('testingCity') ? localStorage.getItem('testingCity') : "An Giang",
     testingLocationId: null,
     testingCityId: null,
+    testingTime: this.props.registeringTimes[0].value,
+    testingTimeId: this.props.registeringTimes[0].id,
+    testingTimeLabel: this.props.registeringTimes[0].label,
+    invalidTestingTime: false
   };
 
   handleDateChange = date => {
@@ -33,15 +41,34 @@ class DateAndLocationRegistration extends Component {
     this.setState({ ...this.state, city: value.value, testingCityId: value.id, location: '', testingLocationId: null });
   }
 
+  handleTimeChange = value => {
+    if (moment(this.state.date).format().substring(0, 11) + value.value <= moment().format().substring(0, 19)) {
+      this.setState({ invalidTestingTime: true });
+      return;
+    }
+    this.setState({ ...this.state, testingTime: value.value, testingTimeId: value.id, testingTimeLabel: value.label })
+  }
+
+  handleCloseTimeModal = () => {
+    this.setState({ invalidTestingTime: false });
+  }
+
+  handleNextButton = () => {
+    if (moment(this.state.date).format().substring(0, 11) + this.state.testingTime <= moment().format().substring(0, 19)) {
+      this.setState({ invalidTestingTime: true });
+      return;
+    }
+    this.props.history.push("/register-testing-questions");
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.testingLocationId !== this.state.testingLocationId) {
       this.props.onInitDisableDates(this.state.testingLocationId);
     }
     localStorage.setItem('testingDate', this.state.date);
-    localStorage.setItem('testingLocation', this.state.location);
+    // localStorage.setItem('testingLocation', this.state.location);
     localStorage.setItem('testingCity', this.state.city);
-    console.log('city id', this.state.testingCityId);
-    console.log('location id', this.state.testingLocationId);
+    localStorage.setItem('testingTime', this.state.testingTime);
   }
 
   filterDisableDates = (date) => {
@@ -52,6 +79,7 @@ class DateAndLocationRegistration extends Component {
   filterTestingLocation = (cityName) => {
     const listLocation = this.props.listLocation.filter(location => location.cityName === cityName);
     if (listLocation[0]) {
+      console.log('AAAAAAAAAAAAAA', listLocation[0]);
       localStorage.setItem('testingLocation', listLocation[0].label);
     }
     return listLocation;
@@ -80,6 +108,7 @@ class DateAndLocationRegistration extends Component {
                   gap: '30px'
                 }}
               >
+                {/* date */}
                 <div className={classes.RegistrationBody_Date}>
                   <h4 style={{ color: "#a19f9f" }}>Chọn ngày bạn muốn xét nghiệm</h4>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -100,11 +129,37 @@ class DateAndLocationRegistration extends Component {
                     />
                   </MuiPickersUtilsProvider>
                 </div>
+                {/* time */}
+                <div className={classes.RegistrationBody_Location}>
+                  <h4 style={{ color: "#a19f9f" }}>Chọn thời gian bạn muốn xét nghiệm</h4>
+                  <Select
+                    styles={customStyles}
+                    value={{ label: this.state.testingTimeLabel, value: this.state.testingTime }}
+                    options={this.props.registeringTimes}
+                    onChange={this.handleTimeChange}
+                  />
+                </div>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '30px'
+                }}
+              >
+                <div className={classes.RegistrationBody_Location}>
+                  <h4 style={{ color: "#a19f9f" }}>Chọn thành phố bạn muốn xét nghiệm</h4>
+                  <Select
+                    styles={customStyles}
+                    value={{ label: this.state.city, value: this.state.city }}
+                    options={this.props.listCity}
+                    onChange={this.handleCityChange}
+                  />
+                </div>
                 <div className={classes.RegistrationBody_Location}>
                   <h4 style={{ color: "#a19f9f" }}>Chọn địa điểm bạn muốn xét nghiệm</h4>
                   <Select
                     styles={customStyles}
-                    // value={{ label: this.state.location, value: this.state.location }}
                     value={
                       {
                         label: this.state.location ? this.state.location : (
@@ -122,15 +177,6 @@ class DateAndLocationRegistration extends Component {
                   />
                 </div>
               </div>
-              <div className={classes.RegistrationBody_Location}>
-                <h4 style={{ color: "#a19f9f" }}>Chọn thành phố bạn muốn xét nghiệm</h4>
-                <Select
-                  styles={customStyles}
-                  value={{ label: this.state.city, value: this.state.city }}
-                  options={this.props.listCity}
-                  onChange={this.handleCityChange}
-                />
-              </div>
             </div>
             <div className={classes.RegistrationBody_Buttons}>
               <div className={classes.CancelButton}>
@@ -142,13 +188,33 @@ class DateAndLocationRegistration extends Component {
               <div className={classes.NextButton}>
                 <Button
                   anotherType="RegisterButton-Next"
-                  clicked={() => this.props.history.push("/register-testing-questions")}
-                  disabled={localStorage.getItem('testingLocation') === '' || localStorage.getItem('testingCity') === ''}
+                  // clicked={() => this.props.history.push("/register-testing-questions")}
+                  clicked={this.handleNextButton}
+                  disabled={localStorage.getItem('testingLocation') === null}
                 >Tiếp tục</Button>
               </div>
             </div>
           </div>
         </div>
+
+        <Dialog
+          open={this.state.invalidTestingTime}
+          onClose={this.handleCloseTimeModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText
+              id="alert-dialog-description"
+              style={{
+                color: "black"
+              }}
+            >
+              Thời gian xét nghiệm không hợp lệ, vui lòng chọn lại!
+          </DialogContentText>
+          </DialogContent>
+        </Dialog>
+
       </div>
     );
   }

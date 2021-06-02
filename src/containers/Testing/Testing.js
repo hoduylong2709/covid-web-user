@@ -48,13 +48,13 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <EventNoteIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Ngày đăng ký xét nghiệm: {moment(testingRecord.registerDate).format('DD-MM-YYYY')}
+                    Ngày đăng ký xét nghiệm: {moment(testingRecord.registerDate).format('DD-MM-YYYY')} {moment(testingRecord.registerDate).format('LT')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
                   <EventNoteIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Ngày xét nghiệm: {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
+                    Ngày xét nghiệm: {moment(testingRecord.testingDate).format('DD-MM-YYYY')} {moment(testingRecord.testingDate).format('LT')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
@@ -88,7 +88,7 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <EventNoteIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Ngày xét nghiệm: {moment(testingRecord.testingDate).format('DD-MM-YYYY')}
+                    Ngày xét nghiệm: {moment(testingRecord.testingDate).format('DD-MM-YYYY')} {moment(testingRecord.testingDate).format('LT')}
                   </Typography>
                 </div>
                 <div className={classes.InfoWrapper}>
@@ -112,7 +112,7 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <AssignmentIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Kết quả xét nghiệm: {testingRecord.result === 'Positive' ? 'Dương tính' : 'Âm tính'}
+                    Kết quả xét nghiệm: {testingRecord.result === 'Positive' ? 'Dương tính' : (testingRecord.result === 'Negative' ? 'Âm tính' : 'Chưa có kết quả')}
                   </Typography>
                 </div>
               </div>

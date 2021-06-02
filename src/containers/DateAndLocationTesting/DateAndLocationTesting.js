@@ -14,6 +14,14 @@ class DateAndLocationTesting extends Component {
   render() {
     let listLocation = [{ value: 'Loading...', label: 'Loading...', id: null, cityId: null }];
     let listCity = [{ value: 'Loading...', label: 'Loading...', id: null }];
+    const registeringTimes = [
+      { value: '08:00:00', label: '8 AM', id: 1 },
+      { value: '09:00:00', label: '9 AM', id: 2 },
+      { value: '10:00:00', label: '10 AM', id: 3 },
+      { value: '14:00:00', label: '2 PM', id: 4 },
+      { value: '15:00:00', label: '3 PM', id: 5 },
+      { value: '16:00:00', label: '4 PM', id: 6 },
+    ];
 
     if (this.props.locations) {
       listLocation = this.props.locations.map(location => {
@@ -29,7 +37,11 @@ class DateAndLocationTesting extends Component {
 
     return (
       <Layout>
-        <DateAndLocationRegistration listLocation={listLocation} listCity={listCity} />
+        <DateAndLocationRegistration
+          listLocation={listLocation}
+          listCity={listCity}
+          registeringTimes={registeringTimes}
+        />
       </Layout>
     );
   }

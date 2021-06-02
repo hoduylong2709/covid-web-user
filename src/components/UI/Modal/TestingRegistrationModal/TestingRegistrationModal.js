@@ -14,7 +14,6 @@ class TestingRegistrationModal extends Component {
     this.props.history.push('/testing');
     this.props.onCloseModalTestingRegistration();
     localStorage.setItem('testingDate', new Date());
-    localStorage.setItem('testingLocation', '');
     localStorage.setItem('testingCity', '');
     localStorage.setItem('isAsthma', false);
     localStorage.setItem('isPregnancy', false);
@@ -28,6 +27,7 @@ class TestingRegistrationModal extends Component {
     localStorage.setItem('isShortnessOfBreath', false);
     localStorage.setItem('isRunningNose', false);
     localStorage.setItem('isTired', false);
+    localStorage.removeItem('testingLocation');
   }
 
   render() {

@@ -21,8 +21,8 @@ class Payment extends Component {
     const location = this.props.listLocation.find(ele => ele.name === localStorage.getItem('testingLocation'));
     const testingLocationId = location.id;
     const registerDate = moment(new Date()).format();
-    const testingDate = moment(localStorage.getItem('testingDate')).format();
-    console.log('HDL', testingLocationId, registerDate, testingDate);
+    const testingDate = moment(localStorage.getItem('testingDate')).format().substring(0, 11) + localStorage.getItem('testingTime');
+    console.log('HDL', testingDate);
     this.props.onTestingRegistration(testingLocationId, registerDate, testingDate);
     const asthma = convertStringToBoolean(localStorage.getItem('isAsthma'));
     const pregnancy = convertStringToBoolean(localStorage.getItem('isPregnancy'));
