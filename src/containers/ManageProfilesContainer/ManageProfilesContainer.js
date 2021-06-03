@@ -8,10 +8,28 @@ import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import Divider from '@material-ui/core/Divider';
 import moment from 'moment';
+import Avatar from '@material-ui/core/Avatar';
+import qrCodeImage from '../../assets/images/qrcode.png';
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import QRCode from "react-qr-code";
 
 class ManageProfilesContainer extends Component {
+  state = {
+    openQRCodeModal: false
+  }
+
   componentDidMount() {
     this.props.onGetUserProfiles();
+  }
+
+  handleClickQRCodeButton = () => {
+    this.setState({ openQRCodeModal: true });
+  }
+
+  closeQRCodeModal = () => {
+    this.setState({ openQRCodeModal: false });
   }
 
   render() {
@@ -21,6 +39,8 @@ class ManageProfilesContainer extends Component {
     let idNo = 'N/A';
     let nationality = 'N/A';
     let address = 'N/A';
+
+    let qrData = JSON.stringify({ email: localStorage.getItem('email') });
 
     if (this.props.userProfiles) {
       if (this.props.userProfiles['firstName']) {
@@ -71,7 +91,17 @@ class ManageProfilesContainer extends Component {
             </div>
             <div className={classes.MPContainer_Body}>
               <div className={classes.UserName}>
-                <Typography variant="body1">{localStorage.getItem('user')}</Typography>
+                <Typography variant="h6">{localStorage.getItem('user')}</Typography>
+                <button
+                  className={classes.QRCodeButton}
+                  onClick={this.handleClickQRCodeButton}
+                >
+                  <Avatar
+                    variant="square"
+                    src={qrCodeImage}
+                  >
+                  </Avatar>
+                </button>
               </div>
               <Divider style={{ marginLeft: '35px', marginRight: '35px' }} />
               <div
@@ -152,6 +182,34 @@ class ManageProfilesContainer extends Component {
               </div>
             </div>
           </div>
+          <Dialog
+            open={this.state.openQRCodeModal}
+            onClose={this.closeQRCodeModal}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-description"
+                style={{
+                  color: "black",
+                  textAlign: 'center'
+                }}
+              >
+                Đây là mã QR Code của bạn. Bạn có thể sử dụng nó để xác nhận lịch trình di chuyển tại sân bay
+          </DialogContentText>
+              <div
+                style={{
+                  width: 'fit-content',
+                  margin: '15px auto'
+                }}
+              >
+                <QRCode
+                  value={qrData}
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </Layout>
     );

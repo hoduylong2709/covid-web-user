@@ -24,9 +24,13 @@
 }
 
 .UserName {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: 30px;
   margin-bottom: 15px;
   margin-left: 80px;
+  margin-right: 80px;
 }
 
 .Email {
@@ -42,4 +46,14 @@
 .Buttons {
   margin-left: 80px;
   max-width: 120px;
+}
+
+.QRCodeButton {
+  height: fit-content;
+  border: none;
+  background: none;
+}
+
+.QRCodeButton:hover {
+  cursor: pointer;
 }

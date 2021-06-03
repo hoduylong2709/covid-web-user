@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './UserInfo.module.css';
 import Typography from '@material-ui/core/Typography';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import PublishIcon from '@material-ui/icons/Publish';
 import * as actions from '../../store/actions/index';
 
 import Dialog from "@material-ui/core/Dialog";
@@ -79,7 +79,7 @@ class UserInfo extends Component {
           className={classes.UploadImageButton}
           onClick={() => this.myRef.current.click()}
         >
-          <AddAPhotoIcon
+          <PublishIcon
             style={{ color: '#07627e', transform: 'scale(1.5)' }}
           />
         </button>
