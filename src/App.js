@@ -21,6 +21,7 @@ import EditProfiles from './containers/ManageProfilesContainer/EditProfiles/Edit
 import ChangePasswordContainer from './containers/ChangePasswordContainer/ChangePasswordContainer';
 import ItineraryHistory from './containers/ItineraryHistory/ItineraryHistory';
 import PrivateRoute from './privateRoute';
+import NotFound from './components/NotFound/NotFound';
 
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
           <PrivateRoute path="/user-profiles-manage" exact component={ManageProfilesContainer} />
           <PrivateRoute path="/edit-profiles" exact component={EditProfiles} />
           <PrivateRoute path="/change-password" exact component={ChangePasswordContainer} />
+          <Route component={NotFound} />
         </Switch>
       </Auxx>
     );
