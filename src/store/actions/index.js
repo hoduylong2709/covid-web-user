@@ -44,7 +44,8 @@ export {
   closeModalCheckinLocation
 } from './locationCheckin';
 export {
-  getLocationCheckin
+  getLocationCheckin,
+  setPaginationCheckinHistory
 } from './getLocationCheckin';
 export {
   getCityList

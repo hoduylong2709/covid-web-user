@@ -26,6 +26,8 @@ const MyPagination = (props) => {
     event.preventDefault();
     if (props.isPaginationForItinerary) {
       props.onSetPaginationItineraryHistory(currentPage, props.pageSize);
+    } else if (props.isPaginationForCheckin) {
+      props.onSetPaginationCheckinHistory(currentPage, props.pageSizeCheckin)
     } else {
       props.onSetPagination(currentPage, 10);
     }
@@ -41,7 +43,8 @@ const MyPagination = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
     onSetPagination: (pageNumber, pageSize) => dispatch(actions.setPagination(pageNumber, pageSize)),
-    onSetPaginationItineraryHistory: (pageNumber, pageSize) => dispatch(actions.setPaginationItineraryHistory(pageNumber, pageSize))
+    onSetPaginationItineraryHistory: (pageNumber, pageSize) => dispatch(actions.setPaginationItineraryHistory(pageNumber, pageSize)),
+    onSetPaginationCheckinHistory: (pageNumber, pageSize) => dispatch(actions.setPaginationCheckinHistory(pageNumber, pageSize)),
   };
 };
 

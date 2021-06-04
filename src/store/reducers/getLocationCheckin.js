@@ -5,7 +5,11 @@ const initialState = {
   checkinList: [],
   isSuccess: false,
   error: null,
-  loading: false
+  loading: false,
+  pageNumber: null,
+  pageSize: null,
+  totalPages: null,
+  totalRecords: null
 };
 
 const getLocationCheckinStart = (state, action) => {
@@ -17,7 +21,11 @@ const getLocationCheckinSuccess = (state, action) => {
     checkinList: action.checkinList,
     isSuccess: action.isSuccess,
     error: null,
-    loading: false
+    loading: false,
+    pageNumber: action.pageNumber,
+    pageSize: action.pageSize,
+    totalPages: action.totalPages,
+    totalRecords: action.totalRecords
   });
 }
 

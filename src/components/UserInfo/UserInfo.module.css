@@ -28,12 +28,15 @@
 }
 
 .UploadImageButton {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #3c92ad;
   margin: auto;
   height: fit-content;
   border: none;
-  background: none;
 }
 
 .UploadImageButton:hover {
   cursor: pointer;
+  background: #286477;
 }

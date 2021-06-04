@@ -20,6 +20,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 
 import ErrorIcon from '@material-ui/icons/Error';
 
+import MyPagination from '../../components/UI/Pagination/Pagination';
+
 class LocationCheckinHistory extends Component {
   state = {
     locationList: [],
@@ -47,6 +49,10 @@ class LocationCheckinHistory extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.checkinList.length !== prevState.locationList.length && this.props.errorDelete) {
       this.setState({ locationList: this.props.checkinList });
+    }
+    if (this.props.loadingDelete !== prevProps.loadingDelete) {
+      console.log("Ho Duy Long");
+      this.props.onGetLocationCheckin();
     }
   }
 
@@ -109,6 +115,16 @@ class LocationCheckinHistory extends Component {
 
   render() {
     let checkinListView = <Spinner />;
+
+    let pagination = null;
+
+    if (this.props.checkinList) {
+      pagination = <MyPagination
+        totalPages={this.props.totalPages}
+        isPaginationForCheckin={true}
+        pageSizeCheckin={4}
+      />
+    }
 
     if (this.state.locationList) {
       checkinListView = this.state.locationList
@@ -176,12 +192,13 @@ class LocationCheckinHistory extends Component {
           <div
             style={{
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              margin: '0px 323px 20px'
+              flexDirection: 'row',
+              margin: '0 225px',
+              justifyContent: 'space-around'
             }}
           >
-            <a href="/check-in">Quay lại</a>
+            <a href="/check-in" style={{ marginTop: '21px' }}>Quay lại</a>
+            {pagination}
           </div>
           <ConfirmDelete
             openConfirmation={this.state.openConfirmation}
@@ -255,7 +272,10 @@ const mapStateToProps = state => {
     isSuccessEdit: state.editLocationCheckin.isSuccess,
     errorEdit: state.editLocationCheckin.error,
     loadingEdit: state.editLocationCheckin.loading,
-    showModalEdit: state.editLocationCheckin.showModal
+    showModalEdit: state.editLocationCheckin.showModal,
+    pageSize: state.getLocationCheckin.pageSize,
+    totalPages: state.getLocationCheckin.totalPages,
+    totalRecords: state.getLocationCheckin.totalRecords
   };
 };
 

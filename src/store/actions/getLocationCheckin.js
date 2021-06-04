@@ -7,11 +7,15 @@ export const getLocationCheckinStart = () => {
   };
 }
 
-export const getLocationCheckinSuccess = (checkinList, isSuccess) => {
+export const getLocationCheckinSuccess = (checkinList, isSuccess, pageNumber, pageSize, totalPages, totalRecords) => {
   return {
     type: actionTypes.GET_LOCATION_CHECKIN_SUCCESS,
     checkinList,
-    isSuccess
+    isSuccess,
+    pageNumber: pageNumber,
+    pageSize: pageSize,
+    totalPages: totalPages,
+    totalRecords: totalRecords
   };
 }
 
@@ -28,12 +32,27 @@ export const getLocationCheckin = () => {
     const config = {
       headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
     };
-    axios.get('/User/itinerary/location-checkin', config)
+    axios.get('/User/itinerary/location-checkin?PageNumber=1&PageSize=4', config)
       .then(response => {
-        dispatch(getLocationCheckinSuccess(response.data.data, response.data.isSuccess));
+        dispatch(getLocationCheckinSuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })
       .catch(error => {
         dispatch(getLocationCheckinFail(error.response.data.message));
+      });
+  };
+}
+
+export const setPaginationCheckinHistory = (pageNumber, pageSize) => {
+  return dispatch => {
+    const config = {
+      headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
+    };
+    axios.get(`/User/itinerary/location-checkin?PageNumber=${pageNumber}&PageSize=${pageSize}`, config)
+      .then(response => {
+        dispatch(getLocationCheckinSuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 }

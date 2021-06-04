@@ -80,7 +80,7 @@ class UserInfo extends Component {
           onClick={() => this.myRef.current.click()}
         >
           <PublishIcon
-            style={{ color: '#07627e', transform: 'scale(1.5)' }}
+            style={{ color: 'white', transform: 'scale(1.5)' }}
           />
         </button>
         <input
