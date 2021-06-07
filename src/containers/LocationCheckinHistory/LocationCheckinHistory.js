@@ -50,10 +50,10 @@ class LocationCheckinHistory extends Component {
     if (this.props.checkinList.length !== prevState.locationList.length && this.props.errorDelete) {
       this.setState({ locationList: this.props.checkinList });
     }
-    if (this.props.loadingDelete !== prevProps.loadingDelete) {
-      console.log("Ho Duy Long");
-      this.props.onGetLocationCheckin();
-    }
+    // if (this.props.loadingDelete !== prevProps.loadingDelete) {
+    //   console.log("Ho Duy Long");
+    //   this.props.onGetLocationCheckin();
+    // }
   }
 
   handleDeleteButton = (id) => {
