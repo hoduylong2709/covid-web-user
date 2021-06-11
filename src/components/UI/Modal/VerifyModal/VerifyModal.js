@@ -51,12 +51,12 @@ class VerifyModal extends Component {
                 clicked={() => this.props.onVerifyEmail(this.props.email, this.state.inputValue)}
               >Xác nhận</Button>
             </div>
-            <div className={classes.CancelButton}>
+            {/* <div className={classes.CancelButton}>
               <Button
                 btnType="Danger"
                 clicked={this.handleCancelButton}
               >Đóng</Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </Modal>

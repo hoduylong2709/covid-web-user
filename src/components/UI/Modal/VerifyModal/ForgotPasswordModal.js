@@ -204,12 +204,12 @@ class ForgotPasswordModal extends Component {
                 clicked={this.submitHandler}
               >Xác nhận</Button>
             </div>
-            <div className={classes.CancelButton}>
+            {/* <div className={classes.CancelButton}>
               <Button
                 btnType="Danger"
                 clicked={() => this.props.onCloseRecoverProcessModal()}
               >Hủy</Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </Modal>
