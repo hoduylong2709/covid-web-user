@@ -35,10 +35,12 @@ class DateAndLocationRegistration extends Component {
 
   handleLocationChange = value => {
     this.setState({ ...this.state, location: value.value, testingLocationId: value.id });
+    localStorage.setItem('testingLocation', value.value);
   }
 
   handleCityChange = value => {
     this.setState({ ...this.state, city: value.value, testingCityId: value.id, location: '', testingLocationId: null });
+    localStorage.removeItem('testingLocation');
   }
 
   handleTimeChange = value => {
@@ -66,7 +68,6 @@ class DateAndLocationRegistration extends Component {
       this.props.onInitDisableDates(this.state.testingLocationId);
     }
     localStorage.setItem('testingDate', this.state.date);
-    // localStorage.setItem('testingLocation', this.state.location);
     localStorage.setItem('testingCity', this.state.city);
     localStorage.setItem('testingTime', this.state.testingTime);
   }
@@ -78,8 +79,7 @@ class DateAndLocationRegistration extends Component {
 
   filterTestingLocation = (cityName) => {
     const listLocation = this.props.listLocation.filter(location => location.cityName === cityName);
-    if (listLocation[0]) {
-      console.log('AAAAAAAAAAAAAA', listLocation[0]);
+    if (listLocation[0] && !localStorage.getItem('testingLocation')) {
       localStorage.setItem('testingLocation', listLocation[0].label);
     }
     return listLocation;
@@ -211,7 +211,7 @@ class DateAndLocationRegistration extends Component {
               }}
             >
               Thời gian xét nghiệm không hợp lệ, vui lòng chọn lại!
-          </DialogContentText>
+            </DialogContentText>
           </DialogContent>
         </Dialog>
 
