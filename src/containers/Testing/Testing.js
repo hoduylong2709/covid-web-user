@@ -16,6 +16,7 @@ import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import LoopIcon from '@material-ui/icons/Loop';
 import PaymentIcon from '@material-ui/icons/Payment';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import MyPagination from '../../components/UI/Pagination/Pagination';
 
 class Testing extends Component {
   state = {
@@ -36,10 +37,20 @@ class Testing extends Component {
   }
 
   render() {
+    let pagination = null;
+
+    if (this.props.testingRecords) {
+      pagination = <MyPagination
+        totalPages={this.props.totalPages}
+        isPaginationForTestingInfo={true}
+        pageSizeTestingInfo={4}
+      />
+    }
+
     let testingRecordsView = <Spinner />;
 
     if (this.props.testingRecords) {
-      let updatedTestingRecords = this.props.testingRecords.slice(0, 3);
+      let updatedTestingRecords = this.props.testingRecords;
       if (this.state.infoButtonClicked) {
         testingRecordsView = updatedTestingRecords.map(testingRecord => {
           return (
@@ -73,7 +84,7 @@ class Testing extends Component {
                   <CheckCircleIcon fontSize="large" style={{ color: 'green' }} />
                   <Typography variant="body1" style={{ padding: '5px 5px', fontWeight: '800' }}>
                     Đã đăng ký
-                </Typography>
+                  </Typography>
                 </div>
               </div>
             </div>
@@ -157,6 +168,13 @@ class Testing extends Component {
               {testingRecordsView}
             </div>
           </div>
+          <div
+            style={{
+              margin: 'auto 231px'
+            }}
+          >
+            {pagination}
+          </div>
         </div>
       </Layout>
     );
@@ -168,7 +186,9 @@ const mapStateToProps = state => {
     testingRecords: state.testingInfo.testingRecords,
     isSuccess: state.testingInfo.isSuccess,
     error: state.testingInfo.error,
-    loading: state.testingInfo.loading
+    loading: state.testingInfo.loading,
+    pageSize: state.testingInfo.pageSize,
+    totalPages: state.testingInfo.totalPages
   };
 };
 

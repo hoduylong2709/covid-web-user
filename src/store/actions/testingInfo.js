@@ -7,11 +7,15 @@ export const getTestingInfoStart = () => {
   };
 }
 
-export const getTestingInfoSuccess = (testingRecords, isSuccess) => {
+export const getTestingInfoSuccess = (testingRecords, isSuccess, pageNumber, pageSize, totalPages, totalRecords) => {
   return {
     type: actionTypes.GET_TESTING_INFORMATION_SUCCESS,
     testingRecords,
-    isSuccess
+    isSuccess,
+    pageNumber: pageNumber,
+    pageSize: pageSize,
+    totalPages: totalPages,
+    totalRecords: totalRecords
   };
 }
 
@@ -28,12 +32,27 @@ export const getTestingInfo = () => {
     const config = {
       headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
     };
-    axios.get('/User/testing', config)
+    axios.get('/User/testing?PageNumber=1&PageSize=4', config)
       .then(response => {
-        dispatch(getTestingInfoSuccess(response.data.data, response.data.isSuccess));
+        dispatch(getTestingInfoSuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })
       .catch(error => {
         dispatch(getTestingInfoFail(error.response.data.message));
+      });
+  };
+}
+
+export const setPaginationTestingInfo = (pageNumber, pageSize) => {
+  return dispatch => {
+    const config = {
+      headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
+    };
+    axios.get(`/User/testing?PageNumber=${pageNumber}&PageSize=${pageSize}`, config)
+      .then(response => {
+        dispatch(getTestingInfoSuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 }

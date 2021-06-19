@@ -37,7 +37,8 @@ export {
   initDisableDates
 } from './disableDates';
 export {
-  getTestingInfo
+  getTestingInfo,
+  setPaginationTestingInfo
 } from './testingInfo';
 export {
   checkinLocation,

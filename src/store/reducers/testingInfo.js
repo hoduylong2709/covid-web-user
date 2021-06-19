@@ -5,7 +5,11 @@ const initialState = {
   testingRecords: null,
   isSuccess: false,
   error: null,
-  loading: false
+  loading: false,
+  pageNumber: null,
+  pageSize: null,
+  totalPages: null,
+  totalRecords: null
 };
 
 const getTestingInfoStart = (state, action) => {
@@ -17,7 +21,11 @@ const getTestingInfoSuccess = (state, action) => {
     testingRecords: action.testingRecords,
     isSuccess: action.isSuccess,
     error: null,
-    loading: false
+    loading: false,
+    pageNumber: action.pageNumber,
+    pageSize: action.pageSize,
+    totalPages: action.totalPages,
+    totalRecords: action.totalRecords
   });
 }
 
