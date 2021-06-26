@@ -15,7 +15,11 @@ class HomePage extends Component {
     let pagination = null;
 
     if (this.props.news) {
-      pagination = <MyPagination totalPages={this.props.news.totalPages} />
+      pagination = <MyPagination
+        totalPages={this.props.news.totalPages}
+        isPaginationForNews={true}
+        pageSizeNews={9}
+      />
     }
 
     return (

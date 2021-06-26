@@ -30,8 +30,8 @@ const MyPagination = (props) => {
       props.onSetPaginationCheckinHistory(currentPage, props.pageSizeCheckin);
     } else if (props.isPaginationForTestingInfo) {
       props.onSetPaginationTestingInfo(currentPage, props.pageSizeTestingInfo);
-    } else {
-      props.onSetPagination(currentPage, 10);
+    } else if (props.isPaginationForNews) {
+      props.onSetPagination(currentPage, props.pageSizeNews);
     }
   };
 
