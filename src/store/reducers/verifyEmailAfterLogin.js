@@ -29,7 +29,9 @@ const verifyAfterLoginFail = (state, action) => {
 
 const closeVerifyModalAfterLogin = (state, action) => {
   return updateObject(state, {
-    isVerifying: null
+    isVerifying: null,
+    verifySuccess: false,
+    verifyError: null,
   });
 };
 

@@ -121,7 +121,7 @@ class Signup extends Component {
     }
 
     if (rules.isValidPassword) {
-      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm;
+      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/gm;
       isValid = pattern.test(value) && isValid;
     }
 
@@ -198,7 +198,7 @@ class Signup extends Component {
         input = (
           <div>
             <p className={classes.PasswordRequirement}>Mật khẩu phải tuân theo quy tắc
-            (Chứa ít nhất 8 ký tự, 1 ký tự thường, 1 ký tự in hoa, 1 chữ số, và 1 ký tự đặc biệt)
+              (Chứa ít nhất 8 ký tự, 1 ký tự thường, 1 ký tự in hoa, 1 chữ số, và 1 ký tự đặc biệt @$!%*?&^#)
             </p>
             <Input
               key={formElement.id}

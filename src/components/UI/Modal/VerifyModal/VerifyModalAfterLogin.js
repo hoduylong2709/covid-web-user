@@ -17,11 +17,9 @@ class VerifyModalAfterLogin extends Component {
   };
 
   handleCancelButton = (event) => {
-    event.preventDefault();
     localStorage.clear();
-    setTimeout(() => {
-      this.props.history.push("/");
-    }, 1000);
+    this.props.onCloseVerifyModalAfterLogin();
+    this.props.history.push("/");
   }
 
   render() {
@@ -47,15 +45,25 @@ class VerifyModalAfterLogin extends Component {
             {verifyResult}
           </div>
           <div className={classes.Button}>
-            <div className={classes.SubmitButton}>
+            <div
+              style={{
+                marginRight: '3px'
+              }}
+            >
               <Button
                 btnType="Success"
+                anotherType="VerifyAfterLoginSubmitButton"
                 clicked={() => this.props.onVerifyEmailAfterLogin(this.props.email, this.state.inputValue)}
               >Xác nhận</Button>
             </div>
-            <div className={classes.CancelButton}>
+            <div
+              style={{
+                marginLeft: '3px'
+              }}
+            >
               <Button
                 btnType="Danger"
+                anotherType="VerifyAfterLoginCancelButton"
                 clicked={this.handleCancelButton}
               >Hủy</Button>
             </div>

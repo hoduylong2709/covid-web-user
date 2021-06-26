@@ -132,7 +132,7 @@ class Login extends Component {
         invalid={!formElement.config.valid}
         shouldValidate={formElement.config.validation}
         touched={formElement.config.touched}
-        valueType={formElement.id}
+        valueType={formElement.config.elementName}
         changed={(event) => this.inputChangedHandler(event, formElement.id)}
       />;
 
