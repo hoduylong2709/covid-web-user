@@ -25,7 +25,7 @@ class DateAndLocationRegistration extends Component {
     testingCityId: null,
     testingTime: localStorage.getItem('testingTime') ? localStorage.getItem('testingTime') : this.props.registeringTimes[0].value,
     testingTimeId: this.props.registeringTimes[0].id,
-    testingTimeLabel: this.props.registeringTimes.find(timeObj => timeObj.value === localStorage.getItem('testingTime')).label,
+    testingTimeLabel: localStorage.getItem('testingTime') ? this.props.registeringTimes.find(timeObj => timeObj.value === localStorage.getItem('testingTime')).label : '8 AM',
     invalidTestingTime: false
   };
 
