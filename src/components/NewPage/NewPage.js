@@ -6,6 +6,8 @@ import NewLayout from '../../hoc/Layout/NewLayout';
 
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 
+import moment from 'moment';
+
 class NewPage extends Component {
   render() {
     const idOfNew = this.props.match.params.id;
@@ -23,12 +25,17 @@ class NewPage extends Component {
           <div className={classes.NewContainer}>
             <div className={classes.HeaderContainer}>
               <div className={classes.HeaderContainer__date}>
-                <span className={classes.Date}>April 6, 2021</span>
+                <span className={classes.Date}>{moment(newPost.createdAt).format('DD-MM-YYYY')}</span>
               </div>
               <h2 className={classes.HeaderContainer__title}>{newPost.title}</h2>
             </div>
             <div className={classes.ContentContainer}>
-              <div dangerouslySetInnerHTML={{ __html: newPost.content }} />
+              <div
+                style={{
+                  textAlign: 'justify'
+                }}
+                dangerouslySetInnerHTML={{ __html: newPost.content }}
+              />
             </div>
           </div>
           <div className={classes.Footer}>
