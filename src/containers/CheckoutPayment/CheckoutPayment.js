@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import classes from './CheckoutPayment.module.css';
 import Layout from '../../hoc/Layout/Layout';
 import Payment from '../../components/Payment/Payment';
 import * as actions from '../../store/actions/index';
