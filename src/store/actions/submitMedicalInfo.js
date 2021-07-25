@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const submitMedicalInfoStart = () => {
   return {
@@ -61,7 +62,8 @@ export const submitMedicalInfo = (
         }, 2000);
       })
       .catch(error => {
-        dispatch(submitMedicalInfoFail(error.response.data.message));
+        // dispatch(submitMedicalInfoFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, submitMedicalInfoFail);
       });
   };
 }

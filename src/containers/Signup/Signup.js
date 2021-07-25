@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -246,6 +247,7 @@ class Signup extends Component {
           email={this.state.controls.email.value}
         >
         </VerifyModal>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </div>
     );
   };

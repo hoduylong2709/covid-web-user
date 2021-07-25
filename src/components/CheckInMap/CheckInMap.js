@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 import classes from './CheckInMap.module.css';
 
@@ -313,10 +314,11 @@ class CheckInMap extends Component {
                 }}
               >
                 Thời gian check-in không hợp lệ, xin vui lòng chọn lại!
-          </DialogContentText>
+              </DialogContentText>
             </DialogContent>
           </DialogContent>
         </Dialog>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </div>
     );
   }

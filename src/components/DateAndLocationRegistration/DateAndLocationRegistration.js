@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
@@ -214,7 +215,7 @@ class DateAndLocationRegistration extends Component {
             </DialogContentText>
           </DialogContent>
         </Dialog>
-
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </div>
     );
   }

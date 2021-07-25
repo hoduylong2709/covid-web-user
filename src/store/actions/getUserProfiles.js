@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const getUserProfilesStart = () => {
   return {
@@ -33,7 +34,8 @@ export const getUserProfiles = () => {
         dispatch(getUserProfilesSuccess(response.data.isSuccess, response.data.data));
       })
       .catch(error => {
-        dispatch(getUserProfilesFail(error.response.data.message));
+        // dispatch(getUserProfilesFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, getUserProfilesFail);
       });
   };
 }

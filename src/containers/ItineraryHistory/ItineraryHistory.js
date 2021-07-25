@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import Layout from '../../hoc/Layout/Layout';
 import classes from './ItineraryHistory.module.css';
 import * as actions from '../../store/actions/index';
@@ -404,12 +405,15 @@ class ItineraryHistory extends Component {
                 }}
               >
                 Xóa lịch trình di chuyển thất bại, xin vui lòng thử lại!
-          </DialogContentText>
+              </DialogContentText>
             </DialogContent>
           </Dialog>
           {mainView}
 
         </div>
+        {this.props.errorDelete === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
+        {this.props.errorEdit === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

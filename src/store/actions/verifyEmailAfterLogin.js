@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const verifyAfterLoginStart = () => {
   return {
@@ -35,7 +36,8 @@ export const verifyEmailAfterLogin = (email, code) => {
         window.location.reload();
       })
       .catch(error => {
-        dispatch(verifyAfterLoginFail(error.response.data.message));
+        // dispatch(verifyAfterLoginFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, verifyAfterLoginFail);
       });
   };
 };

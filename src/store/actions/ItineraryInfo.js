@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const submitItineraryInfoStart = () => {
   return {
@@ -52,7 +53,8 @@ export const submitItineraryInfo = (
         dispatch(submitItineraryInfoSuccess(response.data.isSuccess, response.data.data.mustTesting));
       })
       .catch(error => {
-        dispatch(submitItineraryInfoFail(error.response.data.message));
+        // dispatch(submitItineraryInfoFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, submitItineraryInfoFail);
       });
   };
 }

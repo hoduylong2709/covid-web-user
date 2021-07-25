@@ -40,3 +40,14 @@ export const isConflictItineray = (itineraryList, editItineraryInfo) => {
   }
   return false;
 }
+
+export const handleTimeoutRequest = (dispatch, error, doSomethingFailed) => {
+  if (error.response) {
+    dispatch(doSomethingFailed(error.response.data.message))
+  } else if (error.code === 'ECONNABORTED') {
+    dispatch(doSomethingFailed('TIMEOUT_REQUEST'));
+  } else {
+    console.log(error);
+    dispatch(doSomethingFailed('TIMEOUT_REQUEST'));
+  }
+}

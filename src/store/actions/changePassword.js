@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const changePasswordStart = () => {
   return {
@@ -36,7 +37,8 @@ export const changePassword = (oldPassword, newPassword) => {
         dispatch(changePasswordSuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(changePasswordFail(error.response.data.message))
+        // dispatch(changePasswordFail(error.response.data.message))
+        handleTimeoutRequest(dispatch, error, changePasswordFail)
       });
   };
 }

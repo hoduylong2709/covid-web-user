@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const loginStart = () => {
   return {
@@ -51,7 +52,8 @@ export const login = (email, password) => {
         localStorage.setItem('email', response.data.data.email);
       })
       .catch(error => {
-        dispatch(loginFail(error.response.data.message));
+        // dispatch(loginFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, loginFail);
       });
   };
 };

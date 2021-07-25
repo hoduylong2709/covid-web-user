@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const signupStart = () => {
   return {
@@ -37,7 +38,8 @@ export const signup = (email, password, firstName, lastName) => {
         dispatch(signupSuccess(response.data.isSuccess, response.data.accountId, response.data.isVerified));
       })
       .catch(error => {
-        dispatch(signupFail(error.response.data.message));
+        // dispatch(signupFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, signupFail);
       });
   };
 };

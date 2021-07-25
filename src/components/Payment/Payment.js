@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import moment from 'moment';
 
 import classes from './Payment.module.css';
@@ -110,6 +111,8 @@ class Payment extends Component {
           }
           hasError={this.props.error}
         ></TestingRegistrationModal>
+        {this.props.errorMI === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </div>
     );
   }

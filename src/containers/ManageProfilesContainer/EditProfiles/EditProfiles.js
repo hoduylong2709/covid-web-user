@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import Layout from '../../../hoc/Layout/Layout';
 import classes from './EditProfiles.module.css';
 import Input from '../../../components/UI/Input/Input';
@@ -301,6 +302,7 @@ class EditProfiles extends Component {
             ></CheckinLocationModal>
           </div>
         </div>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const recoverPasswordStart = () => {
   return {
@@ -40,8 +41,9 @@ export const recoverPassword = (recoverEmail) => {
         dispatch(recoverPasswordSuccess(response.data.isSuccess, response.data.message));
       })
       .catch(error => {
-        console.log(error.response);
-        dispatch(recoverPasswordFailed(error.response.data.message));
+        // console.log(error.response);
+        // dispatch(recoverPasswordFailed(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, recoverPasswordFailed);
       });
   };
 }

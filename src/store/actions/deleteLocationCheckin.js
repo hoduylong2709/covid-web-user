@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const deleteLocationCheckinStart = () => {
   return {
@@ -32,7 +33,8 @@ export const deleteLocationCheckin = (locationId) => {
         dispatch(deleteLocationCheckinSuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(deleteLocationCheckinFail(error.response.data.message));
+        // dispatch(deleteLocationCheckinFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, deleteLocationCheckinFail);
       });
   };
 }

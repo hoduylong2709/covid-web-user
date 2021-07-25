@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const testingRegistrationStart = () => {
   return {
@@ -37,7 +38,8 @@ export const testingRegistration = (testingLocationId, registerDate, testingDate
         dispatch(testingRegistrationSuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(testingRegistrationFail(error.response.data.message));
+        // dispatch(testingRegistrationFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, testingRegistrationFail);
       });
   };
 }

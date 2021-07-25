@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const checkinLocationstart = () => {
   return {
@@ -36,7 +37,8 @@ export const checkinLocation = (address, time) => {
         dispatch(checkinLocationSuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(checkinLocationFail(error.response.data.message));
+        // dispatch(checkinLocationFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, checkinLocationFail);
       });
   };
 }

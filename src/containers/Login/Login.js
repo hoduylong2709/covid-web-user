@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -183,6 +184,7 @@ class Login extends Component {
           {this.props.error}
         </Modal>}
         <LoadingModal show={this.props.loading}></LoadingModal>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   };

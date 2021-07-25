@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import classes from './Testing.module.css';
 
@@ -176,6 +177,7 @@ class Testing extends Component {
             {pagination}
           </div>
         </div>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

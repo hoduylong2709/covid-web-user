@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const uploadProfileImageStart = () => {
   return {
@@ -34,7 +35,8 @@ export const uploadProfileImage = (imgFile) => {
         dispatch(uploadProfileImageSuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(uploadProfileImageFail(error.response.data.message));
+        // dispatch(uploadProfileImageFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, uploadProfileImageFail);
       });
   };
 }

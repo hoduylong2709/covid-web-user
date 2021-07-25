@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const deleteItineraryHistoryStart = () => {
   return {
@@ -32,7 +33,8 @@ export const deleteItineraryHistory = (itineraryId) => {
         dispatch(deleteItineraryHistorySuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(deleteItineraryHistoryFail(error.response.data.message));
+        // dispatch(deleteItineraryHistoryFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, deleteItineraryHistoryFail);
       });
   };
 }

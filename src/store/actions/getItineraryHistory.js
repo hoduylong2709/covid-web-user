@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const getItineraryHistoryStart = () => {
   return {
@@ -37,7 +38,8 @@ export const getItineraryHistory = () => {
         dispatch(getItineraryHistorySuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })
       .catch(error => {
-        dispatch(getItineraryHistoryFail(error.response.data.message));
+        // dispatch(getItineraryHistoryFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, getItineraryHistoryFail);
       });
   };
 }

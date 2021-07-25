@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import classes from './ManageProfilesContainer.module.css';
 import Layout from './../../hoc/Layout/Layout';
@@ -197,7 +198,7 @@ class ManageProfilesContainer extends Component {
                 }}
               >
                 Đây là mã QR Code của bạn. Bạn có thể sử dụng nó để xác nhận lịch trình di chuyển tại sân bay
-          </DialogContentText>
+              </DialogContentText>
               <div
                 style={{
                   width: 'fit-content',
@@ -211,6 +212,7 @@ class ManageProfilesContainer extends Component {
             </DialogContent>
           </Dialog>
         </div>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

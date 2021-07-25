@@ -6,6 +6,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import CheckinLocationModal from '../../components/UI/Modal/TestingRegistrationModal/CheckinLocationModal';
+import { Redirect } from 'react-router';
 
 class ChangePasswordContainer extends Component {
   state = {
@@ -146,7 +147,7 @@ class ChangePasswordContainer extends Component {
         input = (
           <div>
             <p className={classes.PasswordRequirement}>Mật khẩu phải tuân theo quy tắc
-            (Chứa ít nhất 8 ký tự, 1 ký tự thường, 1 ký tự in hoa, 1 chữ số, và 1 ký tự đặc biệt)
+              (Chứa ít nhất 8 ký tự, 1 ký tự thường, 1 ký tự in hoa, 1 chữ số, và 1 ký tự đặc biệt)
             </p>
             <Input
               key={formElement.id}
@@ -195,6 +196,7 @@ class ChangePasswordContainer extends Component {
             closeModal={this.props.onCloseChangePasswordModal}
           ></CheckinLocationModal>
         </div>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

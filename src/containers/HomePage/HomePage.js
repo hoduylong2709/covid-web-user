@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import Layout from '../../hoc/Layout/Layout';
 import Banner from '../../components/Banner/Banner';
@@ -42,6 +43,7 @@ class HomePage extends Component {
           email={localStorage.getItem('email')}
         >
         </VerifyModalAfterLogin>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </div>
     );
   }
@@ -49,7 +51,8 @@ class HomePage extends Component {
 
 const mapStateToProps = state => {
   return {
-    news: state.news.news
+    news: state.news.news,
+    error: state.news.error
   };
 };
 

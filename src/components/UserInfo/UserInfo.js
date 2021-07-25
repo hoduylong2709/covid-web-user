@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import classes from './UserInfo.module.css';
 import Typography from '@material-ui/core/Typography';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -105,7 +106,7 @@ class UserInfo extends Component {
               }}
             >
               Kích thước ảnh quá lớn, vui lòng chọn lại!
-          </DialogContentText>
+            </DialogContentText>
           </DialogContent>
         </Dialog>
         <Dialog
@@ -122,9 +123,10 @@ class UserInfo extends Component {
               }}
             >
               Ảnh tải lên không hợp lệ, vui lòng thử lại!
-          </DialogContentText>
+            </DialogContentText>
           </DialogContent>
         </Dialog>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </div >
     );
   }

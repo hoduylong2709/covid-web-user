@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
+
 
 export const getTestingInfoStart = () => {
   return {
@@ -37,7 +39,8 @@ export const getTestingInfo = () => {
         dispatch(getTestingInfoSuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })
       .catch(error => {
-        dispatch(getTestingInfoFail(error.response.data.message));
+        // dispatch(getTestingInfoFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, getTestingInfoFail);
       });
   };
 }

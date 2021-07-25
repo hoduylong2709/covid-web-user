@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const setLocations = (locations) => {
   return {
@@ -27,7 +28,8 @@ export const initLocations = () => {
       })
       .catch(error => {
         console.log(error);
-        dispatch(fetchLocationsFail(error.response.data.message));
+        // dispatch(fetchLocationsFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, fetchLocationsFail);
       });
   };
 }

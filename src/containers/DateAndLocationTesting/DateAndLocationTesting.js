@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import Layout from '../../hoc/Layout/Layout';
 import DateAndLocationRegistration from '../../components/DateAndLocationRegistration/DateAndLocationRegistration';
@@ -42,6 +43,8 @@ class DateAndLocationTesting extends Component {
           listCity={listCity}
           registeringTimes={registeringTimes}
         />
+        {this.props.errorCityList === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }
@@ -51,7 +54,8 @@ const mapStateToProps = state => {
   return {
     locations: state.testingLocations.locations,
     error: state.testingLocations.error,
-    cities: state.cityList.cities
+    cities: state.cityList.cities,
+    errorCityList: state.cityList.error
   };
 };
 

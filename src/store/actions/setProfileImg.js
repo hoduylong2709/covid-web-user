@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const setProfileImage = (profileImg, isSuccess) => {
   return {
@@ -26,7 +27,8 @@ export const getProfileImage = () => {
         dispatch(setProfileImage(response.data.data, response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(setProfileImageFail(error.response.data.message));
+        // dispatch(setProfileImageFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, setProfileImageFail);
       });
   };
 }

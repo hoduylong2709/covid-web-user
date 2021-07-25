@@ -8,10 +8,6 @@ import { useHistory } from 'react-router-dom';
 
 import classes from './New.module.css';
 
-// const clickCardHandle = () => {
-//   console.log('You clicked new!');
-// }
-
 const NewPost = (props) => {
   const history = useHistory();
 
@@ -20,7 +16,7 @@ const NewPost = (props) => {
       <CardActionArea onClick={() => history.push(`/news/${props.newId}`)}>
         <CardMedia
           className={classes.Media}
-          image={props.image}
+          image={props.image.replace(/\\/g, "/")}
           title="image"
         />
         <CardContent>

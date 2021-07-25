@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const setDisableDates = (disableDates) => {
   return {
@@ -25,7 +26,8 @@ export const initDisableDates = (testingLocationId) => {
         dispatch(setDisableDates(response.data.data));
       })
       .catch(error => {
-        dispatch(fetchDisableDatesFail(error.response.data.message));
+        // dispatch(fetchDisableDatesFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, fetchDisableDatesFail);
       });
   };
 }

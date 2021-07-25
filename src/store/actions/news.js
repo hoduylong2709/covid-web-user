@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const setNews = (news, pageNumber, pageSize, totalPages, totalRecords) => {
   return {
@@ -23,11 +24,11 @@ export const initNews = () => {
   return dispatch => {
     axios.get('/Homepage/news')
       .then(response => {
-        console.log(response);
+        // clearTimeout(timeout);
         dispatch(setNews(response.data, response.pageNumber, response.pageSize, response.totalPages, response.totalRecords));
       })
       .catch(error => {
-        dispatch(fetchNewsFailed(error.response.data.message))
+        handleTimeoutRequest(dispatch, error, fetchNewsFailed);
       });
   };
 };

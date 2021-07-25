@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const editProfilesStart = () => {
   return {
@@ -51,7 +52,8 @@ export const editProfiles = (
         dispatch(editProfilesSuccess(response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(editProfilesFail(error.response.data.message));
+        // dispatch(editProfilesFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, editProfilesFail);
       })
   };
 }

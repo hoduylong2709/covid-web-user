@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import Layout from '../../hoc/Layout/Layout';
 import Button from '../../components/UI/Button/Button';
@@ -136,6 +137,7 @@ class ForgotPassword extends Component {
           showVerifyModal={this.props.isRecovering}
           email={this.state.controls.email.value}
         ></ForgotPasswordModal>
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   };

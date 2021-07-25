@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import Layout from '../../hoc/Layout/Layout';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
@@ -47,13 +48,9 @@ class LocationCheckinHistory extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.checkinList.length !== prevState.locationList.length && this.props.errorDelete) {
+    if (this.props.checkinList && this.props.checkinList.length !== prevState.locationList.length && this.props.errorDelete) {
       this.setState({ locationList: this.props.checkinList });
     }
-    // if (this.props.loadingDelete !== prevProps.loadingDelete) {
-    //   console.log("Ho Duy Long");
-    //   this.props.onGetLocationCheckin();
-    // }
   }
 
   handleDeleteButton = (id) => {
@@ -231,7 +228,7 @@ class LocationCheckinHistory extends Component {
                 }}
               >
                 Xóa địa điểm check-in thất bại, xin vui lòng thử lại!
-          </DialogContentText>
+              </DialogContentText>
             </DialogContent>
           </Dialog>
           <EditForm
@@ -255,6 +252,9 @@ class LocationCheckinHistory extends Component {
             closeVerifyTimeModal={this.handleCloseVerifyTimeModal}
           />
         </div>
+        {this.props.errorDelete === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
+        {this.props.errorEdit === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
+        {this.props.error === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

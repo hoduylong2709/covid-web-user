@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import Layout from './../../hoc/Layout/Layout';
 import classes from './ItineraryInfo.module.css';
 import TextField from '@material-ui/core/TextField';
@@ -279,10 +280,11 @@ class ItineraryInfo extends Component {
                 }}
               >
                 Thời gian khởi hành và thời gian đến không hợp lệ, xin vui lòng chọn lại!
-          </DialogContentText>
+              </DialogContentText>
             </DialogContent>
           </Dialog>
         </div>
+        {this.props.errorSubmit === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Layout>
     );
   }

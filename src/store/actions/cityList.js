@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-base';
+import { handleTimeoutRequest } from '../utility';
 
 export const getCityListStart = () => {
   return {
@@ -33,7 +34,8 @@ export const getCityList = () => {
         dispatch(getCityListSuccess(response.data.data, response.data.isSuccess));
       })
       .catch(error => {
-        dispatch(getCityListFail(error.response.data.message));
+        // dispatch(getCityListFail(error.response.data.message));
+        handleTimeoutRequest(dispatch, error, getCityListFail);
       });
   };
 }

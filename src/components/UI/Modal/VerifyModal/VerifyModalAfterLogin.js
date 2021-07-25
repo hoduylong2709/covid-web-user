@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 import Modal from '../Modal';
 import Button from '../../Button/Button';
@@ -69,6 +70,7 @@ class VerifyModalAfterLogin extends Component {
             </div>
           </div>
         </div>
+        {this.props.verifyError === 'TIMEOUT_REQUEST' && <Redirect to="/network-error" />}
       </Modal>
     );
   }
