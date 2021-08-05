@@ -35,7 +35,7 @@ class LocationCheckinHistory extends Component {
   };
 
   componentDidMount() {
-    this.props.onGetLocationCheckin();
+    this.props.onGetLocationCheckin(1);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,7 +67,12 @@ class LocationCheckinHistory extends Component {
     this.setState({ locationList: updatedList, openConfirmation: false });
     setTimeout(() => {
       this.props.onDeleteLocationCheckin(this.state.currentIdRecord);
-    }, 1000);
+    }, 500);
+    // fix here
+    // console.log(this.props.pageNumber);
+    setTimeout(() => {
+      this.props.onGetLocationCheckin(this.props.pageNumber);
+    }, 1500);
   }
 
   handleCloseModal = () => {
@@ -275,13 +280,14 @@ const mapStateToProps = state => {
     showModalEdit: state.editLocationCheckin.showModal,
     pageSize: state.getLocationCheckin.pageSize,
     totalPages: state.getLocationCheckin.totalPages,
-    totalRecords: state.getLocationCheckin.totalRecords
+    totalRecords: state.getLocationCheckin.totalRecords,
+    pageNumber: state.getLocationCheckin.pageNumber
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetLocationCheckin: () => dispatch(actions.getLocationCheckin()),
+    onGetLocationCheckin: (pageNumber) => dispatch(actions.getLocationCheckin(pageNumber)),
     onDeleteLocationCheckin: (locationId) => dispatch(actions.deleteLocationCheckin(locationId)),
     onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal()),
     onEditLocationCheckin: (id, address, time) => dispatch(actions.editLocationCheckin(id, address, time)),

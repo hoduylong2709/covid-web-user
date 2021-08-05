@@ -27,13 +27,13 @@ export const getItineraryHistoryFail = (error) => {
   };
 }
 
-export const getItineraryHistory = () => {
+export const getItineraryHistory = (pageNumber) => {
   return dispatch => {
     dispatch(getItineraryHistoryStart());
     const config = {
       headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
     };
-    axios.get('/User/itinerary?PageNumber=1&PageSize=4', config)
+    axios.get(`/User/itinerary?PageNumber=${pageNumber}&PageSize=4`, config)
       .then(response => {
         dispatch(getItineraryHistorySuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })

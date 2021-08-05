@@ -39,7 +39,7 @@ class ItineraryHistory extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetItineraryHistory();
+    this.props.onGetItineraryHistory(1);
     this.props.onGetCityList();
   }
 
@@ -73,6 +73,10 @@ class ItineraryHistory extends Component {
     setTimeout(() => {
       this.props.onDeleteItineraryHistory(this.state.currentIdRecord);
     }, 500);
+    // fix here
+    setTimeout(() => {
+      this.props.onGetItineraryHistory(this.props.pageNumber);
+    }, 1500);
   }
 
   handleCloseModal = () => {
@@ -435,13 +439,14 @@ const mapStateToProps = state => {
     showModalEdit: state.editItineraryInfo.showModal,
     mustTesting: state.editItineraryInfo.mustTesting,
     pageSize: state.getItineraryHistory.pageSize,
-    totalPages: state.getItineraryHistory.totalPages
+    totalPages: state.getItineraryHistory.totalPages,
+    pageNumber: state.getItineraryHistory.pageNumber
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetItineraryHistory: () => dispatch(actions.getItineraryHistory()),
+    onGetItineraryHistory: (pageNumber) => dispatch(actions.getItineraryHistory(pageNumber)),
     onDeleteItineraryHistory: (itineraryId) => dispatch(actions.deleteItineraryHistory(itineraryId)),
     onCloseDeleteErrorModal: () => dispatch(actions.closeDeleteErrorModal()),
     onGetCityList: () => dispatch(actions.getCityList()),

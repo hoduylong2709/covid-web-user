@@ -28,13 +28,13 @@ export const getLocationCheckinFail = (error) => {
   };
 }
 
-export const getLocationCheckin = () => {
+export const getLocationCheckin = (pageNumber) => {
   return dispatch => {
     dispatch(getLocationCheckinStart());
     const config = {
       headers: { 'Authorization': `bearer ${localStorage.getItem('token')}` }
     };
-    axios.get('/User/itinerary/location-checkin?PageNumber=1&PageSize=4', config)
+    axios.get(`/User/itinerary/location-checkin?PageNumber=${pageNumber}&PageSize=4`, config)
       .then(response => {
         dispatch(getLocationCheckinSuccess(response.data.data, response.data.isSuccess, response.data.pageNumber, response.data.pageSize, response.data.totalPages, response.data.totalRecords));
       })

@@ -124,7 +124,7 @@ class Testing extends Component {
                 <div className={classes.InfoWrapper}>
                   <AssignmentIcon style={{ color: '#07627e' }} />
                   <Typography variant="body1">
-                    Kết quả xét nghiệm: {testingRecord.result === 'Positive' ? <span style={{ color: 'red' }}>Dương tính</span> : (testingRecord.result === 'Negative' ? <span style={{ color: 'green' }}>Âm tính</span> : 'Chưa có kết quả')}
+                    Kết quả xét nghiệm: {testingRecord.result === 'Positive' ? <span style={{ color: 'red', fontWeight: 'bolder' }}>Dương tính</span> : (testingRecord.result === 'Negative' ? <span style={{ color: 'green', fontWeight: 'bolder' }}>Âm tính</span> : 'Chưa có kết quả')}
                   </Typography>
                 </div>
               </div>
