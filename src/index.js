@@ -32,6 +32,8 @@ import deleteItineraryHistoryReducer from './store/reducers/deleteItineraryHisto
 import editItineraryInfoReducer from './store/reducers/editItineraryInfo';
 import uploadProfileImageReducer from './store/reducers/uploadProfileImg';
 import setProfileImageReducer from './store/reducers/setProfileImg';
+import fetchDataCovidReducer from './store/reducers/fetchDataCovid';
+import fetchDatCity3rdReducer from './store/reducers/fetchDataCity3rd';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -59,7 +61,9 @@ const rootReducer = combineReducers({
   deleteItineraryHistory: deleteItineraryHistoryReducer,
   editItineraryInfo: editItineraryInfoReducer,
   uploadProfileImage: uploadProfileImageReducer,
-  setProfileImage: setProfileImageReducer
+  setProfileImage: setProfileImageReducer,
+  fetchDataCovid: fetchDataCovidReducer,
+  fetchDataCity3rd: fetchDatCity3rdReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

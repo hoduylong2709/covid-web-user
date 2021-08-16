@@ -9,7 +9,7 @@ const toolbar = (props) => (
   <header className={classes.Toolbar}>
     <DrawerToggle clicked={props.drawerToggleClicked} />
     <div className={classes.Logo}>
-      <a href="/">
+      <a href="/" style={{ textDecoration: 'none' }}>
         <Logo />
       </a>
     </div>

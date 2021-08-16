@@ -95,3 +95,9 @@ export {
 export {
   getProfileImage
 } from './setProfileImg';
+export {
+  fetchDataCovid
+} from './fetchDataCovid';
+export {
+  fetchDataCity3rd
+} from './fetchDataCity3rd';

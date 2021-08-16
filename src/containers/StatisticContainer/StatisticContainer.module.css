@@ -1,0 +1,9 @@
+.StatisticContainer {
+  height: 100vh;
+  background-color: #f3f4f4;
+}
+
+.Header {
+  display: flex;
+  margin: 10px 300px;
+}
