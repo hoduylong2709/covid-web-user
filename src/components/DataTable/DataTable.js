@@ -13,8 +13,6 @@ const styles = (theme) => ({
     boxSizing: 'border-box',
   },
   table: {
-    // temporary right-to-left patch, waiting for
-    // https://github.com/bvaughn/react-virtualized/issues/454
     '& .ReactVirtualized__Table__headerRow': {
       flip: false,
       paddingRight: theme.direction === 'rtl' ? '0 !important' : undefined,
@@ -141,32 +139,14 @@ MuiVirtualizedTable.propTypes = {
 
 const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
-// ---
-
-// const sample = [
-//   ['Frozen yoghurt', 159, 6.0, 24],
-//   ['Ice cream sandwich', 237, 9.0, 37],
-//   ['Eclair', 262, 16.0, 24],
-//   ['Cupcake', 305, 3.7, 67],
-//   ['Gingerbread', 356, 16.0, 49],
-// ];
-
 function createData(id, city, recovered, deceased, infected) {
   return { id, city, recovered, deceased, infected };
 }
-
-// const rows = [];
-
-// for (let i = 0; i < sample.length; i += 1) {
-//   // const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-//   rows.push(createData(i, ...sample[i]));
-// }
 
 const getData = (sample) => {
   const rows = [];
 
   for (let i = 0; i < sample.length; i += 1) {
-    // const randomSelection = sample[Math.floor(Math.random() * sample.length)];
     rows.push(createData(i, ...sample[i]));
   }
 
@@ -177,32 +157,32 @@ export default function ReactVirtualizedTable({ sample }) {
   const rows = getData(sample);
 
   return (
-    <Paper style={{ height: 400, width: 600 }}>
+    <Paper style={{ height: 400, width: 650 }}>
       <VirtualizedTable
         rowCount={sample.length}
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
-            width: 200,
+            width: 150,
             label: 'Thành phố',
-            dataKey: 'city',
+            dataKey: 'city'
           },
           {
-            width: 120,
+            width: 150,
+            label: 'Số ca mắc',
+            dataKey: 'infected',
+            numeric: true,
+          },
+          {
+            width: 150,
             label: 'Số ca hồi phục',
             dataKey: 'recovered',
             numeric: true,
           },
           {
-            width: 120,
+            width: 150,
             label: 'Số ca tử vong',
             dataKey: 'deceased',
-            numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Số ca mắc',
-            dataKey: 'infected',
             numeric: true,
           }
         ]}

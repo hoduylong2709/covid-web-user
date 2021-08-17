@@ -22,7 +22,7 @@ class NavigationItems extends Component {
   render() {
     let navigationItems = (<ul className={classes.NavigationItems}>
       <NavigationItem link="/" exact>Trang chủ</NavigationItem>
-      <NavigationItem link="/statistic" exact>Thống kê</NavigationItem>
+      {/* <NavigationItem link="/statistic" exact>Thống kê</NavigationItem> */}
       <NavigationItem link="/login">Đăng nhập</NavigationItem>
     </ul>);
 

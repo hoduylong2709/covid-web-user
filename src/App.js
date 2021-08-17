@@ -23,7 +23,7 @@ import ItineraryHistory from './containers/ItineraryHistory/ItineraryHistory';
 import PrivateRoute from './privateRoute';
 import NotFound from './components/NotFound/NotFound';
 import NetworkError from './components/NetworkError/NetworkError';
-import StatisticContainer from './containers/StatisticContainer/StatisticContainer';
+// import StatisticContainer from './containers/StatisticContainer/StatisticContainer';
 
 class App extends Component {
   render() {
@@ -35,7 +35,7 @@ class App extends Component {
           <Route path="/signup" exact component={Signup} />
           <Route path="/forgot-password" exact component={ForgotPassword} />
           <Route path="/news/:id" exact component={NewPage} />
-          <Route path="/statistic" exact component={StatisticContainer} />
+          {/* <Route path="/statistic" exact component={StatisticContainer} /> */}
           <PrivateRoute path="/testing" exact component={Testing} />
           <PrivateRoute path="/register-testing-date-location" exact component={DateAndLocation} />
           <PrivateRoute path="/register-testing-questions" exact component={RegisterTestingQuestions} />

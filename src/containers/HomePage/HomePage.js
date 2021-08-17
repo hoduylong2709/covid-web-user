@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import Layout from '../../hoc/Layout/Layout';
-// import Banner from '../../components/Banner/Banner';
 import News from '../News/News';
 import MyPagination from '../../components/UI/Pagination/Pagination';
 import VerifyModalAfterLogin from './../../components/UI/Modal/VerifyModal/VerifyModalAfterLogin';
-// import StatisticContainer from './../StatisticContainer/StatisticContainer';
 import classes from './HomePage.module.css';
 import * as actions from '../../store/actions/index';
 import PieChart from '../../components/PieChart/PieChart';
@@ -24,6 +22,16 @@ class HomePage extends Component {
     if (this.props.dataCity3rd && this.props.data) {
       const mappedArray = mapApi(this.props.data, this.props.dataCity3rd);
       newArray = convertObjectArrayToArrayOfArray(mappedArray);
+
+      for (let i = 0; i < newArray.length; i++) {
+        if (newArray[i][0] === undefined) {
+          newArray.splice(i, 1);
+        }
+        else {
+          newArray[i][0] = newArray[i][0].split('-').join(' ').toUpperCase();
+        }
+      }
+
       console.log(newArray);
     }
 
@@ -58,7 +66,6 @@ class HomePage extends Component {
               backgroundColor: '#f3f4f4'
             }}
           >
-            {/* <Banner /> */}
             <div
               style={{
                 display: 'flex',
