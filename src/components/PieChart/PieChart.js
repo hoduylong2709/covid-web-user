@@ -9,7 +9,7 @@ const createOptions = (infected, treated, recovered, deceased, lastUpdate) => {
       type: 'pie'
     },
     title: {
-      text: `Số liệu Covid-19 từ Bộ Y Tế - cập nhật ngày ${moment(lastUpdate).format('DD.MM.YYYY')}`
+      text: `Số liệu Covid-19 từ Bộ Y Tế - cập nhật ngày ${moment(lastUpdate).format('DD.MM.YYYY, h:mm a')}`
     },
     accessibility: {
       point: {

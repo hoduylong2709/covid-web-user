@@ -22,14 +22,12 @@ class NavigationItems extends Component {
   render() {
     let navigationItems = (<ul className={classes.NavigationItems}>
       <NavigationItem link="/" exact>Trang chủ</NavigationItem>
-      {/* <NavigationItem link="/statistic" exact>Thống kê</NavigationItem> */}
       <NavigationItem link="/login">Đăng nhập</NavigationItem>
     </ul>);
 
     if (localStorage.getItem('token') !== null) {
       navigationItems = (<ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact>Trang chủ</NavigationItem>
-        <NavigationItem link="/statistic" exact>Thống kê</NavigationItem>
         <NavigationItem link="/testing" exact>Xét nghiệm</NavigationItem>
         <NavigationItem link="/check-in" exact>Check-in</NavigationItem>
         <NavigationItem link="/itinerary" exact>Lịch trình</NavigationItem>

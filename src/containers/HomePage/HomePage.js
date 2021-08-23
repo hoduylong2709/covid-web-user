@@ -26,13 +26,19 @@ class HomePage extends Component {
       for (let i = 0; i < newArray.length; i++) {
         if (newArray[i][0] === undefined) {
           newArray.splice(i, 1);
-        }
-        else {
+        } else {
           newArray[i][0] = newArray[i][0].split('-').join(' ').toUpperCase();
         }
       }
 
-      console.log(newArray);
+      for (let i = 0; i < newArray.length; i++) {
+        if (newArray[i][0] === 'tiền-giang') {
+          newArray[i][0] = 'TIỀN GIANG'
+        }
+        if (newArray[i][0] === 'tuyên-quang') {
+          newArray[i][0] = 'TUYÊN QUANG'
+        }
+      }
     }
 
     let pieChart = null;
@@ -43,7 +49,7 @@ class HomePage extends Component {
         treated={this.props.data.treated}
         recovered={this.props.data.recovered}
         deceased={this.props.data.deceased * 1000}
-        lastUpdate={this.props.data.lastUpdatedAtApify}
+        lastUpdate={this.props.data.lastUpdatedAtSource}
       />;
     }
 
