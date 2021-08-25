@@ -22,7 +22,10 @@ const createOptions = (infected, treated, recovered, deceased, lastUpdate) => {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          style: {
+            fontSize: 13
+          }
         }
       }
     },

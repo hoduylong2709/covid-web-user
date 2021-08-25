@@ -18,7 +18,7 @@ export const fetchDataCity3rdSuccess = (data) => {
 export const fetchDataCity3rd = () => {
   return dispatch => {
     dispatch(fetchDataCovidStart());
-    axios.get('https://api.apify.com/v2/key-value-stores/p3nS2Q9TUn6kUOriJ/records/LATEST')
+    axios.get('/Homepage/medical-statistic')
       .then(response => {
         dispatch(fetchDataCity3rdSuccess(response.data));
       })

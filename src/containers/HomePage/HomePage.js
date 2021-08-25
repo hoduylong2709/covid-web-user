@@ -26,17 +26,6 @@ class HomePage extends Component {
       for (let i = 0; i < newArray.length; i++) {
         if (newArray[i][0] === undefined) {
           newArray.splice(i, 1);
-        } else {
-          newArray[i][0] = newArray[i][0].split('-').join(' ').toUpperCase();
-        }
-      }
-
-      for (let i = 0; i < newArray.length; i++) {
-        if (newArray[i][0] === 'tiền-giang') {
-          newArray[i][0] = 'TIỀN GIANG'
-        }
-        if (newArray[i][0] === 'tuyên-quang') {
-          newArray[i][0] = 'TUYÊN QUANG'
         }
       }
     }
@@ -108,7 +97,7 @@ class HomePage extends Component {
 
 const mapApi = (data1, data2) => {
   const detailArray = data1.detail;
-  const cityArray = data2.key;
+  const cityArray = data2.data.key;
   let mappedArray = [];
 
   for (let i = 0; i < detailArray.length; i++) {

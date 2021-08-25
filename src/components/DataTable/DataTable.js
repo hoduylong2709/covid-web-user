@@ -73,7 +73,7 @@ class MuiVirtualizedTable extends React.PureComponent {
         component="div"
         className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
         variant="head"
-        style={{ height: headerHeight }}
+        style={{ height: headerHeight, fontWeight: 'bold', fontSize: '15px', background: '#D3D3D3' }}
         align={columns[columnIndex].numeric || false ? 'right' : 'left'}
       >
         <span>{label}</span>
@@ -163,24 +163,24 @@ export default function ReactVirtualizedTable({ sample }) {
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
-            width: 150,
+            width: 160,
             label: 'Thành phố',
             dataKey: 'city'
           },
           {
-            width: 150,
+            width: 160,
             label: 'Số ca mắc',
             dataKey: 'infected',
             numeric: true,
           },
           {
-            width: 150,
+            width: 160,
             label: 'Số ca hồi phục',
             dataKey: 'recovered',
             numeric: true,
           },
           {
-            width: 150,
+            width: 160,
             label: 'Số ca tử vong',
             dataKey: 'deceased',
             numeric: true,
