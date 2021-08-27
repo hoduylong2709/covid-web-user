@@ -4,10 +4,6 @@ import HighchartsReact from 'highcharts-react-official';
 import moment from 'moment';
 
 const createOptions = (infected, treated, recovered, deceased, lastUpdate) => {
-  let modifiedTreated = parseFloat(((treated / infected) * 100).toFixed(1));
-  let modifiedRecovered = parseFloat(((recovered / infected) * 100).toFixed(1));
-  let modifiedDeceased = 100 - modifiedRecovered - modifiedTreated;
-
   return {
     chart: {
       type: 'pie'
@@ -39,17 +35,17 @@ const createOptions = (infected, treated, recovered, deceased, lastUpdate) => {
       data: [
         {
           name: 'Đang điều trị',
-          y: modifiedTreated,
+          y: treated,
           sliced: true,
           selected: true
         },
         {
           name: 'Tử vong',
-          y: modifiedDeceased,
+          y: deceased,
         },
         {
           name: 'Hồi phục',
-          y: modifiedRecovered,
+          y: recovered,
         },
       ]
     }]
